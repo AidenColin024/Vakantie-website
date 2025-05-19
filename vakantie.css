@@ -171,6 +171,128 @@ header .account-link a {
     padding: 20px;
     background-color: #f2f2f2;
 }
+.pp-header {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pp-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.pp-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.pp-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.pp-account-link {
+    font-weight: bold;
+}
+
+.pp-hero {
+    background-image: url('img/hero-ski.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 6rem 2rem;
+}
+
+.pp-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.pp-hero p {
+    font-size: 1.25rem;
+}
+
+.pp-searchbar {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pp-searchbar input,
+.pp-searchbar select {
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.pp-search-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.pp-content {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+.pp-filters {
+    width: 250px;
+    background-color: #f0f0f0;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.pp-filters h3 {
+    margin-top: 0;
+}
+
+.pp-filters label {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.pp-destinations {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    flex: 1;
+}
+
+.pp-country {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.pp-country img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.pp-country p {
+    margin: 1rem;
+    font-weight: bold;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
