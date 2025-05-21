@@ -57,7 +57,7 @@ header .account-link a {
 .vakantie .search-bar {
     position: relative;
     z-index: 1;
-    color: white;
+    color: black;
     text-align: center;
 }
 
@@ -120,7 +120,7 @@ header .account-link a {
     background-size: cover;
     background-position: center;
     position: relative;
-    color: white;
+    color: black;
     overflow: hidden;
 }
 
@@ -145,7 +145,7 @@ header .account-link a {
 /* Knopstijl */
 .seasons button {
     background: red;
-    color: white;
+    color: black;
     padding: 10px 20px;
     border: none;
     margin-top: 20px;
@@ -207,7 +207,7 @@ header .account-link a {
     background-image: url('img/hero-ski.jpg');
     background-size: cover;
     background-position: center;
-    color: white;
+    color: black;
     text-align: center;
     padding: 6rem 2rem;
 }
@@ -239,7 +239,7 @@ header .account-link a {
 
 .pp-search-btn {
     background-color: red;
-    color: white;
+    color: black;
     border: none;
     padding: 0.5rem 1.2rem;
     cursor: pointer;
@@ -292,6 +292,147 @@ header .account-link a {
 .pp-country p {
     margin: 1rem;
     font-weight: bold;
+}
+/* About Hero Banner */
+.about-hero {
+    background: url('images/ChatGPT Image 19 mei 2025, 16_01_26.png') no-repeat center center / cover;
+    padding: 100px 20px;
+    color: black;
+    text-align: center;
+}
+
+.about-hero-text h1 {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+}
+
+.about-hero-text p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Missie & Visie */
+.about-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    padding: 60px 20px;
+    background: #f9f9f9;
+}
+
+.about-box {
+    max-width: 400px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+/* Team sectie */
+.about-team {
+    padding: 60px 20px;
+    background: #fff;
+    text-align: center;
+}
+
+.about-team h2 {
+    margin-bottom: 40px;
+}
+
+.team-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.team-member {
+    width: 200px;
+}
+
+.team-member img {
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    height: 200px;
+}
+
+.team-member h3 {
+    margin-top: 15px;
+    font-size: 1.1rem;
+}
+
+.team-member p {
+    font-size: 0.9rem;
+    color: #555;
+}
+.contact-hero {
+    background-image: url('images/ChatGPT Image 21 mei 2025, 11_02_07.png'); /* Vervang dit pad */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 100px 20px;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+.contact-hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Donkere overlay */
+    z-index: 1;
+}
+
+.contact-hero-text {
+    position: relative;
+    z-index: 2;
+}
+
+.contact-form-section {
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-form {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form label {
+    font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.contact-form button {
+    padding: 12px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.contact-form button:hover {
+    background-color: #005fa3;
 }
 
 /* Responsive */
