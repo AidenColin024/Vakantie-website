@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polar & Paradise - Spanje Vakanties</title>
+    <link rel="stylesheet" href="vakantie.css">
+</head>
+<body>
+<header class="pp-header">
+    <div class="logo">
+        <a href="index.php">
+            <img src="images/image1%20(1).png" alt="Polar & Paradise">
+        </a>
+    </div>
+    <nav class="pp-nav">
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="ski.php">Ski vakanties</a></li>
+            <li><a href="zomer.php">Zomer vakanties</a></li>
+            <li><a href="overons.php">Over ons</a></li>
+            <li><a href="contact.php">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="vakantie">
+    <img src="images/Screenshot%202025-05-19%20152016.png" alt="Spanje vakantie">
+    <div class="hero-text">
+        <h1>Beleef de zon in prachtige Spanje</h1>
+    </div>
+    <section class="search-bar">
+        <input type="date" placeholder="Vertrekdatum">
+        <input type="text" placeholder="1 kamer(s), 2 reizigers">
+        <select>
+            <option>8-11 dagen</option>
+            <option>12-15 dagen</option>
+        </select>
+        <input type="text" placeholder="Spanje">
+        <button class="pp-search-btn">Toon vakanties naar Spanje</button>
+    </section>
+</section>
+
+<main class="pp-content">
+    <aside class="pp-filters">
+        <h3>Filter</h3>
+        <label>Regio
+            <select>
+                <option>Barcelona</option>
+                <option>Andalusië</option>
+                <option>Canarische Eilanden</option>
+                <option>Costa Brava</option>
+            </select>
+        </label>
+        <label>Sterren
+            <select>
+                <option>Alle</option>
+                <option>3 sterren</option>
+                <option>4 sterren</option>
+                <option>5 sterren</option>
+            </select>
+        </label>
+        <label>Soort vakantie
+            <select>
+                <option>Strand</option>
+                <option>Stedentrip</option>
+                <option>All-inclusive</option>
+            </select>
+        </label>
+    </aside>
+
+    <section class="pp-destinations">
+        <div class="pp-country">
+            <a href="barcelona-city-hotel.php">
+                <img src="images/spanje-hotel1.jpg" alt="Barcelona Hotel">
+                <p>Barcelona City Hotel – 4 sterren</p>
+            </a>
+        </div>
+        <div class="pp-country">
+            <a href="andalusie-hotel.php">
+                <img src="images/spanje-hotel2.jpg" alt="Andalusië Resort">
+                <p>Andalusië Luxe Resort – 5 sterren</p>
+            </a>
+        </div>
+        <div class="pp-country">
+            <a href="tenerife-hotel.php">
+                <img src="images/spanje-hotel3.jpg" alt="Tenerife Appartement">
+                <p>Tenerife Appartement – 3 sterren</p>
+            </a>
+        </div>
+        <div class="pp-country">
+            <a href="costa-brava-hotel.php">
+                <img src="images/costa-brava-palace.jpg" alt="Costa Brava Palace">
+                <p>Costa Brava Palace – 5 sterren</p>
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
+    © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
+    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
+    Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
+</footer>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Polar & Paradise - Oostenrijk</title>
+    <link rel="stylesheet" href="vakantie.css" />
+</head>
+<body>
+<header class="pp-header">
+    <div class="logo">
+        <a href="index.php">
+            <img src="images/image1 (1).png" alt="Polar & Paradise">
+        </a>
+    </div>
+    <nav class="pp-nav">
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="ski.php">Ski vakanties</a></li>
+            <li><a href="zomer.php">Zomer vakanties</a></li>
+            <li><a href="overons.php">Over ons</a></li>
+            <li><a href="contact.php">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="vakantie">
+    <img src="images/oostenrijk-hero.jpg" alt="Skiën in Oostenrijk">
+    <div class="hero-text">
+        <h1>Ontdek de Alpen van Oostenrijk</h1>
+    </div>
+    <section class="search-bar">
+        <input type="date" placeholder="Vertrekdatum">
+        <input type="text" placeholder="1 kamer(s), 2 reizigers">
+        <select>
+            <option>8-11 dagen</option>
+            <option>12-15 dagen</option>
+        </select>
+        <input type="text" placeholder="Oostenrijk">
+        <button class="pp-search-btn">Toon vakanties</button>
+    </section>
+</section>
+
+<main class="pp-content">
+    <aside class="pp-filters">
+        <h3>Filter</h3>
+        <label>Regio
+            <select>
+                <option>Tirol</option>
+                <option>Salzburgerland</option>
+                <option>Vorarlberg</option>
+            </select>
+        </label>
+        <label>Sterren
+            <select>
+                <option>Alle</option>
+                <option>3 sterren</option>
+                <option>4 sterren</option>
+                <option>5 sterren</option>
+            </select>
+        </label>
+        <label>Soort vakantie
+            <select>
+                <option>Wintersport</option>
+                <option>Familie</option>
+                <option>Luxueus</option>
+            </select>
+        </label>
+        <label>
+            <input type="checkbox"> Ski pas inbegrepen
+        </label>
+    </aside>
+
+    <section class="pp-destinations">
+        <div class="pp-country">
+            <a href="tirol-resort.php">
+                <img src="images/oostenrijk-hotel1.jpg" alt="Tirol Resort" />
+                <p>Tirol Resort – 4 sterren</p>
+            </a>
+        </div>
+        <div class="pp-country">
+            <a href="salzburgerland-chalet.php">
+                <img src="images/oostenrijk-hotel2.jpg" alt="Salzburgerland Chalet" />
+                <p>Salzburgerland Chalet – 5 sterren</p>
+            </a>
+        </div>
+        <div class="pp-country">
+            <a href="vorarlberg-lodge.php">
+                <img src="images/oostenrijk-hotel3.jpg" alt="Vorarlberg Lodge" />
+                <p>Vorarlberg Lodge – 3 sterren</p>
+            </a>
+        </div>
+        <div class="pp-country">
+            <a href="hotel-tirol-lodge.php">
+                <img src="images/tirol-lodge.jpg" alt="Hotel Tirol Lodge" />
+                <p>Hotel Tirol Lodge – 4 sterren</p>
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
+    © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
+    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
+    Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
+</footer>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head> ... <title>Resort Zon & Zee - Malta</title> ... </head>
+<body>
+<header> ... </header>
+
+<main class="pp-content">
+    <section class="hotel-detail">
+        <h1>Resort Zon & Zee – 5 sterren</h1>
+        <div class="hotel-images">
+            <img src="images/malta-hotel2.jpg" alt="Resort Zon & Zee" />
+        </div>
+        <div class="hotel-info">
+            <h2>Beschrijving</h2>
+            <p>Luxe resort direct aan het strand, met exclusieve voorzieningen voor een onvergetelijke ervaring.</p>
+
+            <h2>Prijs</h2>
+            <p>Vanaf €130 per nacht</p>
+
+            <h2>Faciliteiten</h2>
+            <ul>
+                <li>Privéstrand</li>
+                <li>All-inclusive</li>
+                <li>Spa en wellness</li>
+                <li>Roomservice 24/7</li>
+            </ul>
+        </div>
+        <a href="malta.php" class="pp-back-btn">Terug naar Malta vakanties</a>
+    </section>
+</main>
+
+<footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
+    © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
+    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
+    Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
+</footer>
+</body>
+</html>

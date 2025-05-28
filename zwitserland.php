@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Polar & Paradise - Zwitserland</title>
+    <link rel="stylesheet" href="vakantie.css" />
+</head>
+<body>
+<header class="pp-header">
+    <div class="logo">
+        <a href="index.php">
+            <img src="images/image1 (1).png" alt="Polar & Paradise">
+        </a>
+    </div>
+    <nav class="pp-nav">
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="ski.php">Ski vakanties</a></li>
+            <li><a href="zomer.php">Zomer vakanties</a></li>
+            <li><a href="overons.php">Over ons</a></li>
+            <li><a href="contact.php">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="vakantie">
+    <img src="images/zwitserland-hero.jpg" alt="Skiën in Zwitserland">
+    <div class="hero-text">
+        <h1>Beleef de Zwitserse Alpen</h1>
+    </div>
+    <section class="search-bar">
+        <input type="date" placeholder="Vertrekdatum">
+        <input type="text" placeholder="1 kamer(s), 2 reizigers">
+        <select>
+            <option>8-11 dagen</option>
+            <option>12-15 dagen</option>
+        </select>
+        <input type="text" placeholder="Zwitserland">
+        <button class="pp-search-btn">Toon vakanties</button>
+    </section>
+</section>
+
+<main class="pp-content">
+    <aside class="pp-filters">
+        <h3>Filter</h3>
+        <label>Regio
+            <select>
+                <option>Zermatt</option>
+                <option>Verbier</option>
+            </select>
+        </label>
+        <label>Sterren
+            <select>
+                <option>Alle</option>
+                <option>3 sterren</option>
+                <option>4 sterren</option>
+                <option>5 sterren</option>
+            </select>
+        </label>
+        <label>Soort vakantie
+            <select>
+                <option>Wintersport</option>
+                <option>Familie</option>
+                <option>Luxueus</option>
+            </select>
+        </label>
+        <label>
+            <input type="checkbox"> Ski pas inbegrepen
+        </label>
+    </aside>
+
+    <section class="pp-destinations">
+        <div class="pp-country">
+            <a href="hotel-matterhorn-lodge.php">
+                <img src="images/Screenshot 2025-05-19 151959.png" alt="Hotel Matterhorn Lodge" />
+                <p>Hotel Matterhorn Lodge – 5 sterren</p>
+            </a>
+        </div>
+        <div class="pp-country">
+            <a href="hotel-alpengluck.php">
+                <img src="images/alpengluck.jpg" alt="AlpenGlück Hotel" />
+                <p>AlpenGlück Hotel – 4 sterren</p>
+            </a>
+        </div>
+        <div class="pp-country">
+            <a href="hotel-verbier-haven.php">
+                <img src="images/verbier-haven.jpg" alt="Verbier Haven Resort" />
+                <p>Verbier Haven Resort – 4 sterren</p>
+            </a>
+        </div>
+        <div class="pp-country">
+            <a href="hotel-edelweiss-zermatt.php">
+                <img src="images/edelweiss-hotel.jpg" alt="Hotel Edelweiss Zermatt" />
+                <p>Hotel Edelweiss Zermatt – 3 sterren</p>
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
