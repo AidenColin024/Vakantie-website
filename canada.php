@@ -1,22 +1,10 @@
-<?php
-$servername = "mysql_db";
-$username = "root";
-$password = "rootpassword";
-
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=Restaurant", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo "Verbinding mislukt: " . $e->getMessage();
-    exit;
-}
-?>
+<!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polar & Paradise - Ski Vakanties</title>
-    <link rel="stylesheet" href="vakantie.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Polar & Paradise - Canada</title>
+    <link rel="stylesheet" href="vakantie.css" />
 </head>
 <body>
 <header class="pp-header">
@@ -29,19 +17,17 @@ try {
         <ul>
             <li><a href="index.php">Home</a></li>
             <li><a href="ski.php">Ski vakanties</a></li>
-            <li><a href="zomer.html">Zomer vakanties</a></li>
+            <li><a href="zomer.php">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
-            <li><a href="login.php">Login</a></li>
         </ul>
     </nav>
 </header>
 
-<!-- HERO -->
 <section class="vakantie">
-    <img src="\images\image2.png" alt="Zon en Sneeuw vakanties">
+    <img src="images/canada-hero.jpg" alt="Skiën in Canada">
     <div class="hero-text">
-        <h1>Jouw ultime zon vakantie wacht op je</h1>
+        <h1>Avontuur in de Canadese Rockies</h1>
     </div>
     <section class="search-bar">
         <input type="date" placeholder="Vertrekdatum">
@@ -50,20 +36,19 @@ try {
             <option>8-11 dagen</option>
             <option>12-15 dagen</option>
         </select>
-        <input type="text" placeholder="Bestemming">
-        <button class="pp-search-btn">Toon 2214 vakanties</button>
+        <input type="text" placeholder="Canada">
+        <button class="pp-search-btn">Toon vakanties</button>
     </section>
 </section>
 
 <main class="pp-content">
     <aside class="pp-filters">
         <h3>Filter</h3>
-        <label>Land
+        <label>Regio
             <select>
-                <option>Spanje</option>
-                <option>Indonesië</option>
-                <option>Bulgarije</option>
-                <option>Malta</option>
+                <option>Whistler</option>
+                <option>Banff</option>
+                <option>Lake Louise</option>
             </select>
         </label>
         <label>Sterren
@@ -76,41 +61,44 @@ try {
         </label>
         <label>Soort vakantie
             <select>
-                <option>Solo</option>
+                <option>Wintersport</option>
                 <option>Familie</option>
                 <option>Luxueus</option>
             </select>
+        </label>
+        <label>
+            <input type="checkbox"> Ski pas inbegrepen
         </label>
     </aside>
 
     <section class="pp-destinations">
         <div class="pp-country">
-            <a href="spanje.php"><img src="images\Screenshot 2025-05-19 152016.png" alt="Spanje"></a>
-            <p>Spanje</p>
+            <a href="whistler-resort.php">
+                <img src="images/canada-whistler.jpg" alt="Whistler Resort">
+                <p>Whistler Resort – 5 sterren</p>
+            </a>
         </div>
         <div class="pp-country">
-            <a href="griekenland.php"><img src="images\Screenshot 2025-05-19 152022.png" alt="Griekenland"></a>
-            <p>Griekenland</p>
+            <a href="banff-lodge.php">
+                <img src="images/canada-banff.jpg" alt="Banff Lodge">
+                <p>Banff Lodge – 4 sterren</p>
+            </a>
         </div>
         <div class="pp-country">
-            <a href="bulgarije.php"><img src="images\Screenshot 2025-05-19 152028.png" alt="Bulgarije"></a>
-            <p>Bulgarije</p>
+            <a href="lake-louise-inn.php">
+                <img src="images/canada-lakelouise.jpg" alt="Lake Louise Inn">
+                <p>Lake Louise Inn – 3 sterren</p>
+            </a>
         </div>
         <div class="pp-country">
-
-            <a href="malta.php" ><img src="images\Screenshot 2025-05-19 152054.png" alt="Malta"></a>
-            <p>Malta</p>
-        </div>
-        <div class="pp-country">
-            <a href="morokko.php"><img src="images\morokko.jpeg" alt="Malta"></a>
-            <p>Morokko</p>
-        </div>
-        <div class="pp-country">
-            <a href="portugal.php"><img src="images\portugal - Copy.jpg" alt="Portugal"></a>
-            <p>Portugal</p>
+            <a href="whistler-peak-lodge.php">
+                <img src="images/whistler-peak.jpg" alt="Whistler Peak Lodge">
+                <p>Whistler Peak Lodge – 4 sterren</p>
+            </a>
         </div>
     </section>
 </main>
+
 <footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
     © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>

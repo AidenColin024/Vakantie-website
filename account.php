@@ -1,37 +1,14 @@
 <?php
-session_start();
-
-$host = "mysql_db";
-$dbname = "Reis bureau website";
+$servername = "mysql_db";
 $username = "root";
 $password = "rootpassword";
 
 try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=Restaurant", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-die("Verbinding mislukt: " . $e->getMessage());
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-$gebruiker = $_POST['Gebruiker'];
-$wachtwoord = $_POST['Wachtwoord'];
-
-$stmt = $conn->prepare("SELECT * FROM Gebruikers WHERE Gebruiker = :Gebruiker AND Wachtwoord = :Wachtwoord");
-$stmt->execute([
-':Gebruiker' => $gebruiker,
-':Wachtwoord' => $wachtwoord
-]);
-
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if ($user) {
-$_SESSION['username'] = $user['Gebruiker'];
-header("Location: Back-end.php");
-exit();
-} else {
-echo "Ongeldige gebruikersnaam of wachtwoord.";
-}
+    echo "Verbinding mislukt: " . $e->getMessage();
+    exit;
 }
 ?>
 <!DOCTYPE html>

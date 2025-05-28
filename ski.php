@@ -1,3 +1,16 @@
+<?php
+$servername = "mysql_db";
+$username = "root";
+$password = "rootpassword";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=Restaurant", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "Verbinding mislukt: " . $e->getMessage();
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -91,7 +104,7 @@
             <p>Italië</p>
         </div>
         <div class="pp-country">
-            <a href="canada.html"><img src="images\canada.jpeg" alt="Canada"></a>
+            <a href="canada.php"><img src="images\canada.jpeg" alt="Canada"></a>
             <p>Canada</p>
         </div>
         <div class="pp-country">
