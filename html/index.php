@@ -75,16 +75,17 @@ try {
     <div class="summer">
         <div class="content">
             <h2>Jouw ideale zonvakantie</h2>
-            <button><a href="zomer.php">Belijk</a></button>
+            <a href="zomer.php" class="btn btn-primary">Bekijk</a>
         </div>
     </div>
     <div class="winter">
         <div class="content">
             <h2>Jouw ideale wintersportvakantie</h2>
-            <button><a href="ski.php">Bekijk</a></button>
+            <a href="ski.php" class="btn btn-primary">Bekijk</a>
         </div>
     </div>
 </section>
+
 
 
 <!-- SERVICE BLOCKS -->

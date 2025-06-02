@@ -1,11 +1,11 @@
-/* Basis styling */
+/* ===== BASIS STYLING (GELDT VOOR ALLE PAGINA'S) ===== */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* Header */
+/* ===== ALGEMENE HEADER ===== */
 header {
     display: flex;
     justify-content: space-between;
@@ -16,11 +16,10 @@ header {
 }
 
 .logo img {
-    max-height: 100px; /* Pas deze waarde aan naar wens */
+    max-height: 100px;
     height: auto;
     width: auto;
 }
-
 
 header nav ul {
     list-style: none;
@@ -36,10 +35,11 @@ header .account-link a {
     color: #333;
 }
 
+/* ===== HOME PAGINA (vakantie, deals, seasons, services) ===== */
 .vakantie {
     position: relative;
     width: 100%;
-    height: 100vh; /* vult hele hoogte van scherm */
+    height: 100vh;
     overflow: hidden;
 }
 
@@ -49,7 +49,7 @@ header .account-link a {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* zorgt dat de foto het scherm goed vult */
+    object-fit: cover;
     z-index: 0;
 }
 
@@ -84,13 +84,13 @@ header .account-link a {
     font-size: 1rem;
 }
 
+/* Vervang rode button door nieuwe btn btn-primary */
 .vakantie .search-bar button {
-    background: red;
-    color: white;
-    border: none;
+    background: none; /* reset */
+    color: inherit; /* reset */
+    border: none; /* reset */
     cursor: pointer;
 }
-
 
 /* Deals */
 .deals {
@@ -124,7 +124,6 @@ header .account-link a {
     overflow: hidden;
 }
 
-/* Zomer- en winterachtergrond */
 .summer {
     background-image: url('images/image2.png');
 }
@@ -133,7 +132,6 @@ header .account-link a {
     background-image: url('images/image4.webp');
 }
 
-/* Tekst op de foto gecentreerd */
 .content {
     position: absolute;
     top: 50%;
@@ -142,17 +140,14 @@ header .account-link a {
     text-align: center;
 }
 
-/* Knopstijl */
+/* Vervang seasons button met btn btn-primary */
 .seasons button {
-    background: red;
-    color: white;
-    padding: 10px 20px;
-    border: none;
     margin-top: 20px;
+    background: none; /* reset */
+    color: inherit; /* reset */
+    border: none; /* reset */
     cursor: pointer;
 }
-
-
 
 /* Services */
 .services {
@@ -171,36 +166,14 @@ header .account-link a {
     padding: 20px;
     background-color: #f2f2f2;
 }
-.pp-header {
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
 
-.pp-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.pp-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-    margin: 0;
-    padding: 0;
-}
-
-.pp-nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-}
-
-.pp-account-link {
-    font-weight: bold;
+/* ===== BESTEMMINGEN PAGINA (pp = populaire plaatsen) ===== */
+.pp-header,
+.pp-nav,
+.pp-hero,
+.pp-searchbar,
+.pp-content {
+    /* al deze blokken zijn onderdeel van de bestemmingenpagina */
 }
 
 .pp-hero {
@@ -212,15 +185,6 @@ header .account-link a {
     padding: 6rem 2rem;
 }
 
-.pp-hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.pp-hero p {
-    font-size: 1.25rem;
-}
-
 .pp-searchbar {
     display: flex;
     gap: 1rem;
@@ -229,21 +193,6 @@ header .account-link a {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     justify-content: center;
     flex-wrap: wrap;
-}
-
-.pp-searchbar input,
-.pp-searchbar select {
-    padding: 0.5rem;
-    font-size: 1rem;
-}
-
-.pp-search-btn {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 0.5rem 1.2rem;
-    cursor: pointer;
-    font-weight: bold;
 }
 
 .pp-content {
@@ -259,15 +208,6 @@ header .account-link a {
     border-radius: 8px;
 }
 
-.pp-filters h3 {
-    margin-top: 0;
-}
-
-.pp-filters label {
-    display: block;
-    margin-bottom: 1rem;
-}
-
 .pp-destinations {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -275,25 +215,7 @@ header .account-link a {
     flex: 1;
 }
 
-.pp-country {
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.pp-country img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
-
-.pp-country p {
-    margin: 1rem;
-    font-weight: bold;
-}
-/* About Hero Banner */
+/* ===== OVER ONS PAGINA ===== */
 .about-hero {
     background: url('images/ChatGPT Image 19 mei 2025, 16_01_26.png') no-repeat center center / cover;
     padding: 100px 20px;
@@ -301,18 +223,6 @@ header .account-link a {
     text-align: center;
 }
 
-.about-hero-text h1 {
-    font-size: 2.8rem;
-    margin-bottom: 15px;
-}
-
-.about-hero-text p {
-    font-size: 1.2rem;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-/* Missie & Visie */
 .about-content {
     display: flex;
     flex-wrap: wrap;
@@ -322,55 +232,15 @@ header .account-link a {
     background: #f9f9f9;
 }
 
-.about-box {
-    max-width: 400px;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    text-align: center;
-}
-
-/* Team sectie */
 .about-team {
     padding: 60px 20px;
     background: #fff;
     text-align: center;
 }
 
-.about-team h2 {
-    margin-bottom: 40px;
-}
-
-.team-members {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-}
-
-.team-member {
-    width: 200px;
-}
-
-.team-member img {
-    width: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    height: 200px;
-}
-
-.team-member h3 {
-    margin-top: 15px;
-    font-size: 1.1rem;
-}
-
-.team-member p {
-    font-size: 0.9rem;
-    color: #555;
-}
+/* ===== CONTACT PAGINA ===== */
 .contact-hero {
-    background-image: url('images/ChatGPT Image 21 mei 2025, 11_02_07.png'); /* Vervang dit pad */
+    background-image: url('images/ChatGPT Image 21 mei 2025, 11_02_07.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -380,20 +250,6 @@ header .account-link a {
     position: relative;
 }
 
-.contact-hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Donkere overlay */
-    z-index: 1;
-}
-
-.contact-hero-text {
-    position: relative;
-    z-index: 2;
-}
-
 .contact-form-section {
     padding: 50px 20px;
     background-color: #f9f9f9;
@@ -401,41 +257,9 @@ header .account-link a {
     justify-content: center;
 }
 
-.contact-form {
-    max-width: 600px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.contact-form label {
-    font-weight: bold;
-}
-
-.contact-form input,
-.contact-form textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-family: inherit;
-}
-
-.contact-form button {
-    padding: 12px;
-    background-color: #0077cc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.contact-form button:hover {
-    background-color: #005fa3;
-}
+/* ===== LOGIN PAGINA ===== */
 .login-hero {
-    background-image: url('images/ChatGPT Image 19 mei 2025, 16_01_26.png'); /* Gebruik jouw afbeelding */
+    background-image: url('images/ChatGPT Image 19 mei 2025, 16_01_26.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -446,75 +270,9 @@ header .account-link a {
     position: relative;
 }
 
-.login-hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Donkere overlay */
-    z-index: 1;
-}
-
-.login-form-container {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 40px;
-    border-radius: 10px;
-    max-width: 400px;
-    width: 100%;
-    z-index: 2;
-    position: relative;
-    text-align: center;
-}
-
-.login-form-container h1 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.login-form label {
-    text-align: left;
-    font-weight: bold;
-    color: #333;
-}
-
-.login-form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.login-form button {
-    padding: 12px;
-    background-color: #0077cc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.login-form button:hover {
-    background-color: #005fa3;
-}
-
-.login-note {
-    margin-top: 15px;
-    font-size: 0.9em;
-    color: #333;
-}
-
-.login-note a {
-    color: #0077cc;
-    text-decoration: none;
-}
+/* ===== REGISTRATIE PAGINA ===== */
 .register-hero {
-    background-image: url('images/ChatGPT Image 21 mei 2025, 11_02_07.png'); /* Gebruik jouw tropische afbeelding */
+    background-image: url('images/ChatGPT Image 21 mei 2025, 11_02_07.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -525,304 +283,69 @@ header .account-link a {
     position: relative;
 }
 
-.register-hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Donkere overlay voor leesbaarheid */
-    z-index: 1;
-}
-
-.register-form-container {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 40px;
-    border-radius: 10px;
-    max-width: 450px;
-    width: 100%;
-    z-index: 2;
-    position: relative;
-    text-align: center;
-}
-
-.register-form-container h1 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.register-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.register-form label {
-    text-align: left;
-    font-weight: bold;
-    color: #333;
-}
-
-.register-form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.register-form button {
-    padding: 12px;
-    background-color: #0077cc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-}
-/* Achtergrond & layout */
+/* ===== ACCOUNT PAGINA ===== */
 .account-hero {
     background: url('zonvakantie-achtergrond.jpg') center/cover no-repeat;
     min-height: 100vh;
-    padding: 60px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    position: relative;
 }
 
-.account-hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* overlay */
-    z-index: 1;
-}
-
-/* Container voor inhoud */
-.account-container {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    max-width: 800px;
-    width: 100%;
-    z-index: 2;
-    position: relative;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-
-/* Titels */
-.account-container h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #333;
-}
-
-.account-section {
-    margin-bottom: 40px;
-}
-
-.account-section h2 {
-    margin-bottom: 15px;
-    color: #0077cc;
-}
-
-/* Formulieren */
-.account-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.account-form label {
-    font-weight: bold;
-    color: #333;
-}
-
-.account-form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-}
-
-.account-form button {
-    padding: 12px;
-    background-color: #0077cc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-}
-
-.account-form button:hover {
-    background-color: #005fa3;
-}
-
-/* Boekingenlijst */
-.booking-list {
-    list-style: none;
-    padding: 0;
-    color: #333;
-}
-
-.booking-list li {
-    background: #f2f2f2;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 8px;
-}
-
-/* Support link */
-.account-section a {
-    color: #0077cc;
-    text-decoration: none;
-}
-
-.account-section a:hover {
-    text-decoration: underline;
-}
-
-.register-form button:hover {
-    background-color: #005fa3;
-}
-
-.register-note {
-    margin-top: 15px;
-    font-size: 0.9em;
-    color: #333;
-}
-
-.register-note a {
-    color: #0077cc;
-    text-decoration: none;
-}
-.admin-dashboard {
-    padding: 60px 20px;
-    background-color: #f5f7fa;
-    min-height: 100vh;
-}
-
-.admin-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
-}
-
-.admin-container h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #222;
-}
-
-.admin-panel {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    background: #fdfdfd;
-    padding: 0;
-    overflow: hidden;
-}
-
-.admin-panel summary {
-    padding: 15px 20px;
-    font-size: 1.2em;
-    font-weight: bold;
-    cursor: pointer;
-    background-color: #e9f1fa;
-    border-bottom: 1px solid #ccc;
-    list-style: none;
-}
-
-.admin-panel summary::-webkit-details-marker {
-    display: none;
-}
-
-.panel-content {
-    padding: 20px;
-}
-
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-.admin-table th,
-.admin-table td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-.admin-table th {
-    background-color: #f2f2f2;
-}
-
-.admin-table button {
-    margin-right: 5px;
-    padding: 6px 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #0077cc;
-    color: white;
-    cursor: pointer;
-    font-size: 0.9em;
-}
-
-.admin-table button:hover {
-    background-color: #005fa3;
-}
-
-.admin-list {
-    list-style: none;
-    padding: 0;
-}
-
-.admin-list li {
-    background-color: #eef6ff;
-    padding: 15px;
+/* ===== COMPONENT: Buttons ===== */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
     border-radius: 6px;
-    margin-bottom: 12px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.05);
-}
-
-.admin-list button {
-    margin-top: 8px;
-    background-color: #28a745;
-    border: none;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    font-family: inherit;
+    transition: background-color 0.3s ease, color 0.3s ease;
     cursor: pointer;
+    border: none;
 }
 
-.admin-list button:hover {
-    background-color: #218838;
+.btn-primary {
+    background-color: #0077cc;
+    color: white;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .seasons {
-        flex-direction: column;
-    }
+.btn-primary:hover {
+    background-color: #005fa3;
+}
 
-    .search-bar {
-        flex-direction: column;
-        align-items: center;
-    }
+.btn-secondary {
+    background-color: #f2f2f2;
+    color: #333;
+}
 
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+.btn-secondary:hover {
+    background-color: #ddd;
+}
 
-    header nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
+.btn-danger {
+    background-color: #cc0000;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #a30000;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid #0077cc;
+    color: #0077cc;
+}
+
+.btn-outline:hover {
+    background-color: #0077cc;
+    color: white;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #1e7e34;
 }

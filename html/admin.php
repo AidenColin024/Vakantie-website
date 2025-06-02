@@ -1,49 +1,41 @@
 <?php
-$servername = "db"; // Docker-service naam
-$username = "root";
-$password = "rootpassword";
-$database = "mydatabase";
+session_start();
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "✅ Verbinding met database is gelukt!";
-} catch (PDOException $e) {
-    echo "❌ Verbindingsfout: " . $e->getMessage();
+if (!isset($_SESSION['admin_name'], $_SESSION['admin_email'])) {
+    header("Location: admin-login.php");
+    exit;
 }
+
+$naam = htmlspecialchars($_SESSION['admin_name']);
+$email = htmlspecialchars($_SESSION['admin_email']);
 ?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Polar & Paradise</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard - Polar & Paradise</title>
     <link rel="stylesheet" href="vakantie.css?v=1.2">
-
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="pp-header">
     <div class="logo">
-        <a href="index.php">
-            <img src="images/image1 (1).png" alt="Polar & Paradise">
-        </a>
+        <a href="index.php"><img src="images/image1 (1).png" alt="Polar & Paradise" /></a>
     </div>
     <nav class="pp-nav">
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="ski.php">Ski vakanties</a></li>
-            <li><a href="zomer.php">Zomer vakanties</a></li>
-            <li><a href="overons.php">Over ons</a></li>
-            <li><a href="contact.php">Contact</a></li>
-            <li><a href="login.php" >Login</a></li>
+            <li><a href="admin.php" class="active">Dashboard</a></li>
+            <li><a href="admin-logout.php">Uitloggen</a></li>
         </ul>
     </nav>
 </header>
+
 <section class="admin-dashboard">
     <div class="admin-container">
-        <h1>Dashboard Beheer</h1>
+        <h1>Welkom, <?= $naam ?></h1>
+        <p>Dit is het beheerdersdashboard.</p>
 
         <details class="admin-panel">
             <summary>📦 Reizen beheren</summary>
@@ -101,10 +93,16 @@ try {
                 </ul>
             </div>
         </details>
+
     </div>
 </section>
-<footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
+
+<footer style="text-align:center; padding:1rem; font-size:0.9rem; color:#666;">
     © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
+
+</body>
+</html>
+
