@@ -12,7 +12,6 @@ try {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>

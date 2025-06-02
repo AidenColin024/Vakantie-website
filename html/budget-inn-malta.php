@@ -1,3 +1,17 @@
+<?php
+$servername = "db"; // Docker-service naam
+$username = "root";
+$password = "rootpassword";
+$database = "mydatabase";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "✅ Verbinding met database is gelukt!";
+} catch (PDOException $e) {
+    echo "❌ Verbindingsfout: " . $e->getMessage();
+}
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head> ... <title>Budget Inn Malta - Malta</title> ... </head>

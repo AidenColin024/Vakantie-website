@@ -1,17 +1,17 @@
 <?php
-$servername = "mysql_db";
+$servername = "db"; // Docker-service naam
 $username = "root";
 $password = "rootpassword";
+$database = "mydatabase";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=Restaurant", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "✅ Verbinding met database is gelukt!";
 } catch (PDOException $e) {
-    echo "Verbinding mislukt: " . $e->getMessage();
-    exit;
+    echo "❌ Verbindingsfout: " . $e->getMessage();
 }
 ?>
-<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8" />
