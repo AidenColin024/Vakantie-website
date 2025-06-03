@@ -43,7 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Inloggen | Polar & Paradise</title>
-    <link rel="stylesheet" href="vakantie.css?v=1.2" />
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
+
 </head>
 <body>
 <header class="pp-header">
@@ -63,12 +64,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </header>
 
 <section class="login-hero">
-    <div class="login-form-container">
-        <h1>Inloggen</h1>
+    <div class="form-container">
+        <h1 class="form-title">Inloggen</h1>
         <?php if ($foutmelding): ?>
             <p style="color:red; font-weight:bold;"><?php echo htmlspecialchars($foutmelding); ?></p>
         <?php endif; ?>
-        <form class="login-form" method="POST" action="login.php">
+        <form class="form" method="POST" action="login.php">
             <label for="email">E-mailadres</label>
             <input type="email" id="email" name="email" required>
 
@@ -77,17 +78,44 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <button type="submit">Inloggen</button>
         </form>
-        <p class="login-note">Nog geen account? <a href="registreer.php">Registreer hier</a></p>
-        <p class="login-note">Of bent u de eigenaar? <a href="admin-inlog.php">Log dan hier in</a></p>
+        <p class="form-note">Nog geen account? <a href="registreer.php">Registreer hier</a></p>
+        <p class="form-note">Of bent u de eigenaar? <a href="admin-inlog.php">Log dan hier in</a></p>
     </div>
 </section>
+
 
 <footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
     © 2025 Polar Paradise. Alle rechten voorbehouden.<br>
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
+<script>
+    // Simpele veld-validatie feedback
+    document.addEventListener("DOMContentLoaded", () => {
+        const forms = document.querySelectorAll("form");
 
+        forms.forEach(form => {
+            form.addEventListener("submit", e => {
+                const inputs = form.querySelectorAll("input[required], textarea[required]");
+                let allFilled = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.style.borderColor = "red";
+                        allFilled = false;
+                    } else {
+                        input.style.borderColor = "#ccc";
+                    }
+                });
+
+                if (!allFilled) {
+                    e.preventDefault();
+                    alert("⚠️ Vul alle verplichte velden in.");
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
 

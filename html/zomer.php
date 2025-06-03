@@ -7,30 +7,29 @@ $database = "mydatabase";
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "✅ Verbinding met database is gelukt!";
+    // Verbinding gelukt, maar voor productie zou je echo hier vermijden
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
 ?>
+<!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polar & Paradise - Ski Vakanties</title>
-    <link rel="stylesheet" href="vakantie.css">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Zomer Vakanties - Polar & Paradise</title>
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
 </head>
 <body>
 <header class="pp-header">
     <div class="logo">
-        <a href="index.php">
-            <img src="images/image1 (1).png" alt="Polar & Paradise">
-        </a>
+        <a href="index.php"><img src="images/image1 (1).png" alt="Polar & Paradise"></a>
     </div>
     <nav class="pp-nav">
         <ul>
             <li><a href="index.php">Home</a></li>
             <li><a href="ski.php">Ski vakanties</a></li>
-            <li><a href="zomer.html">Zomer vakanties</a></li>
+            <li><a href="zomer.php" class="active">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
             <li><a href="login.php">Login</a></li>
@@ -38,84 +37,94 @@ try {
     </nav>
 </header>
 
-<!-- HERO -->
-<section class="vakantie">
-    <img src="\images\image2.png" alt="Zon en Sneeuw vakanties">
+<section class="vakantie zomer-hero">
+    <img src="images/ChatGPT Image 21 mei 2025, 11_02_07.png" alt="Zomer vakanties" class="hero-img" />
     <div class="hero-text">
-        <h1>Jouw ultime zon vakantie wacht op je</h1>
+        <h1>Vind jouw perfecte zomer vakantie</h1>
+        <p>Van de zonnige stranden tot groene natuurgebieden, wij helpen je de beste plek te vinden.</p>
     </div>
-    <section class="search-bar">
-        <input type="date" placeholder="Vertrekdatum">
-        <input type="text" placeholder="1 kamer(s), 2 reizigers">
-        <select>
-            <option>8-11 dagen</option>
-            <option>12-15 dagen</option>
-        </select>
-        <input type="text" placeholder="Bestemming">
-        <button class="pp-search-btn">Toon 2214 vakanties</button>
-    </section>
 </section>
 
+
+
 <main class="pp-content">
-    <aside class="pp-filters">
-        <h3>Filter</h3>
-        <label>Land
-            <select>
+    <div class="page-content">
+        <aside class="pp-filters">
+            <h3>Filter jouw zomer vakantie</h3>
+            <label for="country">Land</label>
+            <select id="country" name="country">
+                <option value="">Alle landen</option>
                 <option>Spanje</option>
-                <option>Indonesië</option>
-                <option>Bulgarije</option>
-                <option>Malta</option>
+                <option>Italië</option>
+                <option>Griekenland</option>
+                <option>Portugal</option>
+                <option>Frankrijk</option>
             </select>
-        </label>
-        <label>Sterren
-            <select>
-                <option>Alle</option>
+
+            <label for="stars">Sterren</label>
+            <select id="stars" name="stars">
+                <option value="">Alle</option>
                 <option>3 sterren</option>
                 <option>4 sterren</option>
                 <option>5 sterren</option>
             </select>
-        </label>
-        <label>Soort vakantie
-            <select>
-                <option>Solo</option>
+
+            <label for="type">Soort vakantie</label>
+            <select id="type" name="type">
+                <option value="">Alle</option>
                 <option>Familie</option>
-                <option>Luxueus</option>
+                <option>Romantisch</option>
+                <option>Actief</option>
             </select>
-        </label>
-    </aside>
+        </aside>
 
-    <section class="pp-destinations">
-        <div class="pp-country">
-            <a href="spanje.php"><img src="images\Screenshot 2025-05-19 152016.png" alt="Spanje"></a>
-            <p>Spanje</p>
-        </div>
-        <div class="pp-country">
-            <a href="griekenland.php"><img src="images\Screenshot 2025-05-19 152022.png" alt="Griekenland"></a>
-            <p>Griekenland</p>
-        </div>
-        <div class="pp-country">
-            <a href="bulgarije.php"><img src="images\Screenshot 2025-05-19 152028.png" alt="Bulgarije"></a>
-            <p>Bulgarije</p>
-        </div>
-        <div class="pp-country">
+        <section class="destination-blocks">
+            <div class="destination-box" onclick="location.href='spanje.php'">
+                <img src="images/Spain.jpg" alt="Spanje"/>
+                <h3>Spanje</h3>
+            </div>
+            <div class="destination-box" onclick="location.href='griekenland.php'">
+                <img src="images/Greece.jpg" alt="Griekenland"/>
+                <h3>Griekenland</h3>
+            </div>
+            <div class="destination-box" onclick="location.href='italie-zomer.php'">
+                <img src="images/ItalySummer.jpg" alt="Italië"/>
+                <h3>Italië</h3>
+            </div>
+            <div class="destination-box" onclick="location.href='turkije.php'">
+                <img src="images/Turkey.jpg" alt="Turkije"/>
+                <h3>Turkije</h3>
+            </div>
+        </section>
 
-            <a href="malta.php" ><img src="images\Screenshot 2025-05-19 152054.png" alt="Malta"></a>
-            <p>Malta</p>
-        </div>
-        <div class="pp-country">
-            <a href="morokko.php"><img src="images\morokko.jpeg" alt="Malta"></a>
-            <p>Morokko</p>
-        </div>
-        <div class="pp-country">
-            <a href="portugal.php"><img src="images\portugal - Copy.jpg" alt="Portugal"></a>
-            <p>Portugal</p>
-        </div>
-    </section>
 </main>
-<footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
-    © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
-    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
+
+<footer>
+    © 2025 Polar Paradise. Alle rechten voorbehouden.<br>
+    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
+
+<script>
+    document.getElementById('searchForm').addEventListener('submit', function (e) {
+        const inputs = this.querySelectorAll('input[required], select[required]');
+        let allValid = true;
+
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                input.style.borderColor = 'red';
+                allValid = false;
+            } else {
+                input.style.borderColor = '#ccc';
+            }
+        });
+
+        if (!allValid) {
+            e.preventDefault();
+            alert('⚠️ Vul alle verplichte velden in.');
+        }
+    });
+</script>
+
 </body>
 </html>

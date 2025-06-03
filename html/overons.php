@@ -7,7 +7,6 @@ $database = "mydatabase";
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "✅ Verbinding met database is gelukt!";
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
@@ -18,7 +17,7 @@ try {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Polar & Paradise</title>
-    <link rel="stylesheet" href="vakantie.css?v=1.2">
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
 
 </head>
 <body>
@@ -81,3 +80,16 @@ try {
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const contactService = document.querySelector('.service-contact');
+        if (contactService) {
+            contactService.addEventListener('click', () => {
+                alert('Heb je vragen? Neem gerust contact met ons op via de contactpagina!');
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
