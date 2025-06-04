@@ -16,7 +16,6 @@
             <img src="images/image1 (1).png" alt="Polar & Paradise">
         </a>
     </div>
-
     <nav class="pp-nav">
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -24,24 +23,15 @@
             <li><a href="zomer.html">Zomer vakanties</a></li>
             <li><a href="overons.html">Over ons</a></li>
             <li><a href="contact.html">Contact</a></li>
-            <li><a href="login.html">Login</a></li>
         </ul>
     </nav>
 </header>
 
-
 <!-- HERO -->
 <section class="vakantie">
-    <img src="\images\image3.webp" alt="Zon en Sneeuw vakanties">
+    <img src="C:\Users\aiden\OneDrive - ROC Nijmegen\Webapplicatie\Webapp2\Vakantie-website\Inhoud\images\image3.webp" alt="Zon en Sneeuw vakanties">
     <div class="hero-text">
-        <h1>Van zon en zee<br>naar sneeuw en slee</h1>
-    </div>
-    <div class="search-bar">
-        <input type="text" placeholder="Vertreklocatie">
-        <input type="text" placeholder="kamers/personen">
-        <input type="text" placeholder="aantal dagen">
-        <input type="text" placeholder="Bestemming">
-        <button>Toon vakanties</button>
+        <h1>Van zonovergoten stranden tot besneeuwde bergtoppenwij</h1><h3>wij brengen jouw droomvakantie tot leven.</h3>
     </div>
 </section>
 
@@ -63,7 +53,7 @@
     <div class="summer">
         <div class="content">
             <h2>Jouw ideale zonvakantie</h2>
-            <button><a href="zomer.html">Belijk</a></button>
+            <button><a href="zomer.html">Bekijk</a></button>
         </div>
     </div>
     <div class="winter">
@@ -95,39 +85,12 @@
     </div>
 </section>
 <footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
-    © 2025 Polar Paradise. Alle rechten voorbehouden.<br>
-    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
+    © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
+    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
-
 </body>
 </html>
 
-<script>
-    // Simpele veld-validatie feedback
-    document.addEventListener("DOMContentLoaded", () => {
-        const forms = document.querySelectorAll("form");
-
-        forms.forEach(form => {
-            form.addEventListener("submit", e => {
-                const inputs = form.querySelectorAll("input[required], textarea[required]");
-                let allFilled = true;
-
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        input.style.borderColor = "red";
-                        allFilled = false;
-                    } else {
-                        input.style.borderColor = "#ccc";
-                    }
-                });
-
-                if (!allFilled) {
-                    e.preventDefault();
-                    alert("⚠️ Vul alle verplichte velden in.");
-                }
-            });
-        });
-    });
-</script>
-
+</body>
+</html>

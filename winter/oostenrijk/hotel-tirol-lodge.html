@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Tirol Lodge – Oostenrijk</title>
+    <link rel="stylesheet" href="../../vakantie.css">
+</head>
+<body>
+<header class="pp-header">
+    <div class="logo">
+        <a href="../../index.html">
+            <img src="../../images/image1%20(1).png" alt="Polar & Paradise">
+        </a>
+    </div>
+    <nav class="pp-nav">
+        <ul>
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../../ski.html">Ski vakanties</a></li>
+            <li><a href="../../zomer.html">Zomer vakanties</a></li>
+            <li><a href="../../overons.html">Over ons</a></li>
+            <li><a href="../../contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="hotel-main container">
+    <div class="salzburg">
+        <img src="/images/tirol-lodge.png" alt="Hotel Tirol Lodge">
+    </div>
+    <h1>Hotel Tirol Lodge – 4 sterren</h1>
+    <div class="gallery">
+        <img src="/images/tirol-lodge1.png" alt="Lobby">
+        <img src="/images/tirol-lodge2.png" alt="Woonkamer">
+        <img src="/images/tirol-lodge3.png" alt="Zwembad">
+        <img src="/images/tirol-lodge4.png" alt="Restaurant">
+        <img src="/images/tirol-lodge5.png" alt="Uitzicht op de bergen">
+    </div>
+
+    <div class="hotel-details">
+        <div class="description">
+            <h2>Beschrijving</h2>
+            <p>Comfortabel hotel in Tirol met moderne kamers, nabij skigebied en goede faciliteiten voor een ontspannen verblijf.</p>
+
+            <h2>Faciliteiten</h2>
+            <ul>
+                <li>Gratis WiFi</li>
+                <li>Spa en zwembad</li>
+                <li>Restaurant</li>
+                <li>Skiliften dichtbij</li>
+            </ul>
+        </div>
+
+        <div class="booking-box">
+            <p class="price">Vanaf <strong>€130</strong> per nacht</p>
+            <a href="../../contact.html" class="book-now">Boek nu</a>
+        </div>
+    </div>
+
+    <a href="oostenrijk.html" class="back-link">← Terug naar Oostenrijk vakanties</a>
+</main>
+
+<footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
+    © 2025 Polar Paradise. Alle rechten voorbehouden.<br>
+    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
+    Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
+</footer>
+
+</body>
+</html>
+
+<script>
+    // Simpele veld-validatie feedback
+    document.addEventListener("DOMContentLoaded", () => {
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener("submit", e => {
+                const inputs = form.querySelectorAll("input[required], textarea[required]");
+                let allFilled = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.style.borderColor = "red";
+                        allFilled = false;
+                    } else {
+                        input.style.borderColor = "#ccc";
+                    }
+                });
+
+                if (!allFilled) {
+                    e.preventDefault();
+                    alert("⚠️ Vul alle verplichte velden in.");
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
