@@ -79,19 +79,19 @@ try {
 
         <section class="destination-blocks">
             <div class="destination-box" onclick="location.href='kreta-beach-hotel.php'">
-                <img src="images/griekenland-hotel1.jpg" alt="Kreta Beach Resort"/>
+                <img src="images/kreta beach.jpg" alt="Kreta Beach Resort"/>
                 <h3>Kreta Beach Resort – 4 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='rhodes-luxe-hotel.php'">
-                <img src="images/griekenland-hotel2.jpg" alt="Rhodos Luxe Hotel"/>
+                <img src="images/rhodos.jpg" alt="Rhodos Luxe Hotel"/>
                 <h3>Rhodos Luxe Hotel – 5 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='athena-hotel.php'">
-                <img src="images/griekenland-hotel3.jpg" alt="Athene Boutique Hotel"/>
+                <img src="images/athene.jpg" alt="Athene Boutique Hotel"/>
                 <h3>Athene Boutique Hotel – 3 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='hotel-olympia.php'">
-                <img src="images/olympia-beach.jpg" alt="Hotel Olympia Beach"/>
+                <img src="images/olympia beach.jpg" alt="Hotel Olympia Beach"/>
                 <h3>Hotel Olympia Beach – 4 sterren</h3>
             </div>
         </section>

@@ -79,19 +79,19 @@ try {
 
         <section class="destination-blocks">
             <div class="destination-box" onclick="location.href='riad-marrakesh.php'">
-                <img src="images/marokko-marrakesh.jpg" alt="Riad Marrakesh"/>
+                <img src="images/marrakesh.jpg" alt="Riad Marrakesh"/>
                 <h3>Riad Marrakesh – 4 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='agadir-beach-resort.php'">
-                <img src="images/marokko-agadir.jpg" alt="Agadir Beach Resort"/>
+                <img src="images/agadir beach.jpg" alt="Agadir Beach Resort"/>
                 <h3>Agadir Beach Resort – 5 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='casablanca-hotel.php'">
-                <img src="images/marokko-casablanca.jpg" alt="Casablanca Hotel"/>
+                <img src="images/casablanca.jpg" alt="Casablanca Hotel"/>
                 <h3>Casablanca Hotel – 3 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='essaouira-sands.php'">
-                <img src="images/essaouira-sands.jpg" alt="Essaouira Sands Resort"/>
+                <img src="images/assaouri sands.jpg" alt="Essaouira Sands Resort"/>
                 <h3>Essaouira Sands Resort – 4 sterren</h3>
             </div>
         </section>
