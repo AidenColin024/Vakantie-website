@@ -95,7 +95,7 @@ try {
                 <h3>Italië</h3>
             </div>
             <div class="destination-box" onclick="location.href='canada.php'">
-                <img src="images/Snowboarder-terug-in-resort.png"alt="Canada"/>
+                <img src="images/Snowboarder-terug-in-resort.png" alt="Canada"/>
                 <h3>Canada</h3>
             </div>
         </section>

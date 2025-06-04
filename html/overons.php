@@ -14,10 +14,13 @@ try {
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Over ons – Polar & Paradise</title>
     <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
+    <title>Polar & Paradise</title>
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
+
 </head>
 <body>
 
@@ -53,11 +56,13 @@ try {
 <section class="about-content">
     <div class="about-box">
         <h2>Onze Missie</h2>
-        <p>Wij geloven dat iedereen recht heeft op een onvergetelijke vakantie. Of je nu op zoek bent naar ontspanning onder een palmboom of actie op de piste, wij maken het mogelijk.</p>
+        <p>Wij geloven dat iedereen recht heeft op een onvergetelijke vakantie. Of je nu op zoek bent naar ontspanning
+            onder een palmboom of actie op de piste, wij maken het mogelijk.</p>
     </div>
     <div class="about-box">
         <h2>Onze Visie</h2>
-        <p>Als pioniers in veelzijdige reizen combineren we de beste deals, persoonlijke service en betrouwbare garanties. Altijd met oog voor duurzaamheid en lokale cultuur.</p>
+        <p>Als pioniers in veelzijdige reizen combineren we de beste deals, persoonlijke service en betrouwbare
+            garanties. Altijd met oog voor duurzaamheid en lokale cultuur.</p>
     </div>
 </section>
 
@@ -76,12 +81,12 @@ try {
     </div>
 </section>
 
-<!-- Footer -->
-<footer class="site-footer">
-    <p>© 2025 Polar Paradise. Alle rechten voorbehouden.</p>
-    <p>Polar Paradise is een geregistreerd handelsmerk. Ongeautoriseerd gebruik van inhoud of merktekens is verboden.</p>
-</footer>
 
+<footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
+    © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
+    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
+    Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
+</footer>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const contactService = document.querySelector('.service-contact');
@@ -94,4 +99,5 @@ try {
 </script>
 
 </body>
+</html>
 </html>

@@ -38,13 +38,12 @@ try {
 </header>
 
 <section class="vakantie zomer-hero">
-    <img src="images/ChatGPT Image 21 mei 2025, 11_02_07.png" alt="Zomer vakanties" class="hero-img" />
+    <img src="images/ChatGPT Image 21 mei 2025, 11_02_07.png" alt="Zomer vakanties" class="hero-img"/>
     <div class="hero-text">
         <h1>Vind jouw perfecte zomer vakantie</h1>
         <p>Van de zonnige stranden tot groene natuurgebieden, wij helpen je de beste plek te vinden.</p>
     </div>
 </section>
-
 
 
 <main class="pp-content">
@@ -80,6 +79,7 @@ try {
 
         <section class="destination-blocks">
             <div class="destination-box" onclick="location.href='spanje.php'">
+
                 <img src="images\Screenshot 2025-05-19 152006.png" alt="Spanje"/>
                 <h3>Spanje</h3>
             </div>
