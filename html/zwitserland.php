@@ -7,7 +7,6 @@ $database = "mydatabase";
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "✅ Verbinding met database is gelukt!";
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
@@ -18,7 +17,7 @@ try {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Polar & Paradise - Zwitserland</title>
-    <link rel="stylesheet" href="vakantie.css" />
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
 </head>
 <body>
 <header class="pp-header">
@@ -39,7 +38,7 @@ try {
 </header>
 
 <section class="vakantie">
-    <img src="images/zwitserland-hero.jpg" alt="Skiën in Zwitserland">
+    <img src="images/switzerland-zermatt-nl.jpg" alt="Skiën in Zwitserland">
     <div class="hero-text">
         <h1>Beleef de Zwitserse Alpen</h1>
     </div>
@@ -87,7 +86,7 @@ try {
     <section class="pp-destinations">
         <div class="pp-country">
             <a href="hotel-matterhorn-lodge.php">
-                <img src="images/Screenshot 2025-05-19 151959.png" alt="Hotel Matterhorn Lodge" />
+                <img src="images/" alt="Hotel Matterhorn Lodge" />
                 <p>Hotel Matterhorn Lodge – 5 sterren</p>
             </a>
         </div>

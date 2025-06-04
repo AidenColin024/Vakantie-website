@@ -58,10 +58,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Registreren | Polar & Paradise</title>
-    <link rel="stylesheet" href="vakantie.css?v=1.2" />
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
+
 </head>
 <body>
 <header class="pp-header">
@@ -81,32 +82,59 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </header>
 
 <section class="register-hero">
-    <div class="register-form-container">
-        <h1>Registreren</h1>
+    <div class="form-container">
+        <h1 class="form-title">Registreren</h1>
         <?php if ($foutmelding): ?>
             <p style="color:red; font-weight:bold;"><?php echo htmlspecialchars($foutmelding); ?></p>
         <?php endif; ?>
-                <form class="login-form" method="POST" action="registreer.php">
-                    <label for="naam">Naam</label>
-                    <input type="text" id="naam" name="naam" required value="<?= isset($naam) ? htmlspecialchars($naam) : '' ?>">
+        <form class="form" method="POST" action="registreer.php">
+            <label for="naam">Naam</label>
+            <input type="text" id="naam" name="naam" required value="<?= isset($naam) ? htmlspecialchars($naam) : '' ?>">
 
-                    <label for="email">E-mailadres</label>
-                    <input type="email" id="email" name="email" required value="<?= isset($email) ? htmlspecialchars($email) : '' ?>">
+            <label for="email">E-mailadres</label>
+            <input type="email" id="email" name="email" required value="<?= isset($email) ? htmlspecialchars($email) : '' ?>">
 
-                    <label for="password">Wachtwoord</label>
-                    <input type="password" id="password" name="password" required>
+            <label for="password">Wachtwoord</label>
+            <input type="password" id="password" name="password" required>
 
-                    <label for="password_confirm">Bevestig wachtwoord</label>
-                    <input type="password" id="password_confirm" name="password_confirm" required>
+            <label for="password_confirm">Bevestig wachtwoord</label>
+            <input type="password" id="password_confirm" name="password_confirm" required>
 
-                    <button type="submit">Registreren</button>
-                    <p class="register-note">Al een account? <a href="login.php">Log hier in</a></p>
-                </form>
-            </div>
-        </section>
+            <button type="submit">Registreren</button>
+        </form>
+        <p class="form-note">Al een account? <a href="login.php">Log hier in</a></p>
     </div>
 </section>
 
 <footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
     © 2025 Polar Paradise. Alle rechten voorbehouden
+</footer>
+<script>
+    // Simpele veld-validatie feedback
+    document.addEventListener("DOMContentLoaded", () => {
+        const forms = document.querySelectorAll("form");
 
+        forms.forEach(form => {
+            form.addEventListener("submit", e => {
+                const inputs = form.querySelectorAll("input[required], textarea[required]");
+                let allFilled = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.style.borderColor = "red";
+                        allFilled = false;
+                    } else {
+                        input.style.borderColor = "#ccc";
+                    }
+                });
+
+                if (!allFilled) {
+                    e.preventDefault();
+                    alert("⚠️ Vul alle verplichte velden in.");
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

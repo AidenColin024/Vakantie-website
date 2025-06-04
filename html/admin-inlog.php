@@ -44,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8" />
     <title>Admin Inloggen - Polar & Paradise</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="vakantie.css?v=1.2" />
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
+
 </head>
 <body>
 
@@ -64,17 +65,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </nav>
 </header>
 
-<section class="login-hero">
-    <div class="login-form-container">
-        <h1>Admin Inloggen</h1>
+<section class="admin-hero">
+    <div class="form-container">
+        <h1 class="form-title">Admin Inloggen</h1>
         <?php if (!empty($error)): ?>
-            <p style="color: red; font-weight: bold;"><?= htmlspecialchars($error) ?></p>
+            <p style="color:red; font-weight:bold;"><?= htmlspecialchars($error) ?></p>
         <?php endif; ?>
-        <form class="login-form" method="post" action="admin-login.php">
+        <form class="form" method="POST" action="admin-login.php">
             <label for="email">E-mailadres</label>
-            <input type="email" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" />
+            <input type="email" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+
             <label for="password">Wachtwoord</label>
-            <input type="password" id="password" name="password" required />
+            <input type="password" id="password" name="password" required>
+
             <button type="submit">Inloggen</button>
         </form>
     </div>
@@ -88,4 +91,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </body>
 </html>
+
 

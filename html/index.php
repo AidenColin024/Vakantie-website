@@ -7,7 +7,6 @@ $database = "mydatabase";
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "✅ Verbinding met database is gelukt!";
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
@@ -18,7 +17,8 @@ try {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Polar & Paradise</title>
-    <link rel="stylesheet" href="vakantie.css?v=1.2">
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
+
 
 </head>
 <body>
@@ -26,13 +26,11 @@ try {
 <!-- HEADER -->
 <header class="pp-header">
     <div class="logo">
-        <a href="index.php">
-            <img src="images/image1 (1).png" alt="Polar & Paradise">
-        </a>
+        <a href="index.php"><img src="images/image1 (1).png" alt="Polar & Paradise"></a>
     </div>
     <nav class="pp-nav">
         <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="ski.php">Ski vakanties</a></li>
             <li><a href="zomer.php">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
@@ -47,13 +45,6 @@ try {
     <img src="\images\image3.webp" alt="Zon en Sneeuw vakanties">
     <div class="hero-text">
         <h1>Van zon en zee<br>naar sneeuw en slee</h1>
-    </div>
-    <div class="search-bar">
-        <input type="text" placeholder="Vertreklocatie">
-        <input type="text" placeholder="kamers/personen">
-        <input type="text" placeholder="aantal dagen">
-        <input type="text" placeholder="Bestemming">
-        <button>Toon vakanties</button>
     </div>
 </section>
 
@@ -114,6 +105,32 @@ try {
 </footer>
 </body>
 </html>
+<script>
+    // Simpele veld-validatie feedback
+    document.addEventListener("DOMContentLoaded", () => {
+        const forms = document.querySelectorAll("form");
 
+        forms.forEach(form => {
+            form.addEventListener("submit", e => {
+                const inputs = form.querySelectorAll("input[required], textarea[required]");
+                let allFilled = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.style.borderColor = "red";
+                        allFilled = false;
+                    } else {
+                        input.style.borderColor = "#ccc";
+                    }
+                });
+
+                if (!allFilled) {
+                    e.preventDefault();
+                    alert("⚠️ Vul alle verplichte velden in.");
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

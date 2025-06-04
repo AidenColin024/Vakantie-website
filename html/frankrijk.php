@@ -1,11 +1,23 @@
+<?php
+$servername = "db"; // Docker-service naam
+$username = "root";
+$password = "rootpassword";
+$database = "mydatabase";
 
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "❌ Verbindingsfout: " . $e->getMessage();
+}
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Polar & Paradise - Frankrijk</title>
-    <link rel="stylesheet" href="vakantie.css" />
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
 </head>
 <body>
 <header class="pp-header">
@@ -26,7 +38,7 @@
 </header>
 
 <section class="vakantie">
-    <img src="images/frankrijk-hero.jpg" alt="Skiën in Frankrijk">
+    <img src="images/wintersport-frankrijk.webp" alt="Skiën in Frankrijk">
     <div class="hero-text">
         <h1>Geniet van de Franse Alpen</h1>
     </div>

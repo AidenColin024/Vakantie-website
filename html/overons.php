@@ -1,5 +1,5 @@
 <?php
-$servername = "db"; // Docker-service naam
+$servername = "db";
 $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
@@ -7,7 +7,6 @@ $database = "mydatabase";
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "✅ Verbinding met database is gelukt!";
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
@@ -17,9 +16,8 @@ try {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Polar & Paradise</title>
-    <link rel="stylesheet" href="vakantie.css?v=1.2">
-
+    <title>Over ons – Polar & Paradise</title>
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
 </head>
 <body>
 
@@ -35,17 +33,18 @@ try {
             <li><a href="index.php">Home</a></li>
             <li><a href="ski.php">Ski vakanties</a></li>
             <li><a href="zomer.php">Zomer vakanties</a></li>
-            <li><a href="overons.html">Over ons</a></li>
+            <li><a href="overons.php" class="active">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
-            <li><a href="login.php" >Login</a></li>
+            <li><a href="login.php">Login</a></li>
         </ul>
     </nav>
 </header>
-<!-- Banner / Hero -->
-<section class="about-hero">
-    <div class="about-hero-text">
-        <h1>Over ons</h1>
-        <h2>Over Polar & Paradise</h2>
+
+<!-- Hero / Banner -->
+<section class="hero-section about-hero">
+    <img src="images/ChatGPT Image 19 mei 2025, 16_01_26.png" alt="Over ons" class="hero-img">
+    <div class="hero-text">
+        <h1>Over Polar & Paradise</h1>
         <p>Van zonovergoten stranden tot besneeuwde bergtoppen – wij brengen jouw droomvakantie tot leven.</p>
     </div>
 </section>
@@ -76,8 +75,23 @@ try {
         </div>
     </div>
 </section>
-<footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
-    © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
-    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
-    Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
+
+<!-- Footer -->
+<footer class="site-footer">
+    <p>© 2025 Polar Paradise. Alle rechten voorbehouden.</p>
+    <p>Polar Paradise is een geregistreerd handelsmerk. Ongeautoriseerd gebruik van inhoud of merktekens is verboden.</p>
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const contactService = document.querySelector('.service-contact');
+        if (contactService) {
+            contactService.addEventListener('click', () => {
+                alert('Heb je vragen? Neem gerust contact met ons op via de contactpagina!');
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

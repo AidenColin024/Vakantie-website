@@ -7,7 +7,6 @@ $database = "mydatabase";
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "✅ Verbinding met database is gelukt!";
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
@@ -18,7 +17,7 @@ try {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Polar & Paradise - Oostenrijk</title>
-    <link rel="stylesheet" href="vakantie.css" />
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
 </head>
 <body>
 <header class="pp-header">
@@ -39,7 +38,7 @@ try {
 </header>
 
 <section class="vakantie">
-    <img src="images/oostenrijk-hero.jpg" alt="Skiën in Oostenrijk">
+    <img src="images/westendorf-drone.webp" alt="Skiën in Oostenrijk">
     <div class="hero-text">
         <h1>Ontdek de Alpen van Oostenrijk</h1>
     </div>

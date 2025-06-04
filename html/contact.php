@@ -7,7 +7,6 @@ $database = "mydatabase";
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "✅ Verbinding met database is gelukt!";
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
@@ -18,7 +17,8 @@ try {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Polar & Paradise</title>
-    <link rel="stylesheet" href="vakantie.css?v=1.2">
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
+
 
 </head>
 <body>
@@ -42,29 +42,53 @@ try {
     </nav>
 </header>
 <section class="contact-hero">
-    <div class="contact-hero-text">
-        <h1>Contact</h1>
-        <h2>Neem contact met ons op</h2>
-        <p>Heb je vragen of wil je je droomreis bespreken? Wij staan voor je klaar!</p>
+    <div class="form-container">
+        <h1 class="form-title">Contact</h1>
+        <form class="form" method="POST" action="contact.php">
+            <label for="name">Naam</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">E-mailadres</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Bericht</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Verzenden</button>
+        </form>
     </div>
-</section>
-
-<section class="contact-form-section">
-    <form class="contact-form">
-        <label for="name">Naam</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="message">Bericht</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
-
-        <button type="submit">Verzenden</button>
-    </form>
 </section>
 <footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
     © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
+<script>
+    // Simpele veld-validatie feedback
+    document.addEventListener("DOMContentLoaded", () => {
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener("submit", e => {
+                const inputs = form.querySelectorAll("input[required], textarea[required]");
+                let allFilled = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.style.borderColor = "red";
+                        allFilled = false;
+                    } else {
+                        input.style.borderColor = "#ccc";
+                    }
+                });
+
+                if (!allFilled) {
+                    e.preventDefault();
+                    alert("⚠️ Vul alle verplichte velden in.");
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
