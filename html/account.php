@@ -35,11 +35,10 @@ $email = htmlspecialchars($gebruiker['Email'] ?? $_SESSION['email']);
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Mijn Account | Polar & Paradise</title>
     <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
-
 </head>
 <body>
 

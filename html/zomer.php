@@ -80,16 +80,16 @@ try {
         <section class="destination-blocks">
             <div class="destination-box" onclick="location.href='spanje.php'">
 
-                <img src="images\Screenshot 2025-05-19 152006.png" alt="Spanje"/>
+                <img src="images\OIP4.jpg" alt="Spanje"/>
                 <h3>Spanje</h3>
             </div>
             <div class="destination-box" onclick="location.href='griekenland.php'">
-                <img src="images/Screenshot 2025-05-19 152022.png" alt="Griekenland"/>
+                <img src="images/foto-mooie-vakantiebestemming-in-griekenland-met-huizen-en-de-zee-in-de-zomer-hd-vakantie-achtergrond.jpg" alt="Griekenland"/>
                 <h3>Griekenland</h3>
             </div>
-            <div class="destination-box" onclick="location.href='italie-zomer.php'">
-                <img src="images/downloads.jpg" alt="Italië"/>
-                <h3>Italië</h3>
+            <div class="destination-box" onclick="location.href='morokko.php'">
+                <img src="images/OIP (5).jpg" alt="Morokko"/>
+                <h3>Morokko</h3>
             </div>
             <div class="destination-box" onclick="location.href='turkije.php'">
                 <img src="images/downloads (1).jpg" alt="Turkije"/>

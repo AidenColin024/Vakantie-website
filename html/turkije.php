@@ -7,7 +7,7 @@ $database = "mydatabase";
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // echo "✅ Verbinding met database is gelukt!"; // kun je aanzetten voor debug
+    // echo "✅ Verbinding met database is gelukt!";
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
@@ -17,7 +17,7 @@ try {
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Spanje Vakanties - Polar & Paradise</title>
+    <title>Turkije Vakanties - Polar & Paradise</title>
     <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
 </head>
 <body>
@@ -38,10 +38,10 @@ try {
 </header>
 
 <section class="vakantie zomer-hero">
-    <img src="images/OIP4.jpg" alt="Vakantie in Spanje" class="hero-img" />
+    <img src="images/downloads (1).jpg" alt="Vakantie in Turkije" class="hero-img" />
     <div class="hero-text">
-        <h1>Beleef de zon in prachtige Spanje</h1>
-        <p>Van Barcelona tot de Canarische Eilanden, jouw ideale zomervakantie wacht.</p>
+        <h1>Beleef het prachtige Turkije</h1>
+        <p>Van Istanbul tot Antalya, jouw ideale zomerbestemming wacht.</p>
     </div>
 </section>
 
@@ -52,10 +52,10 @@ try {
             <label for="region">Regio</label>
             <select id="region" name="region">
                 <option value="">Alle regio's</option>
-                <option>Barcelona</option>
-                <option>Andalusië</option>
-                <option>Canarische Eilanden</option>
-                <option>Costa Brava</option>
+                <option>Istanbul</option>
+                <option>Antalya</option>
+                <option>Cappadocië</option>
+                <option>Bodrum</option>
             </select>
 
             <label for="stars">Sterren</label>
@@ -69,30 +69,30 @@ try {
             <label for="type">Soort vakantie</label>
             <select id="type" name="type">
                 <option value="">Alle</option>
-                <option>Strand</option>
-                <option>Stedentrip</option>
                 <option>All-inclusive</option>
+                <option>Historisch</option>
+                <option>Strand</option>
             </select>
 
             <label><input type="checkbox"> Inclusief vlucht</label>
         </aside>
 
         <section class="destination-blocks">
-            <div class="destination-box" onclick="location.href='barcelona-city-hotel.php'">
-                <img src="images/spanje-hotel1.jpg" alt="Barcelona City Hotel"/>
-                <h3>Barcelona City Hotel – 4 sterren</h3>
+            <div class="destination-box" onclick="location.href='istanbul-hotel.php'">
+                <img src="images/turkije-hotel1.jpg" alt="Istanbul Grand Hotel"/>
+                <h3>Istanbul Grand Hotel – 4 sterren</h3>
             </div>
-            <div class="destination-box" onclick="location.href='andalusie-hotel.php'">
-                <img src="images/spanje-hotel2.jpg" alt="Andalusië Luxe Resort"/>
-                <h3>Andalusië Luxe Resort – 5 sterren</h3>
+            <div class="destination-box" onclick="location.href='antalya-luxe-hotel.php'">
+                <img src="images/turkije-hotel2.jpg" alt="Antalya Luxe Hotel"/>
+                <h3>Antalya Luxe Hotel – 5 sterren</h3>
             </div>
-            <div class="destination-box" onclick="location.href='tenerife-hotel.php'">
-                <img src="images/spanje-hotel3.jpg" alt="Tenerife Appartement"/>
-                <h3>Tenerife Appartement – 3 sterren</h3>
+            <div class="destination-box" onclick="location.href='cappadocie-boutique-hotel.php'">
+                <img src="images/turkije-hotel3.jpg" alt="Cappadocië Boutique Hotel"/>
+                <h3>Cappadocië Boutique Hotel – 3 sterren</h3>
             </div>
-            <div class="destination-box" onclick="location.href='costa-brava-hotel.php'">
-                <img src="images/costa-brava-palace.jpg" alt="Costa Brava Palace"/>
-                <h3>Costa Brava Palace – 5 sterren</h3>
+            <div class="destination-box" onclick="location.href='bodrum-beach-hotel.php'">
+                <img src="images/bodrum-beach.jpg" alt="Bodrum Beach Hotel"/>
+                <h3>Bodrum Beach Hotel – 4 sterren</h3>
             </div>
         </section>
     </div>

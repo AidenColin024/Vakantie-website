@@ -40,7 +40,7 @@ try {
     <img src="images/R.jpg" alt="Ski vakanties" class="hero-img" />
     <div class="hero-text">
         <h1>Vind jouw perfecte ski vakantie</h1>
-        <p>Van de Alpen tot Canada, wij hebben de beste pistes voor jou geselecteerd.</p>
+        <p>Van de Oostenrijk tot Italië, wij hebben de beste pistes voor jou geselecteerd.</p>
     </div>
 </section>
 
@@ -94,11 +94,6 @@ try {
                 <img src="images/R.jpg" alt="Italië"/>
                 <h3>Italië</h3>
             </div>
-            <div class="destination-box" onclick="location.href='canada.php'">
-                <img src="images/Snowboarder-terug-in-resort.png" alt="Canada"/>
-                <h3>Canada</h3>
-            </div>
-        </section>
 
 </main>
 
