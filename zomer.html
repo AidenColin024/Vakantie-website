@@ -13,6 +13,7 @@
             <img src="images/image1 (1).png" alt="Polar & Paradise">
         </a>
     </div>
+
     <nav class="pp-nav">
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -20,6 +21,7 @@
             <li><a href="zomer.html">Zomer vakanties</a></li>
             <li><a href="overons.html">Over ons</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
         </ul>
     </nav>
 </header>
@@ -72,36 +74,65 @@
 
     <section class="pp-destinations">
         <div class="pp-country">
-            <a href="spanje.html"><img src="images\Screenshot 2025-05-19 152016.png" alt="Spanje"></a>
+            <a href="zomer/spanje/spanje.html"><img src="images\Screenshot 2025-05-19 152016.png" alt="Spanje"></a>
             <p>Spanje</p>
         </div>
         <div class="pp-country">
-            <a href="griekenland.html"><img src="images\Screenshot 2025-05-19 152022.png" alt="Griekenland"></a>
+            <a href="zomer/griekenland/griekenland.html"><img src="images\Screenshot 2025-05-19 152022.png" alt="Griekenland"></a>
             <p>Griekenland</p>
         </div>
         <div class="pp-country">
-            <a href="bulgarije.html"><img src="images\Screenshot 2025-05-19 152028.png" alt="Bulgarije"></a>
+            <a href="zomer/bulgarije/bulgarije.html"><img src="images\Screenshot 2025-05-19 152028.png" alt="Bulgarije"></a>
             <p>Bulgarije</p>
         </div>
         <div class="pp-country">
 
-            <a href="malta.html" ><img src="images\Screenshot 2025-05-19 152054.png" alt="Malta"></a>
+            <a href="zomer/malta/malta.html" ><img src="images\Screenshot 2025-05-19 152054.png" alt="Malta"></a>
             <p>Malta</p>
         </div>
         <div class="pp-country">
-            <a href="morokko.html"><img src="images\morokko.jpeg" alt="Malta"></a>
+            <a href="zomer/morokko/morokko.html"><img src="images\morokko.jpeg" alt="Malta"></a>
             <p>Morokko</p>
         </div>
         <div class="pp-country">
-            <a href="portugal.html"><img src="images\portugal - Copy.jpg" alt="Portugal"></a>
+            <a href="zomer/portugal/portugal.html"><img src="images\portugal - Copy.jpg" alt="Portugal"></a>
             <p>Portugal</p>
         </div>
     </section>
 </main>
 <footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
-    © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
-    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
+    © 2025 Polar Paradise. Alle rechten voorbehouden.<br>
+    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
+
 </body>
 </html>
+
+<script>
+    // Simpele veld-validatie feedback
+    document.addEventListener("DOMContentLoaded", () => {
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener("submit", e => {
+                const inputs = form.querySelectorAll("input[required], textarea[required]");
+                let allFilled = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.style.borderColor = "red";
+                        allFilled = false;
+                    } else {
+                        input.style.borderColor = "#ccc";
+                    }
+                });
+
+                if (!allFilled) {
+                    e.preventDefault();
+                    alert("⚠️ Vul alle verplichte velden in.");
+                }
+            });
+        });
+    });
+</script>

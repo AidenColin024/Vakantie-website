@@ -25,7 +25,7 @@
 </header>
 
 <section class="vakantie">
-    <img src="images/oostenrijk-hero.jpg" alt="Skiën in Oostenrijk">
+    <img src="/images/oostenrijk-hero.jpg" alt="Skiën in Oostenrijk">
     <div class="hero-text">
         <h1>Ontdek de Alpen van Oostenrijk</h1>
     </div>
@@ -73,26 +73,26 @@
 
     <section class="pp-destinations">
         <div class="pp-country">
-            <a href="../../tirol-resort.html">
-                <img src="images/oostenrijk-hotel1.jpg" alt="Tirol Resort" />
+            <a href="tirol-resort.html">
+                <img src="/images/oostenrijk-hotel1.jpg" alt="Tirol Resort" />
                 <p>Tirol Resort – 4 sterren</p>
             </a>
         </div>
         <div class="pp-country">
             <a href="salzburgerland-chalet.html">
-                <img src="images/oostenrijk-hotel2.jpg" alt="Salzburgerland Chalet" />
+                <img src="/images/oostenrijk-hotel2.jpg" alt="Salzburgerland Chalet" />
                 <p>Salzburgerland Chalet – 5 sterren</p>
             </a>
         </div>
         <div class="pp-country">
-            <a href="../../vorarlberg-lodge.html">
-                <img src="images/oostenrijk-hotel3.jpg" alt="Vorarlberg Lodge" />
+            <a href="vorarlberg-lodge.html">
+                <img src="/images/oostenrijk-hotel3.jpg" alt="Vorarlberg Lodge" />
                 <p>Vorarlberg Lodge – 3 sterren</p>
             </a>
         </div>
         <div class="pp-country">
-            <a href="../../hotel-tirol-lodge.html">
-                <img src="images/tirol-lodge.jpg" alt="Hotel Tirol Lodge" />
+            <a href="hotel-tirol-lodge.html">
+                <img src="/images/tirol-lodge.jpg" alt="Hotel Tirol Lodge" />
                 <p>Hotel Tirol Lodge – 4 sterren</p>
             </a>
         </div>
@@ -100,9 +100,41 @@
 </main>
 
 <footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
-    © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
-    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
+    © 2025 Polar Paradise. Alle rechten voorbehouden.<br>
+    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
+
+</body>
+</html>
+
+<script>
+    // Simpele veld-validatie feedback
+    document.addEventListener("DOMContentLoaded", () => {
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener("submit", e => {
+                const inputs = form.querySelectorAll("input[required], textarea[required]");
+                let allFilled = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.style.borderColor = "red";
+                        allFilled = false;
+                    } else {
+                        input.style.borderColor = "#ccc";
+                    }
+                });
+
+                if (!allFilled) {
+                    e.preventDefault();
+                    alert("⚠️ Vul alle verplichte velden in.");
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>

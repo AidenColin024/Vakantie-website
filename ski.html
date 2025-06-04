@@ -13,6 +13,7 @@
             <img src="images/image1 (1).png" alt="Polar & Paradise">
         </a>
     </div>
+
     <nav class="pp-nav">
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -20,6 +21,7 @@
             <li><a href="zomer.html">Zomer vakanties</a></li>
             <li><a href="overons.html">Over ons</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
         </ul>
     </nav>
 </header>
@@ -82,27 +84,56 @@
             <p>Frankrijk</p>
         </div>
         <div class="pp-country">
-            <a href="zwitserland.html"><img src="images\Screenshot 2025-05-19 151959.png" alt="Zwitserland"></a>
+            <a href="winter/zwitserland/zwitserland.html"><img src="images\Screenshot 2025-05-19 151959.png" alt="Zwitserland"></a>
             <p>Zwitserland</p>
         </div>
         <div class="pp-country">
-            <a href="winter/italie/italië.html"><img src="images\Screenshot 2025-05-19 152006.png" alt="Italie"></a>
+            <a href="winter/italië/italië.html"><img src="images\Screenshot 2025-05-19 152006.png" alt="Italie"></a>
             <p>Italië</p>
         </div>
         <div class="pp-country">
-            <a href="canada.html"><img src="images\canada.jpeg" alt="Canada"></a>
+            <a href="winter/canada/canada.html"><img src="images\canada.jpeg" alt="Canada"></a>
             <p>Canada</p>
         </div>
         <div class="pp-country">
-            <a href="noorwegen.html"><img src="images\noorwegen.jpeg" alt="Noorwegen"></a>
+            <a href="winter/noorwegen/noorwegen.html"><img src="images\noorwegen.jpeg" alt="Noorwegen"></a>
             <p>Noorwegen</p>
         </div>
     </section>
 </main>
 <footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
-    © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
-    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
+    © 2025 Polar Paradise. Alle rechten voorbehouden.<br>
+    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
+
 </body>
 </html>
+
+<script>
+    // Simpele veld-validatie feedback
+    document.addEventListener("DOMContentLoaded", () => {
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener("submit", e => {
+                const inputs = form.querySelectorAll("input[required], textarea[required]");
+                let allFilled = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.style.borderColor = "red";
+                        allFilled = false;
+                    } else {
+                        input.style.borderColor = "#ccc";
+                    }
+                });
+
+                if (!allFilled) {
+                    e.preventDefault();
+                    alert("⚠️ Vul alle verplichte velden in.");
+                }
+            });
+        });
+    });
+</script>
