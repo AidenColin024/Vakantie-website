@@ -79,19 +79,19 @@ try {
 
         <section class="destination-blocks">
             <div class="destination-box" onclick="location.href='barcelona-city-hotel.php'">
-                <img src="images/spanje-hotel1.jpg" alt="Barcelona City Hotel"/>
+                <img src="images/barcelona city hotel.jpg" alt="Barcelona City Hotel"/>
                 <h3>Barcelona City Hotel – 4 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='andalusie-hotel.php'">
-                <img src="images/spanje-hotel2.jpg" alt="Andalusië Luxe Resort"/>
+                <img src="images/andalusië resort.jpg" alt="Andalusië Luxe Resort"/>
                 <h3>Andalusië Luxe Resort – 5 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='tenerife-hotel.php'">
-                <img src="images/spanje-hotel3.jpg" alt="Tenerife Appartement"/>
+                <img src="images/tenerife apartement.jpg" alt="Tenerife Appartement"/>
                 <h3>Tenerife Appartement – 3 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='costa-brava-hotel.php'">
-                <img src="images/costa-brava-palace.jpg" alt="Costa Brava Palace"/>
+                <img src="images/costa brava resort.jpg" alt="Costa Brava Palace"/>
                 <h3>Costa Brava Palace – 5 sterren</h3>
             </div>
         </section>

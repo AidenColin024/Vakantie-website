@@ -79,19 +79,19 @@ try {
 
         <section class="destination-blocks">
             <div class="destination-box" onclick="location.href='istanbul-hotel.php'">
-                <img src="images/turkije-hotel1.jpg" alt="Istanbul Grand Hotel"/>
+                <img src="images/istantbul.jpg" alt="Istanbul Grand Hotel"/>
                 <h3>Istanbul Grand Hotel – 4 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='antalya-luxe-hotel.php'">
-                <img src="images/turkije-hotel2.jpg" alt="Antalya Luxe Hotel"/>
+                <img src="images/antalya.jpg" alt="Antalya Luxe Hotel"/>
                 <h3>Antalya Luxe Hotel – 5 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='cappadocie-boutique-hotel.php'">
-                <img src="images/turkije-hotel3.jpg" alt="Cappadocië Boutique Hotel"/>
+                <img src="images/coppaducia.webp" alt="Cappadocië Boutique Hotel"/>
                 <h3>Cappadocië Boutique Hotel – 3 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='bodrum-beach-hotel.php'">
-                <img src="images/bodrum-beach.jpg" alt="Bodrum Beach Hotel"/>
+                <img src="images/bodrum.jpg" alt="Bodrum Beach Hotel"/>
                 <h3>Bodrum Beach Hotel – 4 sterren</h3>
             </div>
         </section>
