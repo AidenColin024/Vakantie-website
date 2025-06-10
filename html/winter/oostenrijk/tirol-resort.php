@@ -106,6 +106,7 @@ try {
             <li><a href="zomer.php">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
+            <li><a href="annuleren.php">Annuleren</a></li>
         </ul>
     </nav>
 </header>
