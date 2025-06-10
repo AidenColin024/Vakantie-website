@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <li><a href="zomer.php">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
-            <li><a href="admin-login.php" class="active">Login</a></li>
+            <li><a href="admin-inlog.php" class="active">Login</a></li>
         </ul>
     </nav>
 </header>
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (!empty($error)): ?>
             <p style="color:red; font-weight:bold;"><?= htmlspecialchars($error) ?></p>
         <?php endif; ?>
-        <form class="form" method="POST" action="admin-login.php">
+        <form class="form" method="POST" action="admin-inlog.php">
             <label for="email">E-mailadres</label>
             <input type="email" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
 
@@ -80,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <button type="submit">Inloggen</button>
         </form>
+        <p class="form-note">Nog geen account? <a href="admin-registreer.php">Registreer hier</a></p>
     </div>
 </section>
 
