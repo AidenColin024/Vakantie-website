@@ -19,18 +19,19 @@ try {
     die("❌ Verbindingsfout: " . $e->getMessage());
 }
 
-// Haal gegevens op van ingelogde gebruiker
+// Haal gegevens op van ingelogde klant
 $email = $_SESSION['email'];
 
-$stmt = $conn->prepare("SELECT Naam, Email FROM Gebruikers WHERE Email = :email");
+$stmt = $conn->prepare("SELECT Naam, Email FROM Klanten WHERE Email = :email");
 $stmt->bindParam(":email", $email);
 $stmt->execute();
 
-$gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
+$klant = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$naam = htmlspecialchars($gebruiker['Naam'] ?? $_SESSION['naam']);
-$email = htmlspecialchars($gebruiker['Email'] ?? $_SESSION['email']);
+$naam = htmlspecialchars($klant['Naam'] ?? $_SESSION['naam']);
+$email = htmlspecialchars($klant['Email'] ?? $_SESSION['email']);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="nl">

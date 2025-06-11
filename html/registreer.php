@@ -29,17 +29,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } elseif ($wachtwoord !== $wachtwoordBevestiging) {
         $foutmelding = "Wachtwoorden komen niet overeen.";
     } else {
-        // Check of email al bestaat
-        $stmt = $conn->prepare("SELECT * FROM Gebruikers WHERE Email = :email");
+        // Check of email al bestaat in Klanten
+        $stmt = $conn->prepare("SELECT * FROM Klanten WHERE email = :email");
         $stmt->bindParam(":email", $email);
         $stmt->execute();
+
         if ($stmt->fetch()) {
             $foutmelding = "Dit e-mailadres is al geregistreerd.";
         } else {
             // Wachtwoord hashen en opslaan
             $hash = password_hash($wachtwoord, PASSWORD_DEFAULT);
 
-            $stmt = $conn->prepare("INSERT INTO Gebruikers (Naam, Email, Wachtwoord) VALUES (:naam, :email, :wachtwoord)");
+            $stmt = $conn->prepare("INSERT INTO Klanten (naam, email, wachtwoord) VALUES (:naam, :email, :wachtwoord)");
             $stmt->bindParam(":naam", $naam);
             $stmt->bindParam(":email", $email);
             $stmt->bindParam(":wachtwoord", $hash);

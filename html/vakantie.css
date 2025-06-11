@@ -669,7 +669,239 @@ section {
     color: #666;
     line-height: 1.6;
 }
+/* Account hero section */
+.account-hero {
+    max-width: 900px;
+    margin: 2rem auto 4rem;
+    background: white;
+    padding: 2.5rem 3rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
 
+/* Container binnen section */
+.account-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+/* Titels */
+h1 {
+    font-size: 2.25rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #00457c;
+    padding-bottom: 0.25rem;
+    color: #003366;
+}
+
+/* Account sections styling */
+.account-section {
+    background: #f0f4f8;
+    padding: 1.8rem 2rem;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Form styling */
+.account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.account-form label {
+    font-weight: 600;
+    color: #00457c;
+}
+
+.account-form input[type="text"],
+.account-form input[type="email"],
+.account-form input[type="password"] {
+    padding: 0.7rem 1rem;
+    border: 1.8px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.account-form input[type="text"]:focus,
+.account-form input[type="email"]:focus,
+.account-form input[type="password"]:focus {
+    outline: none;
+    border-color: #00457c;
+    box-shadow: 0 0 5px rgba(0, 69, 124, 0.5);
+}
+
+/* Buttons */
+.account-form button {
+    margin-top: 1rem;
+    background-color: #00457c;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+
+.account-form button:hover {
+    background-color: #0066cc;
+}
+
+/* Boekingen lijst */
+.booking-list {
+    list-style: none;
+    padding-left: 1rem;
+    font-size: 1.1rem;
+    color: #222;
+}
+
+.booking-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+}
+
+/* Contact & support link */
+.account-section p {
+    font-size: 1.1rem;
+}
+
+.account-section a {
+    color: #00457c;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.account-section a:hover {
+    color: #0066cc;
+}
+/* Admin dashboard sectie */
+.admin-dashboard {
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.admin-container h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    color: #004e92;
+}
+
+.admin-container p {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Details panel */
+.admin-panel {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+}
+
+.admin-panel summary {
+    font-weight: 700;
+    font-size: 1.2rem;
+    outline: none;
+    list-style: none;
+    user-select: none;
+}
+
+.admin-panel[open] {
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.admin-panel summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Panel content */
+.panel-content {
+    margin-top: 1rem;
+    padding-left: 1rem;
+}
+
+/* Buttons */
+button {
+    background-color: #0074d9;
+    border: none;
+    color: white;
+    padding: 0.4rem 0.9rem;
+    margin: 0.15rem 0.25rem 0.15rem 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+/* Admin table */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.admin-table th {
+    background-color: #e7f0ff;
+    font-weight: 700;
+}
+
+.admin-table tr:hover {
+    background-color: #f0f7ff;
+}
+
+/* Admin list (contactvragen) */
+.admin-list li {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.8rem;
+    border-radius: 6px;
+    color: #333;
+    font-size: 0.95rem;
+    position: relative;
+}
+
+.admin-list button {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+}
 /* ====================================== */
 /*             Responsiveness             */
 /* ====================================== */

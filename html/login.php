@@ -20,15 +20,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"] ?? '';
     $wachtwoord = $_POST["password"] ?? '';
 
-    $stmt = $conn->prepare("SELECT * FROM Gebruikers WHERE Email = :email");
+    // Query aangepast naar tabel Klanten
+    $stmt = $conn->prepare("SELECT * FROM Klanten WHERE email = :email");
     $stmt->bindParam(":email", $email);
     $stmt->execute();
 
-    $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
+    $klant = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($gebruiker && password_verify($wachtwoord, $gebruiker["Wachtwoord"])) {
-        $_SESSION["naam"] = $gebruiker["Naam"];
-        $_SESSION["email"] = $gebruiker["Email"];
+    if ($klant && password_verify($wachtwoord, $klant["wachtwoord"])) {
+        $_SESSION["naam"] = $klant["naam"];
+        $_SESSION["email"] = $klant["email"];
         header("Location: account.php");
         exit;
     } else {
@@ -36,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="nl">
