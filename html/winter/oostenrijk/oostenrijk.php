@@ -17,27 +17,27 @@ try {
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Ski Vakanties Oostenrijk - Polar & Paradise</title>
-    <link rel="stylesheet" href="../../vakantie.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
 </head>
 <body>
 <header class="pp-header">
     <div class="logo">
-        <a href="../../index.php"><img src="../../images/image1%20(1).png" alt="Polar & Paradise"></a>
+        <a href="index.php"><img src="images/image1%20(1).png" alt="Polar & Paradise"></a>
     </div>
     <nav class="pp-nav">
         <ul>
-            <li><a href="../../index.php">Home</a></li>
-            <li><a href="../../ski.php" class="active">Ski vakanties</a></li>
-            <li><a href="../../zomer.php">Zomer vakanties</a></li>
-            <li><a href="../../overons.php">Over ons</a></li>
-            <li><a href="../../contact.php">Contact</a></li>
-            <li><a href="../../login.php">Login</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="ski.php" class="active">Ski vakanties</a></li>
+            <li><a href="zomer.php">Zomer vakanties</a></li>
+            <li><a href="overons.php">Over ons</a></li>
+            <li><a href="contact.php">Contact</a></li>
+            <li><a href="login.php">Login</a></li>
         </ul>
     </nav>
 </header>
 
 <section class="vakantie ski-hero">
-    <img src="../../images/westendorf-drone.webp" alt="Skiën in Oostenrijk" class="hero-img" />
+    <img src="images/westendorf-drone.webp" alt="Skiën in Oostenrijk" class="hero-img" />
     <div class="hero-text">
         <h1>Ontdek de Alpen van Oostenrijk</h1>
         <p>Van Tirol tot Vorarlberg, beleef jouw ultieme wintersportervaring.</p>
@@ -77,19 +77,19 @@ try {
 
         <section class="destination-blocks">
             <div class="destination-box" onclick="location.href='tirol-resort.php'">
-                <img src="../../images/tyrol%20resort.jpg" alt="Tirol Resort"/>
+                <img src="images/tyrol resort.jpg" alt="Tirol Resort"/>
                 <h3>Tirol Resort – 4 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='salzburgerland-chalet.php'">
-                <img src="../../images/salzburg%20chalet.jpg" alt="Salzburgerland Chalet"/>
+                <img src="images/salzburg chalet.jpg" alt="Salzburgerland Chalet"/>
                 <h3>Salzburgerland Chalet – 5 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='vorarlberg-lodge.php'">
-                <img src="../../images/voralberg%20lodge.jpg" alt="Vorarlberg Lodge"/>
+                <img src="images/voralberg lodge.jpg" alt="Vorarlberg Lodge"/>
                 <h3>Vorarlberg Lodge – 3 sterren</h3>
             </div>
             <div class="destination-box" onclick="location.href='hotel-tirol-lodge.php'">
-                <img src="../../images/hotel%20tirol%20lodge.jpg" alt="Hotel Tirol Lodge"/>
+                <img src="images/hotel tirol lodge.jpg" alt="Hotel Tirol Lodge"/>
                 <h3>Hotel Tirol Lodge – 4 sterren</h3>
             </div>
         </section>

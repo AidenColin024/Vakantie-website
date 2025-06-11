@@ -1,16 +1,43 @@
 <?php
-$servername = "db"; // Docker-service naam
+$servername = "db";
 $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // Verbinding gelukt, eventueel logging
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
+
+// Verwerk formulier als er een review wordt ingestuurd
+$bericht = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_review'])) {
+    $hotel = "TirolResort"; // vaste hotelnaam passend bij deze pagina
+    $naam = trim(htmlspecialchars($_POST['naam']));
+    $beoordeling = (int)$_POST['beoordeling'];
+    $commentaar = trim(htmlspecialchars($_POST['commentaar']));
+
+    if ($naam !== "" && $beoordeling >= 1 && $beoordeling <= 5 && $commentaar !== "") {
+        $stmt = $conn->prepare("INSERT INTO review (hotel, naam, beoordeling, commentaar, datum) VALUES (:hotel, :naam, :beoordeling, :commentaar, NOW())");
+
+        $stmt->execute([
+            ':hotel' => $hotel,
+            ':naam' => $naam,
+            ':beoordeling' => $beoordeling,
+            ':commentaar' => $commentaar,
+        ]);
+        $bericht = "✅ Bedankt voor je review!";
+    } else {
+        $bericht = "⚠️ Vul alle velden correct in.";
+    }
+}
+
+// Haal bestaande reviews op
+$stmt = $conn->prepare("SELECT naam, beoordeling, commentaar, datum FROM review WHERE hotel = :hotel ORDER BY datum DESC");
+$stmt->execute([':hotel' => "TirolResort"]);
+$reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -74,6 +101,8 @@ try {
             text-decoration: none;
             border-radius: 10px;
             transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
 
         .pp-booking-btn:hover {
@@ -92,6 +121,52 @@ try {
             text-decoration: underline;
             color: #007acc;
         }
+
+        /* Review sectie */
+        form label {
+            font-weight: 600;
+        }
+        form input[type="text"],
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 0.6rem;
+            margin-top: 0.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        ul.reviews-list {
+            margin-top: 2rem;
+            padding-left: 0;
+        }
+
+        ul.reviews-list li {
+            list-style: none;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        ul.reviews-list li strong {
+            font-size: 1.1rem;
+            color: #004080;
+        }
+
+        ul.reviews-list li em {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        ul.reviews-list li p {
+            margin-top: 0.3rem;
+            font-size: 1rem;
+            white-space: pre-line;
+        }
+
     </style>
 </head>
 <body>
@@ -133,6 +208,48 @@ try {
             </ul>
 
             <a href="boeking.php?hotel=TirolResort" class="pp-booking-btn">Boek nu</a>
+
+            <h2>Reviews</h2>
+
+            <?php if (!empty($bericht)): ?>
+                <p><strong><?php echo $bericht; ?></strong></p>
+            <?php endif; ?>
+
+            <form method="post" action="">
+                <label for="naam">Naam:</label><br />
+                <input type="text" id="naam" name="naam" required /><br />
+
+                <label for="beoordeling">Beoordeling:</label><br />
+                <select id="beoordeling" name="beoordeling" required>
+                    <option value="">Kies</option>
+                    <option value="1">1 ster</option>
+                    <option value="2">2 sterren</option>
+                    <option value="3">3 sterren</option>
+                    <option value="4">4 sterren</option>
+                    <option value="5">5 sterren</option>
+                </select><br />
+
+                <label for="commentaar">Review:</label><br />
+                <textarea id="commentaar" name="commentaar" rows="4" required></textarea><br />
+
+                <button type="submit" name="submit_review" class="pp-booking-btn">Plaats review</button>
+            </form>
+
+            <?php if ($reviews): ?>
+                <ul class="reviews-list">
+                    <?php foreach ($reviews as $rev): ?>
+                        <li>
+                            <strong><?php echo htmlspecialchars($rev['naam']); ?></strong> -
+                            <em><?php echo date('d-m-Y', strtotime($rev['datum'])); ?></em><br />
+                            Beoordeling: <?php echo str_repeat('⭐', $rev['beoordeling']); ?><br />
+                            <p><?php echo nl2br(htmlspecialchars($rev['commentaar'])); ?></p>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+                <p>Er zijn nog geen reviews. Wees de eerste!</p>
+            <?php endif; ?>
+
         </article>
 
         <a href="oostenrijk.php" class="pp-back-btn">← Terug naar Oostenrijk vakanties</a>

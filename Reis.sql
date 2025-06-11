@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Gegenereerd op: 02 jun 2025 om 13:56
--- Serverversie: 5.7.44
--- PHP-versie: 8.2.27
+-- Generation Time: Jun 11, 2025 at 10:03 AM
+-- Server version: 5.7.44
+-- PHP Version: 8.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,98 +18,228 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Reis`
+-- Database: `mydatabase`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `Admin`
+-- Table structure for table `Admin`
 --
 
 CREATE TABLE `Admin` (
-  `Naam` varchar(100) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `Wachtwoord` varchar(255) NOT NULL
+                         `Naam` varchar(100) NOT NULL,
+                         `Email` varchar(100) NOT NULL,
+                         `Wachtwoord` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden geëxporteerd voor tabel `Admin`
+-- Dumping data for table `Admin`
 --
 
 INSERT INTO `Admin` (`Naam`, `Email`, `Wachtwoord`) VALUES
-('Aiden', 'aidencolindna@gmail.com', 'Kai2007!');
+    ('Aiden', 'aidencolindna@gmail.com', 'Kai2007!');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `Gebruikers`
+-- Table structure for table `annuleren`
+--
+
+CREATE TABLE `annuleren` (
+                             `id` int(11) NOT NULL,
+                             `hotel` varchar(255) NOT NULL,
+                             `email` varchar(255) NOT NULL,
+                             `reden` text NOT NULL,
+                             `datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Gebruikers`
 --
 
 CREATE TABLE `Gebruikers` (
-  `Naam` varchar(100) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `Wachtwoord` varchar(255) NOT NULL
+                              `Naam` varchar(100) NOT NULL,
+                              `Email` varchar(100) NOT NULL,
+                              `Wachtwoord` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden geëxporteerd voor tabel `Gebruikers`
+-- Dumping data for table `Gebruikers`
 --
 
 INSERT INTO `Gebruikers` (`Naam`, `Email`, `Wachtwoord`) VALUES
-('Aiden', 'aidencolindna@gmail.com', '$2y$10$l2lu8C9lvQ36yxzcGU2tFeM4O8I8mSup92y.2KlqREkfYLpEDQcNi');
+    ('Aiden', 'aidencolindna@gmail.com', '$2y$10$l2lu8C9lvQ36yxzcGU2tFeM4O8I8mSup92y.2KlqREkfYLpEDQcNi');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `Recensies`
+-- Table structure for table `hotel`
+--
+
+CREATE TABLE `hotel` (
+                         `id` int(11) NOT NULL,
+                         `hotel` varchar(255) NOT NULL,
+                         `naam` varchar(255) NOT NULL,
+                         `email` varchar(255) NOT NULL,
+                         `aantal_nachten` int(11) NOT NULL,
+                         `datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `hotel`
+--
+
+INSERT INTO `hotel` (`id`, `hotel`, `naam`, `email`, `aantal_nachten`, `datum`) VALUES
+    (1, 'TirolResort', 'Aleks', '1208470@student.roc-nijmegen.nl', 2, '2025-06-11 09:00:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hotels`
+--
+
+CREATE TABLE `hotels` (
+                          `id` int(11) NOT NULL,
+                          `name` varchar(255) NOT NULL,
+                          `region` varchar(255) NOT NULL,
+                          `stars` int(11) NOT NULL,
+                          `type` varchar(255) NOT NULL,
+                          `category` varchar(50) NOT NULL,
+                          `image` varchar(255) NOT NULL,
+                          `link` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `hotels`
+--
+
+INSERT INTO `hotels` (`id`, `name`, `region`, `stars`, `type`, `category`, `image`, `link`) VALUES
+                                                                                                (1, 'Oostenrijk', 'Europa', 5, 'Wintersport', 'ski', 'images/westendorf-drone.webp', 'oostenrijk.php'),
+                                                                                                (2, 'Italië', 'Europa', 5, 'Wintersport', 'ski', '', ''),
+                                                                                                (3, 'Frankrijk', 'Europa', 5, 'Wintersport', 'ski', '', ''),
+                                                                                                (4, 'Zwitserland', 'Europa', 5, 'Wintersport', 'ski', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Recensies`
 --
 
 CREATE TABLE `Recensies` (
-  `Naam` varchar(100) NOT NULL,
-  `Recensie` text NOT NULL
+                             `Naam` varchar(100) NOT NULL,
+                             `Recensie` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `Reizen`
+-- Table structure for table `Reizen`
 --
 
 CREATE TABLE `Reizen` (
-  `id` int(11) NOT NULL,
-  `naam` text NOT NULL,
-  `prijs` int(11) NOT NULL
+                          `id` int(11) NOT NULL,
+                          `naam` text NOT NULL,
+                          `prijs` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `Vragen`
+-- Table structure for table `review`
+--
+
+CREATE TABLE `review` (
+                          `id` int(11) NOT NULL,
+                          `hotel` varchar(100) NOT NULL,
+                          `naam` varchar(100) NOT NULL,
+                          `beoordeling` tinyint(4) NOT NULL,
+                          `commentaar` text NOT NULL,
+                          `datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Vragen`
 --
 
 CREATE TABLE `Vragen` (
-  `Naam` varchar(100) NOT NULL,
-  `Vraag` text NOT NULL
+                          `Naam` varchar(100) NOT NULL,
+                          `Vraag` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Indexen voor geëxporteerde tabellen
+-- Indexes for dumped tables
 --
 
 --
--- Indexen voor tabel `Admin`
+-- Indexes for table `Admin`
 --
 ALTER TABLE `Admin`
-  ADD UNIQUE KEY `Email` (`Email`),
-  ADD UNIQUE KEY `Wachtwoord` (`Wachtwoord`);
+    ADD UNIQUE KEY `Email` (`Email`),
+    ADD UNIQUE KEY `Wachtwoord` (`Wachtwoord`);
 
 --
--- Indexen voor tabel `Gebruikers`
+-- Indexes for table `annuleren`
+--
+ALTER TABLE `annuleren`
+    ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Gebruikers`
 --
 ALTER TABLE `Gebruikers`
-  ADD UNIQUE KEY `Email` (`Email`),
-  ADD UNIQUE KEY `Wachtwoord` (`Wachtwoord`);
+    ADD UNIQUE KEY `Email` (`Email`),
+    ADD UNIQUE KEY `Wachtwoord` (`Wachtwoord`);
+
+--
+-- Indexes for table `hotel`
+--
+ALTER TABLE `hotel`
+    ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `hotels`
+--
+ALTER TABLE `hotels`
+    ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `review`
+--
+ALTER TABLE `review`
+    ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `annuleren`
+--
+ALTER TABLE `annuleren`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hotel`
+--
+ALTER TABLE `hotel`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `hotels`
+--
+ALTER TABLE `hotels`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `review`
+--
+ALTER TABLE `review`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

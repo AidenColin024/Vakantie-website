@@ -10,6 +10,23 @@ try {
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
+
+// Query met filters opbouwen
+$sql = "SELECT name, region, stars, type, image, link FROM hotels WHERE category = 'ski'";
+$params = [];
+
+if (!empty($_GET['stars'])) {
+    $sql .= " AND stars = :stars";
+    $params[':stars'] = $_GET['stars'];
+}
+if (!empty($_GET['type'])) {
+    $sql .= " AND type = :type";
+    $params[':type'] = $_GET['type'];
+}
+
+$stmt = $conn->prepare($sql);
+$stmt->execute($params);
+$hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -40,61 +57,57 @@ try {
     <img src="images/R.jpg" alt="Ski vakanties" class="hero-img" />
     <div class="hero-text">
         <h1>Vind jouw perfecte ski vakantie</h1>
-        <p>Van de Oostenrijk tot Italië, wij hebben de beste pistes voor jou geselecteerd.</p>
+        <p>Van Oostenrijk tot Italië, wij hebben de beste pistes voor jou geselecteerd.</p>
     </div>
 </section>
-
-
 
 <main class="pp-content">
     <div class="page-content">
         <aside class="pp-filters">
             <h3>Filter jouw Ski vakantie</h3>
-            <label for="country">Land</label>
-            <select id="country" name="country">
-                <option value="">Alle landen</option>
-                <option>Oostenrijk</option>
-                <option>Zwitserland</option>
-                <option>Italië</option>
-                <option>Noorwegen</option>
-                <option>Frankrijk</option>
-            </select>
+            <form method="GET" action="ski.php">
+                <!-- Land-filter verwijderd omdat je geen country-kolom hebt -->
+                <label for="stars">Sterren</label>
+                <select id="stars" name="stars">
+                    <option value="">Alle</option>
+                    <option value="3" <?= (isset($_GET['stars']) && $_GET['stars'] == '3') ? 'selected' : '' ?>>3 sterren</option>
+                    <option value="4" <?= (isset($_GET['stars']) && $_GET['stars'] == '4') ? 'selected' : '' ?>>4 sterren</option>
+                    <option value="5" <?= (isset($_GET['stars']) && $_GET['stars'] == '5') ? 'selected' : '' ?>>5 sterren</option>
+                </select>
 
-            <label for="stars">Sterren</label>
-            <select id="stars" name="stars">
-                <option value="">Alle</option>
-                <option>3 sterren</option>
-                <option>4 sterren</option>
-                <option>5 sterren</option>
-            </select>
+                <label for="type">Soort vakantie</label>
+                <select id="type" name="type">
+                    <option value="">Alle</option>
+                    <option value="Wintersport" <?= (isset($_GET['type']) && $_GET['type'] == 'Wintersport') ? 'selected' : '' ?>>Wintersport</option>
+                    <option value="Familie" <?= (isset($_GET['type']) && $_GET['type'] == 'Familie') ? 'selected' : '' ?>>Familie</option>
+                    <option value="Luxueus" <?= (isset($_GET['type']) && $_GET['type'] == 'Luxueus') ? 'selected' : '' ?>>Luxueus</option>
+                </select>
 
-            <label for="type">Soort vakantie</label>
-            <select id="type" name="type">
-                <option value="">Alle</option>
-                <option>Familie</option>
-                <option>Solo</option>
-                <option>Actief</option>
-            </select>
+                <button type="submit">Filter</button>
+            </form>
         </aside>
 
         <section class="destination-blocks">
-            <div class="destination-box" onclick="location.href='oostenrijk.php'">
-                <img src="images/westendorf-drone.webp" alt="Oostenrijk"/>
-                <h3>Oostenrijk</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='zwitserland.php'">
-                <img src="images/switzerland-zermatt-nl.jpg" alt="Zwitserland"/>
-                <h3>Zwitserland</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='frankrijk.php'">
-                <img src="images/wintersport-frankrijk.webp" alt="Frankrijk"/>
-                <h3>Frankrijk</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='italië.php'">
-                <img src="images/R.jpg" alt="Italië"/>
-                <h3>Italië</h3>
-            </div>
-
+            <?php if (count($hotels) > 0): ?>
+                <?php foreach ($hotels as $hotel): ?>
+                    <div class="destination-box">
+                        <?php if (!empty($hotel['image'])): ?>
+                            <img src="<?= htmlspecialchars($hotel['image']) ?>" alt="<?= htmlspecialchars($hotel['name']) ?>" style="width:100%;max-width:220px;height:auto;border-radius:6px;margin-bottom:10px;">
+                        <?php endif; ?>
+                        <h3><?= htmlspecialchars($hotel['name']) ?></h3>
+                        <p>Regio: <?= htmlspecialchars($hotel['region']) ?></p>
+                        <p>Sterren: <?= htmlspecialchars($hotel['stars']) ?></p>
+                        <p>Type: <?= htmlspecialchars($hotel['type']) ?></p>
+                        <?php if (!empty($hotel['link'])): ?>
+                            <p><a href="<?= htmlspecialchars($hotel['link']) ?>" target="_blank">Meer info</a></p>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>❄️ Geen resultaten gevonden voor jouw filters.</p>
+            <?php endif; ?>
+        </section>
+    </div>
 </main>
 
 <footer>
@@ -102,32 +115,5 @@ try {
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
-<script>
-    // Simpele veld-validatie feedback
-    document.addEventListener("DOMContentLoaded", () => {
-        const forms = document.querySelectorAll("form");
-
-        forms.forEach(form => {
-            form.addEventListener("submit", e => {
-                const inputs = form.querySelectorAll("input[required], textarea[required]");
-                let allFilled = true;
-
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        input.style.borderColor = "red";
-                        allFilled = false;
-                    } else {
-                        input.style.borderColor = "#ccc";
-                    }
-                });
-
-                if (!allFilled) {
-                    e.preventDefault();
-                    alert("⚠️ Vul alle verplichte velden in.");
-                }
-            });
-        });
-    });
-</script>
 </body>
 </html>
