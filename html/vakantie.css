@@ -902,6 +902,54 @@ button:hover {
     font-size: 0.85rem;
     padding: 0.3rem 0.6rem;
 }
+/* Consent banner styles */
+.consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 2px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+    font-family: sans-serif;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.consent-container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.consent-details {
+    margin-bottom: 15px;
+}
+
+.consent-details summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.consent-text {
+    margin-top: 10px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.consent-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.consent-button:hover {
+    background-color: #0056b3;
+}
 /* ====================================== */
 /*             Responsiveness             */
 /* ====================================== */

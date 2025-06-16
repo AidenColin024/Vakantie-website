@@ -22,7 +22,48 @@ try {
 
 </head>
 <body>
+<div id="consent-banner" class="consent-banner">
+    <div class="consent-container">
+        <h2>Privacyverklaring & Algemene Voorwaarden</h2>
+        <p>
+            Wij gebruiken cookies om uw ervaring op onze website te verbeteren. Door gebruik te maken van deze website, accepteert u onze
+            <strong>Privacyverklaring</strong> en <strong>Algemene Voorwaarden</strong>.
+        </p>
 
+        <details class="consent-details">
+            <summary>Bekijk volledige voorwaarden en privacyverklaring</summary>
+            <div class="consent-text">
+                <h3>Privacyverklaring</h3>
+                <p>Uw privacy is belangrijk voor ons. Wij verzamelen alleen gegevens die nodig zijn voor het boeken van uw reis, zoals naam, e-mailadres, paspoortgegevens en betaalinformatie. Deze informatie wordt uitsluitend gedeeld met onze partners voor het uitvoeren van de geboekte reizen.</p>
+
+                <h3>Welke gegevens verzamelen wij?</h3>
+                <ul>
+                    <li>Volledige naam, e-mailadres, telefoonnummer</li>
+                    <li>Reisvoorkeuren en bestemmingen</li>
+                    <li>Betaalgegevens (via veilige betaalproviders)</li>
+                </ul>
+
+                <h3>Waarom verzamelen wij gegevens?</h3>
+                <p>Om uw vakantie te boeken, reisdocumenten op te stellen en u te informeren over uw reis.</p>
+
+                <h3>Uw rechten</h3>
+                <p>U heeft recht op inzage, correctie en verwijdering van uw gegevens. Mail ons op <a href="mailto:info@reisbureauvoorbeeld.nl">info@reisbureauvoorbeeld.nl</a>.</p>
+
+                <h3>Algemene Voorwaarden</h3>
+                <ul>
+                    <li>Boekingen zijn pas definitief na betaling.</li>
+                    <li>Annulering is mogelijk volgens de annuleringsvoorwaarden die bij elke reis vermeld staan.</li>
+                    <li>Wij zijn niet aansprakelijk voor vertragingen of wijzigingen buiten onze controle, zoals weersomstandigheden of vluchtaanpassingen.</li>
+                    <li>Alle prijzen zijn inclusief btw en onderhevig aan beschikbaarheid.</li>
+                </ul>
+
+                <p>Op alle boekingen is Nederlands recht van toepassing. Geschillen worden behandeld door de rechtbank te [jouw stad].</p>
+            </div>
+        </details>
+
+        <button id="accept-consent" class="consent-button">Ik accepteer</button>
+    </div>
+</div>
 <!-- HEADER -->
 <header class="pp-header">
     <div class="logo">
@@ -130,6 +171,14 @@ try {
                 }
             });
         });
+    });
+    // Toon altijd de banner
+    window.addEventListener('load', function () {
+        document.getElementById('consent-banner').style.display = 'block';
+    });
+
+    document.getElementById('accept-consent').addEventListener('click', function () {
+        document.getElementById('consent-banner').style.display = 'none';
     });
 </script>
 </body>
