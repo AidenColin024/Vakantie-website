@@ -953,40 +953,185 @@ button:hover {
 /* ====================================== */
 /*             Responsiveness             */
 /* ====================================== */
-
+/* Responsive aanpassingen voor schermen kleiner dan 768px */
 @media (max-width: 768px) {
     .pp-header {
         flex-direction: column;
-        gap: 15px;
-        text-align: center;
+        align-items: flex-start;
+        padding: 15px;
     }
 
     .pp-nav ul {
         flex-direction: column;
         gap: 10px;
+        width: 100%;
     }
 
-    .hero-text {
-        left: 20px;
+    .hero-text,
+    .ski-hero .hero-text,
+    .zomer-hero .hero-text {
+        font-size: 1.5rem;
+        padding: 20px;
         max-width: 90%;
-        font-size: 1.8rem;
-        padding: 20px 25px;
     }
 
     .seasons {
         flex-direction: column;
-        align-items: center;
+        gap: 20px;
+        margin: 30px 15px;
     }
 
     .summer, .winter {
-        width: 90%;
-        height: 180px;
+        width: 100%;
+        height: 200px;
     }
-}
 
-@media (max-width: 480px) {
+    .page-content {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .pp-filters {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .destination-box {
+        width: 100%;
+    }
+
+    .services {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+
+    .ski-destinations,
+    .zomer-destinations {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+
     .form-container {
         margin: 2rem 1rem;
         padding: 1.5rem;
     }
+
+    .about-content {
+        flex-direction: column;
+        padding: 2rem 1rem;
+    }
+
+    .team-members {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .account-hero {
+        padding: 1.5rem 1.5rem;
+        margin: 1rem 1rem 2rem;
+    }
+
+    .account-container {
+        gap: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    .account-form input[type="text"],
+    .account-form input[type="email"],
+    .account-form input[type="password"] {
+        font-size: 0.95rem;
+        padding: 0.6rem 0.9rem;
+    }
+
+    .account-form button {
+        font-size: 1rem;
+        padding: 0.65rem;
+    }
+
+    .booking-list {
+        font-size: 1rem;
+        padding-left: 0;
+    }
+
+    .booking-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+    }
+
+    .account-section {
+        padding: 1.5rem 1.25rem;
+    }
+
+    /* Admin dashboard */
+    .admin-dashboard {
+        padding: 1rem;
+        margin: 0 1rem;
+    }
+
+    .admin-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .admin-container p {
+        font-size: 1rem;
+    }
+
+    .admin-panel {
+        padding: 0.5rem 1rem;
+    }
+
+    .admin-panel summary {
+        font-size: 1.05rem;
+    }
+
+    .panel-content {
+        margin-top: 0.75rem;
+        padding-left: 0;
+    }
+
+    .admin-table {
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        white-space: nowrap;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .admin-list li {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .admin-list button {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    /* Consent banner */
+    .consent-banner {
+        padding: 15px;
+    }
+
+    .consent-container {
+        padding: 0 1rem;
+    }
+
+    .consent-button {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
 }
+

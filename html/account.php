@@ -58,7 +58,6 @@ $email = htmlspecialchars($klant['Email'] ?? $_SESSION['email']);
         </ul>
     </nav>
 </header>
-
 <section class="account-hero">
     <div class="account-container">
         <h1>Mijn Account</h1>
