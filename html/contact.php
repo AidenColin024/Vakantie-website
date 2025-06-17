@@ -1,14 +1,39 @@
 <?php
-$servername = "db"; // Docker-service naam
+$servername = "db";
 $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
+}
+
+$success = false;
+$error = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $message = trim($_POST['message'] ?? '');
+
+    if ($name !== '' && $message !== '') {
+        try {
+            // Alleen naam en vraag opslaan, email wordt genegeerd!
+            $stmt = $conn->prepare("INSERT INTO Vragen (Naam, Vraag) VALUES (:naam, :vraag)");
+            $stmt->execute([
+                ':naam' => $name,
+                ':vraag' => $message
+            ]);
+            $success = true;
+        } catch (PDOException $e) {
+            $error = "Er ging iets mis bij het opslaan van je vraag. Probeer het later opnieuw.";
+        }
+    } else {
+        $error = "Vul alle verplichte velden in!";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -16,10 +41,8 @@ try {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Polar & Paradise</title>
+    <title>Polar & Paradise - Contact</title>
     <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
-
-
 </head>
 <body>
 
@@ -36,14 +59,24 @@ try {
             <li><a href="ski.php">Ski vakanties</a></li>
             <li><a href="zomer.php">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="login.php" >Login</a></li>
+            <li><a href="contact.php" class="active">Contact</a></li>
+            <li><a href="login.php">Login</a></li>
         </ul>
     </nav>
 </header>
 <section class="contact-hero">
     <div class="form-container">
         <h1 class="form-title">Contact</h1>
+        <?php if ($success): ?>
+            <div class="success-message" style="color: green; margin-bottom: 1em;">
+                Je vraag is succesvol verzonden! We nemen zo snel mogelijk contact met je op.
+            </div>
+        <?php endif; ?>
+        <?php if ($error): ?>
+            <div class="error-message" style="color: red; margin-bottom: 1em;">
+                <?= htmlspecialchars($error) ?>
+            </div>
+        <?php endif; ?>
         <form class="form" method="POST" action="contact.php">
             <label for="name">Naam</label>
             <input type="text" id="name" name="name" required>
@@ -91,5 +124,4 @@ try {
     });
 </script>
 </body>
-</html>
 </html>

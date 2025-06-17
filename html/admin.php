@@ -161,6 +161,14 @@ try {
 } catch (Exception $e) {
     // als de tabel niet bestaat of iets anders fout gaat, negeer het voor nu
 }
+
+// VRAGEN OPHALEN UIT 'Vragen' TABEL (let op hoofdlettergevoeligheid)
+$vragen = [];
+try {
+    $vragen = $conn->query("SELECT * FROM Vragen ORDER BY Naam ASC")->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    // als de tabel niet bestaat of iets anders fout gaat, negeer het voor nu
+}
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -307,6 +315,31 @@ try {
             </table>
         <?php else: ?>
             <p>Er zijn nog geen vakanties geboekt.</p>
+        <?php endif; ?>
+    </section>
+
+    <!-- VRAGEN OVERZICHT -->
+    <section class="boekingen-section">
+        <h2>Gestelde vragen via contactformulier</h2>
+        <?php if (!empty($vragen)): ?>
+            <table class="boeking-table">
+                <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Vraag</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($vragen as $vraag): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($vraag['Naam']) ?></td>
+                        <td><?= nl2br(htmlspecialchars($vraag['Vraag'])) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p>Er zijn nog geen vragen gesteld.</p>
         <?php endif; ?>
     </section>
 </main>

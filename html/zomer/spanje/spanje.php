@@ -5,7 +5,7 @@ $password = "rootpassword";
 $database = "mydatabase";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // echo "✅ Verbinding met database is gelukt!"; // kun je aanzetten voor debug
 } catch (PDOException $e) {
@@ -78,22 +78,37 @@ try {
         </aside>
 
         <section class="destination-blocks">
-            <div class="destination-box" onclick="location.href='barcelona-city-hotel.php'">
-                <img src="../../images/barcelona%20city%20hotel.jpg" alt="Barcelona City Hotel"/>
-                <h3>Barcelona City Hotel – 4 sterren</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='andalusie-hotel.php'">
-                <img src="../../images/andalusië%20resort.jpg" alt="Andalusië Luxe Resort"/>
-                <h3>Andalusië Luxe Resort – 5 sterren</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='tenerife-hotel.php'">
-                <img src="../../images/tenerife%20apartement.jpg" alt="Tenerife Appartement"/>
-                <h3>Tenerife Appartement – 3 sterren</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='costa-brava-hotel.php'">
-                <img src="../../images/costa%20brava%20resort.jpg" alt="Costa Brava Palace"/>
-                <h3>Costa Brava Palace – 5 sterren</h3>
-            </div>
+            <?php
+            // Haal alle hotels in Spanje op (waar hotel_naam niet leeg is)
+            $stmt = $conn->prepare("SELECT * FROM hotels WHERE name = :land AND hotel_naam IS NOT NULL AND hotel_naam != '' ORDER BY stars DESC, hotel_naam ASC");
+            $stmt->execute([':land' => 'Spanje']);
+            $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (empty($hotels)) {
+                echo "<p style='margin-left:1rem;'>Er zijn nog geen hotels toegevoegd voor Spanje.</p>";
+            } else {
+                foreach ($hotels as $hotel):
+                    $hotelLink = htmlspecialchars($hotel['link'] ?: '#');
+                    $hotelImage = htmlspecialchars($hotel['image']);
+                    $hotelNaam = htmlspecialchars($hotel['hotel_naam']);
+                    $hotelSterren = htmlspecialchars($hotel['stars']);
+                    $hotelPrijs = isset($hotel['prijs']) ? number_format($hotel['prijs'], 2, ',', '.') : 'n.v.t.';
+                    $hotelBeschikbaar = isset($hotel['beschikbaar']) && $hotel['beschikbaar'] !== '0000-00-00'
+                        ? date('d-m-Y', strtotime($hotel['beschikbaar']))
+                        : 'n.v.t.';
+                    ?>
+                    <div class="destination-box" onclick="location.href='<?= $hotelLink ?>'">
+                        <img src="<?= $hotelImage ?>" alt="<?= $hotelNaam ?>"/>
+                        <h3><?= $hotelNaam ?> – <?= $hotelSterren ?> sterren</h3>
+                        <div class="hotel-extra-info">
+                            <span>Prijs: €<?= $hotelPrijs ?> per nacht</span><br>
+                            <span>Beschikbaar vanaf: <?= $hotelBeschikbaar ?></span>
+                        </div>
+                    </div>
+                <?php
+                endforeach;
+            }
+            ?>
         </section>
     </div>
 </main>
@@ -133,4 +148,3 @@ try {
 </script>
 </body>
 </html>
-

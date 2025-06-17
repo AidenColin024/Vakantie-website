@@ -98,7 +98,7 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <p>Sterren: <?= htmlspecialchars($land['stars']) ?></p>
                         <p>Type: <?= htmlspecialchars($land['type']) ?></p>
                         <?php if (!empty($land['link'])): ?>
-                            <p><a href="<?= htmlspecialchars($land['link']) ?>" target="_blank">Meer info</a></p>
+                            <p><a href="<?= htmlspecialchars($land['link']) ?>" target="_blank">Ga naar vakanties</a></p>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>

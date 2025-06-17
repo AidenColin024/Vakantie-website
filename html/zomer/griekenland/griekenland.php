@@ -5,7 +5,7 @@ $password = "rootpassword";
 $database = "mydatabase";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // echo "✅ Verbinding met database is gelukt!";
 } catch (PDOException $e) {
@@ -78,22 +78,37 @@ try {
         </aside>
 
         <section class="destination-blocks">
-            <div class="destination-box" onclick="location.href='kreta-beach-hotel.php'">
-                <img src="../../images/kreta%20beach.jpg" alt="Kreta Beach Resort"/>
-                <h3>Kreta Beach Resort – 4 sterren</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='rhodes-luxe-hotel.php'">
-                <img src="../../images/rhodos.jpg" alt="Rhodos Luxe Hotel"/>
-                <h3>Rhodos Luxe Hotel – 5 sterren</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='athena-hotel.php'">
-                <img src="../../images/athene.jpg" alt="Athene Boutique Hotel"/>
-                <h3>Athene Boutique Hotel – 3 sterren</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='hotel-olympia.php'">
-                <img src="../../images/olympia%20beach.jpg" alt="Hotel Olympia Beach"/>
-                <h3>Hotel Olympia Beach – 4 sterren</h3>
-            </div>
+            <?php
+            // Haal alle hotels in Griekenland op (waar hotel_naam niet leeg is)
+            $stmt = $conn->prepare("SELECT * FROM hotels WHERE name = :land AND hotel_naam IS NOT NULL AND hotel_naam != '' ORDER BY stars DESC, hotel_naam ASC");
+            $stmt->execute([':land' => 'Griekenland']);
+            $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (empty($hotels)) {
+                echo "<p style='margin-left:1rem;'>Er zijn nog geen hotels toegevoegd voor Griekenland.</p>";
+            } else {
+                foreach ($hotels as $hotel):
+                    $hotelLink = htmlspecialchars($hotel['link'] ?: '#');
+                    $hotelImage = htmlspecialchars($hotel['image']);
+                    $hotelNaam = htmlspecialchars($hotel['hotel_naam']);
+                    $hotelSterren = htmlspecialchars($hotel['stars']);
+                    $hotelPrijs = isset($hotel['prijs']) ? number_format($hotel['prijs'], 2, ',', '.') : 'n.v.t.';
+                    $hotelBeschikbaar = isset($hotel['beschikbaar']) && $hotel['beschikbaar'] !== '0000-00-00'
+                        ? date('d-m-Y', strtotime($hotel['beschikbaar']))
+                        : 'n.v.t.';
+                    ?>
+                    <div class="destination-box" onclick="location.href='<?= $hotelLink ?>'">
+                        <img src="<?= $hotelImage ?>" alt="<?= $hotelNaam ?>"/>
+                        <h3><?= $hotelNaam ?> – <?= $hotelSterren ?> sterren</h3>
+                        <div class="hotel-extra-info">
+                            <span>Prijs: €<?= $hotelPrijs ?> per nacht</span><br>
+                            <span>Beschikbaar vanaf: <?= $hotelBeschikbaar ?></span>
+                        </div>
+                    </div>
+                <?php
+                endforeach;
+            }
+            ?>
         </section>
     </div>
 </main>
@@ -133,4 +148,3 @@ try {
 </script>
 </body>
 </html>
-
