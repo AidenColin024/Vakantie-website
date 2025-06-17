@@ -43,6 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Polar & Paradise - Contact</title>
     <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
+    <title>Polar & Paradise</title>
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
+
+
 </head>
 <body>
 
@@ -61,12 +65,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php" class="active">Contact</a></li>
             <li><a href="login.php">Login</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.php" >Login</a></li>
         </ul>
     </nav>
 </header>
 <section class="contact-hero">
     <div class="form-container">
         <h1 class="form-title">Contact</h1>
+<<<<<<< HEAD
         <?php if ($success): ?>
             <div class="success-message" style="color: green; margin-bottom: 1em;">
                 Je vraag is succesvol verzonden! We nemen zo snel mogelijk contact met je op.
@@ -124,4 +131,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     });
 </script>
 </body>
+</html>
 </html>

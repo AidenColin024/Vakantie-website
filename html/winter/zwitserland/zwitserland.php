@@ -74,6 +74,8 @@ if (!empty($_GET['hotelSearch'])) {
             </datalist>
             <button type="submit">Zoek</button>
         </form>
+        <h1>Ontdek de Zwitserse Alpen</h1>
+        <p>Van Zermatt tot St. Moritz, beleef jouw ultieme wintersportervaring.</p>
     </div>
 </section>
 
@@ -88,6 +90,10 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>Bernese Oberland</option>
                 <option>Graubünden</option>
             </select>
+                <option>Graubünden</option>
+                <option>Berner Oberland</option>
+            </select>
+
             <label for="stars">Sterren</label>
             <select id="stars" name="stars">
                 <option value="">Alle</option>
@@ -95,6 +101,7 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>4 sterren</option>
                 <option>5 sterren</option>
             </select>
+
             <label for="type">Soort vakantie</label>
             <select id="type" name="type">
                 <option value="">Alle</option>
@@ -102,6 +109,7 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>Familie</option>
                 <option>Luxueus</option>
             </select>
+
             <label><input type="checkbox"> Ski pas inbegrepen</label>
         </aside>
 
@@ -137,6 +145,22 @@ if (!empty($_GET['hotelSearch'])) {
                 endforeach;
             }
             ?>
+            <div class="destination-box" onclick="location.href='zermatt-resort.php'">
+                <img src="../../images/zermat%20resort.webp" alt="Zermatt Resort"/>
+                <h3>Zermatt Resort – 5 sterren</h3>
+            </div>
+            <div class="destination-box" onclick="location.href='st-moritz-chalet.php'">
+                <img src="../../images/st%20moritz%20chalet.jpg" alt="St. Moritz Chalet"/>
+                <h3>St. Moritz Chalet – 4 sterren</h3>
+            </div>
+            <div class="destination-box" onclick="location.href='jungfrau-lodge.php'">
+                <img src="../../images/jungfrau-lodge-swiss.jpg" alt="Jungfrau Lodge"/>
+                <h3>Jungfrau Lodge – 3 sterren</h3>
+            </div>
+            <div class="destination-box" onclick="location.href='bern-hotel.php'">
+                <img src="../../images/berner%20hotel.jpg" alt="Berner Hotel Deluxe"/>
+                <h3>Berner Hotel Deluxe – 5 sterren</h3>
+            </div>
         </section>
     </div>
 </main>
@@ -149,4 +173,33 @@ if (!empty($_GET['hotelSearch'])) {
 </body>
 </html>
 
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener("submit", e => {
+                const inputs = form.querySelectorAll("input[required], textarea[required]");
+                let allFilled = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.style.borderColor = "red";
+                        allFilled = false;
+                    } else {
+                        input.style.borderColor = "#ccc";
+                    }
+                });
+
+                if (!allFilled) {
+                    e.preventDefault();
+                    alert("⚠️ Vul alle verplichte velden in.");
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
 

@@ -62,12 +62,16 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="hero-text">
         <h1>Vind jouw perfecte zomer vakantie</h1>
         <p>Van de zonnige stranden tot groene natuurgebieden, wij helpen je de beste plek te vinden.</p>
+<<<<<<< HEAD
         <form class="zoek-container" method="GET" action="" onsubmit="return redirectToLandZomer();">
             <input type="text" id="landZoekZomer" name="land" placeholder="Typ een land (bijv. Spanje)" required>
             <button type="submit">Zoek</button>
         </form>
     </div>
 
+=======
+    </div>
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 </section>
 
 <main class="pp-content">
@@ -134,6 +138,7 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
 </body>
+<<<<<<< HEAD
 <script>
     function redirectToLandZomer() {
         const land = document.getElementById('landZoekZomer').value.trim().toLowerCase();
@@ -149,4 +154,6 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return false;
     }
 </script>
+=======
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 </html>

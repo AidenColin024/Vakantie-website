@@ -74,6 +74,8 @@ if (!empty($_GET['hotelSearch'])) {
             </datalist>
             <button type="submit">Zoek</button>
         </form>
+        <h1>Ontdek de Alpen van Oostenrijk</h1>
+        <p>Van Tirol tot Vorarlberg, beleef jouw ultieme wintersportervaring.</p>
     </div>
 </section>
 
@@ -147,4 +149,5 @@ if (!empty($_GET['hotelSearch'])) {
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
 </body>
+</html>
 </html>

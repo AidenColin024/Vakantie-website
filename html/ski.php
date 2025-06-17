@@ -32,6 +32,23 @@ if (!empty($_GET['stars'])) {
 if (!empty($_GET['maxprijs'])) {
     $sql .= " AND prijs <= :maxprijs";
     $params[':maxprijs'] = (float)$_GET['maxprijs'];
+    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "❌ Verbindingsfout: " . $e->getMessage();
+}
+
+// Query met filters opbouwen: alleen landen tonen, geen hotels
+$sql = "SELECT name, region, stars, type, image, link FROM hotels WHERE (hotel_naam IS NULL OR hotel_naam = '') AND category = 'ski'";
+$params = [];
+
+if (!empty($_GET['stars'])) {
+    $sql .= " AND stars = :stars";
+    $params[':stars'] = $_GET['stars'];
+}
+if (!empty($_GET['type'])) {
+    $sql .= " AND type = :type";
+    $params[':type'] = $_GET['type'];
 }
 
 $stmt = $conn->prepare($sql);
@@ -41,6 +58,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // Ophalen unieke landen voor dropdown filter
 $landenStmt = $conn->query("SELECT DISTINCT name FROM hotels WHERE (hotel_naam = '' OR hotel_naam IS NULL) AND category = 'ski'");
 $landenOptions = $landenStmt->fetchAll(PDO::FETCH_COLUMN);
+$landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -78,6 +96,9 @@ $landenOptions = $landenStmt->fetchAll(PDO::FETCH_COLUMN);
         </form>
     </div>
 </section>
+    </div>
+</section>
+
 <main class="pp-content">
     <div class="page-content">
         <aside class="pp-filters">
@@ -103,6 +124,13 @@ $landenOptions = $landenStmt->fetchAll(PDO::FETCH_COLUMN);
 
                 <label for="maxprijs">Max prijs (€)</label>
                 <input type="number" id="maxprijs" name="maxprijs" step="0.01" min="0" value="<?= isset($_GET['maxprijs']) ? htmlspecialchars($_GET['maxprijs']) : '' ?>" placeholder="Bijv. 150">
+                <label for="type">Soort vakantie</label>
+                <select id="type" name="type">
+                    <option value="">Alle</option>
+                    <option value="Wintersport" <?= (isset($_GET['type']) && $_GET['type'] == 'Wintersport') ? 'selected' : '' ?>>Wintersport</option>
+                    <option value="Familie" <?= (isset($_GET['type']) && $_GET['type'] == 'Familie') ? 'selected' : '' ?>>Familie</option>
+                    <option value="Luxueus" <?= (isset($_GET['type']) && $_GET['type'] == 'Luxueus') ? 'selected' : '' ?>>Luxueus</option>
+                </select>
 
                 <button type="submit">Filter</button>
             </form>
@@ -120,6 +148,18 @@ $landenOptions = $landenStmt->fetchAll(PDO::FETCH_COLUMN);
                         <p>Prijs vanaf: €<?= number_format($result['prijs'], 2) ?></p>
                         <?php if (!empty($result['link'])): ?>
                             <p><a href="<?= htmlspecialchars($result['link']) ?>" target="_blank" rel="noopener">Meer info</a></p>
+            <?php if (count($landen) > 0): ?>
+                <?php foreach ($landen as $land): ?>
+                    <div class="destination-box">
+                        <?php if (!empty($land['image'])): ?>
+                            <img src="<?= htmlspecialchars($land['image']) ?>" alt="<?= htmlspecialchars($land['name']) ?>" style="width:100%;max-width:220px;height:auto;border-radius:6px;margin-bottom:10px;">
+                        <?php endif; ?>
+                        <h3><?= htmlspecialchars($land['name']) ?></h3>
+                        <p>Regio: <?= htmlspecialchars($land['region']) ?></p>
+                        <p>Sterren: <?= htmlspecialchars($land['stars']) ?></p>
+                        <p>Type: <?= htmlspecialchars($land['type']) ?></p>
+                        <?php if (!empty($land['link'])): ?>
+                            <p><a href="<?= htmlspecialchars($land['link']) ?>" target="_blank">Meer info</a></p>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
@@ -153,4 +193,5 @@ $landenOptions = $landenStmt->fetchAll(PDO::FETCH_COLUMN);
         return false; // Voorkom standaard form-submissie
     }
 </script>
+</html>
 </html>

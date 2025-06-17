@@ -1,5 +1,6 @@
 <?php
 $servername = "db";
+$servername = "db"; // Docker-service naam
 $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
@@ -32,6 +33,10 @@ if (!empty($_GET['hotelSearch'])) {
         echo "<p style='color:red;'>Hotel niet gevonden. Probeer een andere naam.</p>";
     }
 }
+    // echo "✅ Verbinding met database is gelukt!"; // kun je aanzetten voor debug
+} catch (PDOException $e) {
+    echo "❌ Verbindingsfout: " . $e->getMessage();
+}
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -39,6 +44,7 @@ if (!empty($_GET['hotelSearch'])) {
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Ski Vakanties Spanje - Polar & Paradise</title>
+    <title>Spanje Vakanties - Polar & Paradise</title>
     <link rel="stylesheet" href="../../vakantie.css?v=<?= time() ?>">
 </head>
 <body>
@@ -51,6 +57,8 @@ if (!empty($_GET['hotelSearch'])) {
             <li><a href="../../index.php">Home</a></li>
             <li><a href="../../ski.php" class="active">Ski vakanties</a></li>
             <li><a href="../../zomer.php">Zomer vakanties</a></li>
+            <li><a href="../../ski.php">Ski vakanties</a></li>
+            <li><a href="../../zomer.php" class="active">Zomer vakanties</a></li>
             <li><a href="../../overons.php">Over ons</a></li>
             <li><a href="../../contact.php">Contact</a></li>
             <li><a href="../../login.php">Login</a></li>
@@ -74,6 +82,11 @@ if (!empty($_GET['hotelSearch'])) {
             </datalist>
             <button type="submit">Zoek</button>
         </form>
+<section class="vakantie zomer-hero">
+    <img src="../../images/OIP4.jpg" alt="Vakantie in Spanje" class="hero-img" />
+    <div class="hero-text">
+        <h1>Beleef de zon in prachtige Spanje</h1>
+        <p>Van Barcelona tot de Canarische Eilanden, jouw ideale zomervakantie wacht.</p>
     </div>
 </section>
 
@@ -88,6 +101,16 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>Pyreneeën</option>
                 <option>Andorra</option>
             </select>
+            <h3>Filter jouw Zomer vakantie</h3>
+            <label for="region">Regio</label>
+            <select id="region" name="region">
+                <option value="">Alle regio's</option>
+                <option>Barcelona</option>
+                <option>Andalusië</option>
+                <option>Canarische Eilanden</option>
+                <option>Costa Brava</option>
+            </select>
+
             <label for="stars">Sterren</label>
             <select id="stars" name="stars">
                 <option value="">Alle</option>
@@ -137,6 +160,35 @@ if (!empty($_GET['hotelSearch'])) {
                 endforeach;
             }
             ?>
+
+            <label for="type">Soort vakantie</label>
+            <select id="type" name="type">
+                <option value="">Alle</option>
+                <option>Strand</option>
+                <option>Stedentrip</option>
+                <option>All-inclusive</option>
+            </select>
+
+            <label><input type="checkbox"> Inclusief vlucht</label>
+        </aside>
+
+        <section class="destination-blocks">
+            <div class="destination-box" onclick="location.href='barcelona-city-hotel.php'">
+                <img src="../../images/barcelona%20city%20hotel.jpg" alt="Barcelona City Hotel"/>
+                <h3>Barcelona City Hotel – 4 sterren</h3>
+            </div>
+            <div class="destination-box" onclick="location.href='andalusie-hotel.php'">
+                <img src="../../images/andalusië%20resort.jpg" alt="Andalusië Luxe Resort"/>
+                <h3>Andalusië Luxe Resort – 5 sterren</h3>
+            </div>
+            <div class="destination-box" onclick="location.href='tenerife-hotel.php'">
+                <img src="../../images/tenerife%20apartement.jpg" alt="Tenerife Appartement"/>
+                <h3>Tenerife Appartement – 3 sterren</h3>
+            </div>
+            <div class="destination-box" onclick="location.href='costa-brava-hotel.php'">
+                <img src="../../images/costa%20brava%20resort.jpg" alt="Costa Brava Palace"/>
+                <h3>Costa Brava Palace – 5 sterren</h3>
+            </div>
         </section>
     </div>
 </main>
@@ -149,4 +201,35 @@ if (!empty($_GET['hotelSearch'])) {
 </body>
 </html>
 
+
+
+<script>
+    // Simpele veld-validatie feedback
+    document.addEventListener("DOMContentLoaded", () => {
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener("submit", e => {
+                const inputs = form.querySelectorAll("input[required], textarea[required]");
+                let allFilled = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.style.borderColor = "red";
+                        allFilled = false;
+                    } else {
+                        input.style.borderColor = "#ccc";
+                    }
+                });
+
+                if (!allFilled) {
+                    e.preventDefault();
+                    alert("⚠️ Vul alle verplichte velden in.");
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
 

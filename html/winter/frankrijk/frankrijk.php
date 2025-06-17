@@ -88,6 +88,7 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>La Plagne</option>
                 <option>Serre Chevalier</option>
             </select>
+
             <label for="stars">Sterren</label>
             <select id="stars" name="stars">
                 <option value="">Alle</option>
@@ -95,6 +96,7 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>4 sterren</option>
                 <option>5 sterren</option>
             </select>
+
             <label for="type">Soort vakantie</label>
             <select id="type" name="type">
                 <option value="">Alle</option>
@@ -102,12 +104,14 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>Familie</option>
                 <option>Luxueus</option>
             </select>
+
             <label><input type="checkbox"> Ski pas inbegrepen</label>
         </aside>
 
         <section class="destination-blocks">
             <?php
             // Haal alle hotels in Frankrijk op (waar hotel_naam niet leeg is)
+            // Haalt alle hotels in Frankrijk op (waar hotel_naam niet leeg is)
             $stmt = $conn->prepare("SELECT * FROM hotels WHERE name = :land AND hotel_naam IS NOT NULL AND hotel_naam != '' ORDER BY stars DESC, hotel_naam ASC");
             $stmt->execute([':land' => 'Frankrijk']);
             $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -146,5 +150,33 @@ if (!empty($_GET['hotelSearch'])) {
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
+</body>
+</html>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener("submit", e => {
+                const inputs = form.querySelectorAll("input[required], textarea[required]");
+                let allFilled = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.style.borderColor = "red";
+                        allFilled = false;
+                    } else {
+                        input.style.borderColor = "#ccc";
+                    }
+                });
+
+                if (!allFilled) {
+                    e.preventDefault();
+                    alert("⚠️ Vul alle verplichte velden in.");
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
