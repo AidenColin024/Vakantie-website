@@ -9,7 +9,6 @@ body {
     line-height: 1.6;
 }
 
-/* Links */
 a {
     color: #004080;
     text-decoration: none;
@@ -19,7 +18,6 @@ a:hover {
     color: #0066cc;
 }
 
-/* Buttons */
 .btn-primary {
     background-color: #004080;
     color: white;
@@ -35,7 +33,6 @@ a:hover {
     background-color: #0066cc;
 }
 
-/* Header */
 .pp-header {
     display: flex;
     justify-content: space-between;
@@ -70,8 +67,8 @@ a:hover {
     background-color: #0066cc;
 }
 
-/* Footer */
-footer {
+footer,
+.site-footer {
     background-color: #f0f0f0;
     color: #666;
     padding: 20px 10px;
@@ -80,21 +77,31 @@ footer {
     border-top: 1px solid #ccc;
 }
 
-/* --- Stijlen index.php --- */
-
-/* Hero sectie */
-.vakantie {
+/* --- Hero styles --- */
+.vakantie,
+.ski-hero,
+.zomer-hero {
     position: relative;
     height: 420px;
     overflow: hidden;
 }
-.vakantie img {
+.vakantie img,
+.ski-hero .hero-img,
+.zomer-hero .hero-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    filter: brightness(0.7);
+    transition: filter 0.3s ease;
 }
-.hero-text {
+.ski-hero:hover .hero-img,
+.zomer-hero:hover .hero-img {
+    filter: brightness(0.8);
+}
+.hero-text,
+.ski-hero .hero-text,
+.zomer-hero .hero-text {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -107,9 +114,11 @@ footer {
     font-size: 2.2rem;
     font-weight: 700;
     line-height: 1.2;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
-/* Deals sectie */
+/* --- Deals & Seasons --- */
 .deals {
     background-color: white;
     padding: 30px 20px;
@@ -135,8 +144,6 @@ footer {
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     user-select: none;
 }
-
-/* Seasons sectie */
 .seasons {
     display: flex;
     justify-content: center;
@@ -176,7 +183,7 @@ footer {
     font-weight: 700;
 }
 
-/* Service blokken */
+/* --- Grids & Blocks --- */
 .services {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -206,46 +213,7 @@ footer {
     font-size: 1rem;
     color: #444;
 }
-
-/* --- Stijlen ski.php --- */
-
-.ski-hero {
-    position: relative;
-    height: 420px;
-    overflow: hidden;
-}
-
-.ski-hero .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.7);
-    transition: filter 0.3s ease;
-}
-
-.ski-hero:hover .hero-img {
-    filter: brightness(0.8);
-}
-
-.ski-hero .hero-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 450px;
-    background-color: rgba(0, 64, 128, 0.75);
-    padding: 30px 40px;
-    border-radius: 12px;
-    color: white;
-    font-size: 1.9rem;
-    font-weight: 700;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    line-height: 1.2;
-    text-align: center;
-}
-
-/* Ski bestemmingen grid */
-.ski-destinations {
+.ski-destinations, .zomer-destinations {
     max-width: 1100px;
     margin: 0 auto 60px auto;
     display: grid;
@@ -253,82 +221,32 @@ footer {
     gap: 30px;
     padding: 0 20px;
 }
-
-.ski-destination {
+.ski-destination, .zomer-destination {
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0,0,0,0.12);
     transition: box-shadow 0.3s ease;
 }
-.ski-destination:hover {
+.ski-destination:hover, .zomer-destination:hover {
     box-shadow: 0 7px 20px rgba(0,0,0,0.2);
 }
-.ski-destination img {
+.ski-destination img, .zomer-destination img {
     width: 100%;
     height: 180px;
     object-fit: cover;
 }
-.ski-destination .info {
+.ski-destination .info, .zomer-destination .info {
     padding: 15px 18px;
 }
-.ski-destination .info h3 {
+.ski-destination .info h3, .zomer-destination .info h3 {
     margin: 0 0 8px 0;
     color: #004080;
 }
-.ski-destination .info p {
-    margin: 0 0 12px 0;
-    color: #555;
-}
-.ski-destination .info .btn-primary {
+.ski-destination .info .btn-primary, .zomer-destination .info .btn-primary {
     font-size: 0.9rem;
 }
 
-/* --- Stijlen zomer.php --- */
-
-.zomer-hero {
-    position: relative;
-    height: 420px;
-    overflow: hidden;
-}
-
-.zomer-hero .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.7);
-    transition: filter 0.3s ease;
-}
-
-.zomer-hero:hover .hero-img {
-    filter: brightness(0.8);
-}
-
-.zomer-hero .hero-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 450px;
-    background-color: rgba(0, 64, 128, 0.75);
-    padding: 30px 40px;
-    border-radius: 12px;
-    color: white;
-    font-size: 1.9rem;
-    font-weight: 700;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    line-height: 1.2;
-    text-align: center;
-}
-/* Zomer bestemmingen grid */
-.zomer-destinations {
-    max-width: 1100px;
-    margin: 0 auto 60px auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    padding: 0 20px;
-}
 .destination-blocks {
     display: flex;
     flex-wrap: wrap;
@@ -336,7 +254,6 @@ footer {
     gap: 2rem;
     padding: 2rem;
 }
-
 .destination-box {
     cursor: pointer;
     width: 200px;
@@ -347,20 +264,17 @@ footer {
     background-color: white;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .destination-box img {
     width: 100%;
     height: 140px;
     object-fit: cover;
     display: block;
 }
-
 .destination-box h3 {
     margin: 1rem 0;
     color: #222;
     font-size: 1.2rem;
 }
-
 .destination-box:hover {
     transform: translateY(-6px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
@@ -370,29 +284,23 @@ footer {
     gap: 2rem;
     padding: 2rem;
 }
-
-/* Aside filter */
 .pp-filters {
-    flex: 0 0 250px; /* vaste breedte */
+    flex: 0 0 250px;
     background: #f9f9f9;
     padding: 1rem;
     border-radius: 12px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    font-family: Arial, sans-serif;
 }
-
 .pp-filters h3 {
     margin-bottom: 1rem;
     color: #333;
 }
-
 .pp-filters label {
     display: block;
     margin-top: 1rem;
     font-weight: bold;
     color: #555;
 }
-
 .pp-filters select {
     width: 100%;
     padding: 0.4rem;
@@ -402,76 +310,7 @@ footer {
     font-size: 1rem;
 }
 
-/* Bestemmingsblokken */
-.destination-blocks {
-    flex: 1; /* neemt resterende ruimte */
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: flex-start;
-}
-
-.destination-box {
-    cursor: pointer;
-    width: 200px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    text-align: center;
-    background-color: white;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.destination-box img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    display: block;
-}
-
-.destination-box h3 {
-    margin: 1rem 0;
-    color: #222;
-    font-size: 1.2rem;
-}
-
-.destination-box:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-}
-
-.zomer-destination {
-    background-color: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
-    transition: box-shadow 0.3s ease;
-}
-.zomer-destination:hover {
-    box-shadow: 0 7px 20px rgba(0,0,0,0.2);
-}
-.zomer-destination img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
-.zomer-destination .info {
-    padding: 15px 18px;
-}
-.zomer-destination .info h3 {
-    margin: 0 0 8px 0;
-    color: #006600;
-}
-.zomer-destination .info p {
-    margin: 0 0 12px 0;
-    color: #444;
-}
-.zomer-destination .info .btn-primary {
-    font-size: 0.9rem;
-}
-
-/* --- Stijlen overons.php --- */
-
+/* --- Over ons, Forms, Reviews, Boekingen --- */
 .overons-section {
     max-width: 900px;
     margin: 40px auto 80px auto;
@@ -487,21 +326,14 @@ footer {
     font-weight: 700;
     text-align: center;
 }
-
-
-/* ====================================== */
-/*        Formulieren & Auth Styles       */
-/* ====================================== */
-
-/* Algemene container voor formulieren */
 .form-container {
     max-width: 400px;
     margin: 5rem auto;
     padding: 2rem;
-    background-color: #ffffff; /* wit, zichtbaar */
+    background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ddd; /* optioneel, voor duidelijkheid */
+    border: 1px solid #ddd;
 }
 .login-hero,
 .register-hero,
@@ -514,31 +346,24 @@ footer {
     align-items: center;
     min-height: 100vh;
 }
-/* Titel in het formulier */
 .form-container .form-title {
     margin-bottom: 1.5rem;
     text-align: center;
     color: #222;
     font-size: 1.8rem;
 }
-
-/* Formulier zelf */
 .form-container .form {
     display: flex;
     flex-direction: column;
 }
-
-/* Labels */
 .form-container label {
     margin-bottom: 0.5rem;
     font-weight: bold;
     color: #444;
 }
-
-/* Inputs en textarea */
 .form-container input,
 .form-container textarea,
-.form-container select{
+.form-container select {
     padding: 0.75rem;
     margin-bottom: 1.2rem;
     border: 1px solid #ccc;
@@ -546,10 +371,9 @@ footer {
     font-size: 1rem;
     font-family: inherit;
     box-sizing: border-box;
-
 }
 .form-container button {
-    background-color: #4CAF50; /* Groen */
+    background-color: #4CAF50;
     color: white;
     padding: 0.75rem 1.5rem;
     border: none;
@@ -560,18 +384,13 @@ footer {
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 8px rgba(76, 175, 80, 0.4);
 }
-
 .form-container button:hover {
-    background-color: #45a049; /* Donkerder groen bij hover */
+    background-color: #45a049;
     box-shadow: 0 6px 12px rgba(69, 160, 73, 0.6);
 }
-
-/* Algemene spacing */
 section {
     padding: 4rem 2rem;
 }
-
-/* Hero-afbeelding */
 .hero-section {
     position: relative;
     width: 100%;
@@ -581,7 +400,6 @@ section {
     align-items: center;
     justify-content: center;
 }
-
 .hero-img {
     position: absolute;
     top: 0;
@@ -591,7 +409,6 @@ section {
     object-fit: cover;
     z-index: 1;
 }
-
 .hero-text {
     z-index: 2;
     background-color: rgba(0, 0, 0, 0.6);
@@ -603,8 +420,6 @@ section {
     margin: 0 auto;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
-
-/* Missie & Visie */
 .about-content {
     display: flex;
     flex-wrap: wrap;
@@ -613,7 +428,6 @@ section {
     background-color: #f9f9f9;
     padding: 4rem 2rem;
 }
-
 .about-box {
     flex: 1 1 300px;
     background-color: white;
@@ -621,32 +435,26 @@ section {
     border-radius: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
 .about-box h2 {
     color: #006400;
     margin-bottom: 1rem;
 }
-
-/* Teamsectie */
 .about-team {
     text-align: center;
     padding: 4rem 2rem;
     background: #eaf7ea;
 }
-
 .about-team h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
     color: #006400;
 }
-
 .team-members {
     display: flex;
     justify-content: center;
     gap: 2rem;
     flex-wrap: wrap;
 }
-
 .team-member {
     background: #fff;
     padding: 2rem;
@@ -654,352 +462,18 @@ section {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 200px;
 }
-
 .team-member h3 {
     margin-bottom: 0.5rem;
     color: #333;
 }
 
-/* Footer */
-.site-footer {
-    background-color: #f0f0f0;
-    text-align: center;
-    padding: 2rem 1rem;
-    font-size: 0.9rem;
-    color: #666;
-    line-height: 1.6;
-}
-
-/* ====================================== */
-/*             Responsiveness             */
-/* ====================================== */
-
-@media (max-width: 768px) {
-    .pp-header {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-
-    .pp-nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .hero-text {
-        left: 20px;
-        max-width: 90%;
-        font-size: 1.8rem;
-        padding: 20px 25px;
-    }
-
-    .seasons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .summer, .winter {
-        width: 90%;
-        height: 180px;
-    }
-}
-
-/* Alleen extra styles voor hotelpagina */
-.hotel-container {
-    max-width: 1100px;
-    margin: 3rem auto 5rem auto;
-    padding: 0 20px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.hotel-image img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-
-/* Enkele basics voor boekingspagina */
-.booking-container {
-    max-width: 450px;
-    margin: 3rem auto 5rem auto;
-    background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-}
-
-.booking-form input, .booking-form select {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
-.booking-form button {
-    width: 100%;
-    background-color: #004080;
-    color: white;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f7fa;
-    margin: 0;
-    padding: 0;
-}
-
-.annuleer-container {
-    max-width: 600px;
-    margin: 50px auto;
-    background: white;
-    padding: 2em;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.annuleer-container h1 {
-    color: #cc0000;
-    font-size: 1.8em;
-    margin-bottom: 10px;
-}
-
-.annuleer-container form {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-}
-
-.annuleer-container input,
-.annuleer-container textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-}
-
-.annuleer-container button {
-    background-color: #cc0000;
-    color: white;
-    padding: 10px;
-    border: none;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.annuleer-container button:hover {
-    background-color: #b30000;
-}
-
-.account-hero {
-    background: linear-gradient(135deg, #e6f3fb 0%, #f6fafd 100%);
-    min-height: 100vh;
-    padding: 0 0 3rem 0;
-}
-.account-container {
-    max-width: 560px;
-    margin: 3rem auto 0 auto;
-    background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.07);
-    padding: 2.3rem 2.5rem 2.5rem 2.5rem;
-}
-.account-container h1 {
-    margin-top: 0;
-    color: #0066cc;
-    font-size: 2.1rem;
-}
-.account-section {
-    margin-bottom: 2.7rem;
-}
-.account-section h2 {
-    margin-bottom: 0.7rem;
-    color: #007acc;
-    font-size: 1.2rem;
-}
-.account-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-}
-.account-form label {
-    font-weight: 600;
-}
-.account-form input[type="text"],
-.account-form input[type="email"],
-.account-form input[type="password"] {
-    padding: 0.7rem;
-    border-radius: 6px;
-    border: 1px solid #bcd8ee;
-    font-size: 1rem;
-    background: #f6fafd;
-    margin-bottom: 0.2rem;
-    transition: border 0.15s;
-}
-.account-form input:focus {
-    outline: none;
-    border-color: #007acc;
-}
-.account-form button {
-    margin-top: 0.8rem;
-    padding: 0.8rem 0;
-    border: none;
-    border-radius: 7px;
-    background: #007acc;
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background .2s;
-}
-.account-form button:hover {
-    background: #005fa3;
-}
-.booking-list {
-    padding-left: 1.1rem;
-    font-size: 1.09rem;
-}
-.booking-list li {
-    margin-bottom: 0.7rem;
-    padding-left: 0.2rem;
-    position: relative;
-}
-.booking-list .status {
-    font-size: 0.96em;
-    margin-left: 0.4em;
-    color: #666;
-}
-.booking-list .status.afgerond {
-    color: #1a7f37;
-}
-.booking-list .status.geannuleerd {
-    color: #c00;
-}
-.booking-list .status.gepland {
-    color: #0066cc;
-}
-
-.hotel-detail {
-    max-width: 900px;
-    margin: 3rem auto 5rem auto;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-}
-.hotel-detail h1 {
-    font-size: 2.4rem;
-    margin-bottom: 1rem;
-    color: #004080;
-}
-.hotel-images img {
-    width: 100%;
-    max-height: 350px;
-    object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    margin-bottom: 2rem;
-}
-.hotel-info h2 {
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #0066cc;
-    font-weight: 700;
-}
-.hotel-info p, .hotel-info ul {
-    font-size: 1.05rem;
-    line-height: 1.5;
-}
-.hotel-info ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-}
-.pp-booking-btn {
-    display: inline-block;
-    margin-top: 2rem;
-    padding: 0.8rem 2rem;
-    background-color: #007acc;
-    color: white;
-    font-weight: 700;
-    text-decoration: none;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-    border: none;
-    cursor: pointer;
-}
-.pp-booking-btn:hover {
-    background-color: #005a99;
-}
-.pp-back-btn {
-    display: inline-block;
-    margin-top: 3rem;
-    color: #555;
-    text-decoration: none;
-    font-size: 1rem;
-}
-.pp-back-btn:hover {
-    text-decoration: underline;
-    color: #007acc;
-}
-/* Review sectie */
-form label {
-    font-weight: 600;
-}
-form input[type="text"],
-form select,
-form textarea {
-    width: 100%;
-    padding: 0.6rem;
-    margin-top: 0.25rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-family: inherit;
-}
-ul.reviews-list {
-    margin-top: 2rem;
-    padding-left: 0;
-}
-ul.reviews-list li {
-    list-style: none;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
-}
-ul.reviews-list li strong {
-    font-size: 1.1rem;
-    color: #004080;
-}
-ul.reviews-list li em {
-    color: #777;
-    font-size: 0.9rem;
-}
-ul.reviews-list li p {
-    margin-top: 0.3rem;
-    font-size: 1rem;
-    white-space: pre-line;
-}
-
-
+/* --- Boekingen, Cards, Admin --- */
 .card-row {
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
     margin-bottom: 3rem;
 }
-
 .land-card {
     width: 340px;
     border-radius: 16px;
@@ -1009,13 +483,11 @@ ul.reviews-list li p {
     margin-bottom: 1.5rem;
     text-align: center;
 }
-
 .land-card img {
     width: 100%;
     height: 150px;
     object-fit: cover;
 }
-
 .hotel-list-in-land {
     padding: 1rem;
     background: #f6f6f6;
@@ -1023,7 +495,6 @@ ul.reviews-list li p {
     margin-top: 0.7rem;
     text-align: left;
 }
-
 .hotel-in-land {
     margin-bottom: 1rem;
     padding-bottom: 1rem;
@@ -1032,11 +503,9 @@ ul.reviews-list li p {
 .hotel-in-land:last-child {
     border-bottom: none;
 }
-
 .hotel-in-land-title {
     font-weight: bold;
 }
-
 .hotel-add-form,
 .hotel-edit-form {
     margin-top: 1.2rem;
@@ -1061,7 +530,6 @@ ul.reviews-list li p {
     border-radius: 4px;
     cursor: pointer;
 }
-
 .verwijder-land-form {
     margin-top: .9rem;
 }
@@ -1082,7 +550,6 @@ ul.reviews-list li p {
     cursor: pointer;
     font-size: 0.9rem;
 }
-
 .add-land-form,
 .edit-land-form {
     margin-bottom: 2.5rem;
@@ -1116,7 +583,6 @@ ul.reviews-list li p {
     font-size: 0.98rem;
     margin-bottom: 0.2rem;
 }
-
 .boekingen-section {
     margin: 3rem 0 2rem 0;
     padding: 1.5rem;
@@ -1139,49 +605,271 @@ ul.reviews-list li p {
     background: #e9f7fa;
 }
 
-.reis-zoekfunctie {
-    margin: 2rem 0 1.5rem 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
+/* --- Responsiveness --- */
+@media (max-width: 1100px) {
+    .services,
+    .ski-destinations,
+    .zomer-destinations {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+    }
+    .card-row {
+        flex-direction: column;
+        gap: 1.3rem;
+    }
+    .land-card {
+        width: 98%;
+    }
+    .page-content {
+        flex-direction: column;
+        gap: 1.3rem;
+        padding: 1rem;
+    }
+    .destination-blocks {
+        gap: 1rem;
+        padding: 1rem;
+    }
 }
 
-.reis-zoekfunctie input[type="text"] {
-    padding: 0.5rem;
-    width: 220px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-}
-
-.reis-zoekfunctie select {
-    padding: 0.5rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-}
-
-.reis-zoekfunctie button {
-    padding: 0.5rem 1.2rem;
-    border-radius: 4px;
-    background: #1877f2;
-    color: #fff;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.reis-zoekfunctie button:hover {
-    background: #1257b5;
-}
-
-
-
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+    .pp-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 12px 7px;
+    }
+    .pp-nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .hero-text,
+    .ski-hero .hero-text,
+    .zomer-hero .hero-text {
+        left: 20px;
+        max-width: 96%;
+        font-size: 1.4rem;
+        padding: 16px 10px;
+    }
+    .seasons {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+    }
+    .summer, .winter {
+        width: 96%;
+        height: 150px;
+    }
     .form-container {
         margin: 2rem 1rem;
-        padding: 1.5rem;
+        padding: 1.3rem;
+        max-width: 99vw;
+    }
+    .card-row,
+    .about-content {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+    .land-card {
+        width: 97vw;
+    }
+    .hotel-detail {
+        max-width: 99vw;
+        padding: 1rem;
+    }
+    .hotel-images img {
+        max-height: 170px;
+    }
+    .about-team,
+    .about-box {
+        padding: 2rem 0.5rem;
+    }
+    section {
+        padding: 2rem 0.7rem;
+    }
+    .boekingen-section {
+        padding: 1rem 0.5rem;
+    }
+    .destination-box {
+        width: 99vw;
+        min-width: 170px;
+    }
+    .pp-filters {
+        flex: unset;
+        width: 98vw;
+        max-width: 400px;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pp-header {
+        padding: 8px 3px;
+    }
+    .hero-text,
+    .ski-hero .hero-text,
+    .zomer-hero .hero-text {
+        font-size: 1.01rem;
+        padding: 10px 3px;
+    }
+    .form-container {
+        margin: 1rem 0.2rem;
+        padding: 0.7rem;
+        max-width: 100vw;
+    }
+    .card-row {
+        gap: 0.4rem;
+    }
+    .land-card {
+        width: 99vw;
+        border-radius: 10px;
+        font-size: 0.98rem;
+    }
+    .hotel-detail {
+        padding: 0.4rem;
+    }
+    .boekingen-section {
+        padding: 0.5rem 0.1rem;
+    }
+    .destination-blocks {
+        gap: 0.4rem;
+        padding: 0.4rem;
+    }
+    .destination-box {
+        width: 99vw;
+        min-width: 120px;
+        padding: 0.3rem;
+    }
+    .pp-filters {
+        width: 99vw;
+        padding: 0.7rem;
+        font-size: 0.96rem;
+    }
+    section {
+        padding: 1.2rem 0.2rem;
+    }
+}
+
+/* --- Extra: Hide scrollbars on mobile for better feel --- */
+@media (max-width: 480px) {
+    html, body {
+        overflow-x: hidden;
+    }
+}
+
+/* --- Perfecte mobile fix voor telefoon (extra centreren) --- */
+@media (max-width: 650px) {
+    .pp-header {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 5px !important;
+        text-align: center !important;
+        padding: 10px 2vw !important;
+    }
+    .pp-nav ul {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 8px !important;
+        width: 100vw !important;
+        padding: 0 !important;
+    }
+    .pp-nav ul li {
+        width: 100vw !important;
+        text-align: center !important;
+    }
+    .hero-text,
+    .ski-hero .hero-text,
+    .zomer-hero .hero-text {
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        max-width: 98vw !important;
+        width: 96vw !important;
+        text-align: center !important;
+        padding: 0.8em 0.4em !important;
+        font-size: 1em !important;
+        word-break: break-word !important;
+    }
+    .seasons,
+    .destination-blocks,
+    .deal-icons,
+    .about-content,
+    .team-members {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        gap: 0.8em !important;
+    }
+    .summer, .winter, .destination-box {
+        width: 97vw !important;
+        min-width: unset !important;
+        max-width: 420px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        font-size: 1em !important;
+    }
+    .destination-box h3,
+    .service h3,
+    .service p,
+    .deals,
+    .overons-section,
+    .about-box,
+    .about-team,
+    .team-member,
+    .boekingen-section,
+    .land-card,
+    .hotel-list-in-land,
+    .hotel-in-land-title {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    .boeking-table th,
+    .boeking-table td {
+        text-align: center !important;
+        font-size: 0.97em !important;
+        padding: 0.35em 0.5em !important;
+        word-break: break-word !important;
+    }
+    .boeking-table {
+        font-size: 0.97em !important;
+    }
+    .form-container,
+    .form-container .form,
+    .about-box,
+    .account-container,
+    .annuleer-container {
+        text-align: center !important;
+        align-items: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 97vw !important;
+        max-width: 99vw !important;
+    }
+    .form-container input,
+    .form-container textarea,
+    .form-container button {
+        display: block !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 96% !important;
+        text-align: left;
+    }
+    footer,
+    .site-footer {
+        text-align: center !important;
+        font-size: 0.98em !important;
+    }
+    .card-row {
+        flex-direction: column !important;
+        gap: 0.7em !important;
+    }
+    .land-card {
+        width: 99vw !important;
+        border-radius: 10px !important;
+        font-size: 0.98rem !important;
+    }
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
     }
 }
