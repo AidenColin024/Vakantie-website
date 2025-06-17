@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Jun 17, 2025 at 09:29 AM
+-- Generation Time: Jun 17, 2025 at 11:29 AM
 -- Server version: 5.7.44
 -- PHP Version: 8.2.27
 
@@ -153,7 +153,7 @@ INSERT INTO `hotels` (`id`, `name`, `hotel_naam`, `region`, `prijs`, `beschikbaa
 (19, 'Oostenrijk', 'Tirol Resort', 'Europa', 120.00, '2025-06-17', 4, 'Wintersport', 'ski', '../../images/tyrol%20resort.jpg', 'tirol-resort.php'),
 (21, 'Oostenrijk', 'Vorarlberg Lodge', 'Europa', 90.00, '2025-06-17', 3, 'Wintersport', 'ski', '../../images/voralberg lodge.jpg', 'vorarlberg-lodge.php'),
 (24, 'Oostenrijk', 'Salzburgerland Chalet', 'Europa', 180.00, '2025-06-17', 5, 'Wintersport', 'ski', '../../images/salzburg%20chalet.jpg', 'salzburgerland-chalet.php'),
-(25, 'Zwitserland', 'Berner Hotel Deluxe', 'Europa', 0.00, NULL, 5, 'Wintersport', 'ski', '../../images/berner%20hotel.jpg', 'berner-hotel-deluxe.php'),
+(25, 'Zwitserland', 'Berner Hotel Deluxe', 'Europa', 200.00, '2025-06-17', 5, 'Wintersport', 'ski', '../../images/berner%20hotel.jpg', 'berner-hotel-deluxe.php'),
 (26, 'Spanje', '', 'Europa', 0.00, NULL, 5, 'Zomervakantie', 'zomer', '../../images/OIP4.jpg', 'zomer/spanje/spanje.php'),
 (27, 'Griekenland', '', 'Europa', 0.00, NULL, 5, 'Zomervakantie', 'zomer', '../../images/foto-mooie-vakantiebestemming-in-griekenland-met-huizen-en-de-zee-in-de-zomer-hd-vakantie-achtergrond.jpg', 'zomer/griekenland/griekenland.php\r\n'),
 (28, 'Morokko', '', 'Noord-Afrika', 0.00, NULL, 5, 'Zomervakantie', 'zomer', '../../images/OIP%20(5).jpg', 'zomer/morokko/morokko.php'),
@@ -165,7 +165,26 @@ INSERT INTO `hotels` (`id`, `name`, `hotel_naam`, `region`, `prijs`, `beschikbaa
 (34, 'Italie', 'Dolomieten Chalet', 'Europa', 90.00, '2025-06-17', 4, 'Wintersport', 'ski', '../../images/dolomieten%20lodge.jpg', 'dolomieten-chalet.php'),
 (35, 'Italie', 'Val Gardena Resort', 'Europa', 150.00, '2025-06-17', 5, 'Wintersport', 'ski', '../../images/val%20gardana%20resort.jpg', 'val-gardena-resort.php'),
 (36, 'Italie', 'Cervinia Lodge', 'Europa', 70.00, '2025-06-17', 3, 'Wintersport', 'ski', '../../images/cervinia%20lodge.jpg', 'cervinia-lodge.php'),
-(37, 'Italie', 'Dolomiti Resort', 'Europa', 100.00, '2025-06-17', 4, 'Wintersport', 'ski', '../../images/dolomiti%20resort.jpg', 'dolomiti-resort.php');
+(37, 'Italie', 'Dolomiti Resort', 'Europa', 100.00, '2025-06-17', 4, 'Wintersport', 'ski', '../../images/dolomiti%20resort.jpg', 'dolomiti-resort.php'),
+(38, 'Zwitserland', 'Zermatt Resort', 'Europa', 250.00, '2025-06-17', 5, 'Wintersport', 'ski', '../../images/zermat%20resort.webp', 'zermatt-resort.php'),
+(39, 'Zwitserland', 'St. Moritz Chalet', 'Europa', 220.00, '2025-06-17', 4, 'Wintersport', 'ski', '../../images/st%20moritz%20chalet.jpg', 'st-moritz-chalet.php'),
+(40, 'Zwitserland', 'Jungfrau Lodge', 'Europa', 120.00, '2025-06-17', 3, 'Wintersport', 'ski', '../../images/jungfrau-lodge-swiss.jpg', 'jungfrau-lodge.php'),
+(41, 'Spanje', 'Barcelona City Hotel', 'Europa', 140.00, '2025-06-17', 4, 'Zomervakantie', 'Familie', '../../images/barcelona%20city%20hotel.jpg', 'barcelona-city-hotel.php'),
+(42, 'Spanje', 'Andalusië Luxe Resort', 'Europa', 130.00, '2025-06-17', 4, 'Zomervakantie', 'All-inclusive', '../../images/andalusië%20resort.jpg', 'andalusie-hotel.php'),
+(43, 'Spanje', 'Tenerife Appartement', 'Europa', 170.00, '2025-06-17', 3, 'Zomervakantie', 'Strand', '../../images/tenerife%20apartement.jpg', 'tenerife-hotel.php'),
+(44, 'Spanje', 'Costa Brava Palace', 'Europa', 200.00, '2025-06-17', 5, 'Zomervakantie', 'All-inclusive', '../../images/costa%20brava%20resort.jpg', 'costa-brava-hotel.php'),
+(45, 'Griekenland', 'Kreta Beach Resort', 'Europa', 180.00, '2025-06-17', 4, 'Zomervakantie', 'Strand', '../../images/kreta%20beach.jpg', 'kreta-beach-hotel.php'),
+(46, 'Griekenland', 'Rhodos Luxe Hotel', 'Europa', 210.00, '2025-06-17', 5, 'Zomervakantie', 'All-inclusive', '../../images/rhodos.jpg', 'rhodes-luxe-hotel.php'),
+(47, 'Griekenland', 'Athene Boutique Hotel', 'Europa', 120.00, '2025-06-17', 3, 'Zomervakantie', 'Strand', '../../images/athene.jpg', 'athena-hotel.php'),
+(48, 'Griekenland', 'Hotel Olympia Beach', 'Europa', 90.00, '2025-06-17', 4, 'Zomervakantie', 'Strand', '../../images/olympia%20beach.jpg', 'hotel-olympia.php'),
+(49, 'Morokko', 'Riad Marrakesh', 'Noord-Afrika', 160.00, '2025-06-17', 4, 'Zomervakantie', 'Strand', '../../images/marrakesh.jpg', 'riad-marrakesh.php'),
+(50, 'Morokko', 'Agadir Beach Resort', 'Noord-Afrika', 190.00, '2025-06-17', 5, 'Zomervakantie', 'All-inclusive', '../../images/agadir%20beach.jpg', 'agadir-beach-resort.php'),
+(51, 'Morokko', 'Casablanca Hotel', 'Noord-Afrika', 130.00, '2025-06-17', 3, 'Zomervakantie', 'Strand', '../../images/casablanca.jpg', 'casablanca-hotel.php'),
+(52, 'Morokko', 'Essaouira Sands Resort', 'Noord-Afrika', 110.00, '2025-06-17', 4, 'Zomervakantie', 'Strand', '../../images/assaouri%20sands.jpg', 'essaouira-sands.php'),
+(53, 'Turkije', 'Istanbul Grand Hotel', 'Midden-Oosten', 200.00, '2025-06-17', 4, 'Zomervakantie', 'Strand', '../../images/istantbul.jpg', 'istanbul-hotel.php'),
+(54, 'Turkije', 'Antalya Luxe Hotel', 'Midden-Oosten', 220.00, '2025-06-17', 5, 'Zomervakantie', 'All-inclusive', '../../images/antalya.jpg', 'antalya-luxe-hotel.php'),
+(55, 'Turkije', 'Cappadocië Boutique Hotel', 'Midden-Oosten', 160.00, '2025-06-17', 3, 'Zomervakantie', 'Strand', '../../images/coppaducia.webp', 'cappadocie-boutique-hotel.php'),
+(56, 'Turkije', 'Bodrum Beach Hotel', 'Midden-Oosten', 150.00, '2025-06-17', 4, 'Zomervakantie', 'Strand', '../../images/bodrum.jpg', 'bodrum-beach-hotel.php');
 
 -- --------------------------------------------------------
 
@@ -224,6 +243,13 @@ CREATE TABLE `Vragen` (
   `Naam` varchar(100) NOT NULL,
   `Vraag` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Vragen`
+--
+
+INSERT INTO `Vragen` (`Naam`, `Vraag`) VALUES
+('Aleks', 'fdsas');
 
 --
 -- Indexes for dumped tables
@@ -306,7 +332,7 @@ ALTER TABLE `hotel`
 -- AUTO_INCREMENT for table `hotels`
 --
 ALTER TABLE `hotels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `review`
