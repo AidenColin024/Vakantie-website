@@ -1,11 +1,13 @@
 <?php
 $servername = "db";
+$servername = "db"; // Docker-service naam
 $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();

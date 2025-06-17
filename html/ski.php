@@ -104,6 +104,7 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <aside class="pp-filters">
             <h3>Filter jouw Ski vakantie</h3>
             <form method="GET" action="ski.php">
+<<<<<<< HEAD
                 <label for="land">Land</label>
                 <select id="land" name="land">
                     <option value="">Alle landen</option>
