@@ -1,24 +1,16 @@
 <?php
-<<<<<<< HEAD
-$servername = "db";
-=======
 $servername = "db"; // Docker-service naam
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
 
 try {
-<<<<<<< HEAD
     $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
-=======
-    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
+    exit;
 }
-<<<<<<< HEAD
 
 $success = false;
 $error = "";
@@ -30,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($name !== '' && $message !== '') {
         try {
-            // Alleen naam en vraag opslaan, email wordt genegeerd!
+            // Alleen naam en bericht opslaan, email wordt niet opgeslagen
             $stmt = $conn->prepare("INSERT INTO Vragen (Naam, Vraag) VALUES (:naam, :vraag)");
             $stmt->execute([
                 ':naam' => $name,
@@ -44,27 +36,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Vul alle verplichte velden in!";
     }
 }
-=======
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 ?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<<<<<<< HEAD
     <title>Polar & Paradise - Contact</title>
     <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
-=======
-    <title>Polar & Paradise</title>
-    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
-
-
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="pp-header">
     <div class="logo">
         <a href="index.php">
@@ -77,32 +59,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <li><a href="ski.php">Ski vakanties</a></li>
             <li><a href="zomer.php">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
-<<<<<<< HEAD
             <li><a href="contact.php" class="active">Contact</a></li>
             <li><a href="login.php">Login</a></li>
-=======
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="login.php" >Login</a></li>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
         </ul>
     </nav>
 </header>
+
 <section class="contact-hero">
     <div class="form-container">
         <h1 class="form-title">Contact</h1>
-<<<<<<< HEAD
+
         <?php if ($success): ?>
             <div class="success-message" style="color: green; margin-bottom: 1em;">
                 Je vraag is succesvol verzonden! We nemen zo snel mogelijk contact met je op.
             </div>
         <?php endif; ?>
+
         <?php if ($error): ?>
             <div class="error-message" style="color: red; margin-bottom: 1em;">
                 <?= htmlspecialchars($error) ?>
             </div>
         <?php endif; ?>
-=======
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
+
         <form class="form" method="POST" action="contact.php">
             <label for="name">Naam</label>
             <input type="text" id="name" name="name" required>
@@ -117,11 +95,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 </section>
+
 <footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
     © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
+
 <script>
     // Simpele veld-validatie feedback
     document.addEventListener("DOMContentLoaded", () => {
@@ -149,9 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     });
 </script>
+
 </body>
 </html>
-<<<<<<< HEAD
-=======
-</html>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
+

@@ -1,11 +1,12 @@
 <?php
+// Database configuratie
 $servername = "db";
 $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
 
 try {
-<<<<<<< HEAD
+    // Maak verbinding
     $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
@@ -13,59 +14,41 @@ try {
     exit;
 }
 
-// Basis query: alleen landen (dus hotel_naam is leeg) en category is ski
-$sql = "SELECT name, prijs, stars, image, link FROM hotels WHERE (hotel_naam = '' OR hotel_naam IS NULL) AND category = 'ski'";
+// Basis query: alleen landen (hotel_naam leeg of NULL) en category = 'ski'
+$sql = "SELECT name, region, prijs, stars, type, image, link FROM hotels WHERE (hotel_naam = '' OR hotel_naam IS NULL) AND category = 'ski'";
 $params = [];
 
-// Filter land
+// Filters toevoegen als ze bestaan
 if (!empty($_GET['land'])) {
     $sql .= " AND name = :land";
     $params[':land'] = $_GET['land'];
 }
 
-// Filter sterren
 if (!empty($_GET['stars'])) {
     $sql .= " AND stars = :stars";
     $params[':stars'] = (int)$_GET['stars'];
 }
 
-// Filter prijs (max prijs)
 if (!empty($_GET['maxprijs'])) {
     $sql .= " AND prijs <= :maxprijs";
     $params[':maxprijs'] = (float)$_GET['maxprijs'];
-=======
-    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo "❌ Verbindingsfout: " . $e->getMessage();
 }
 
-// Query met filters opbouwen: alleen landen tonen, geen hotels
-$sql = "SELECT name, region, stars, type, image, link FROM hotels WHERE (hotel_naam IS NULL OR hotel_naam = '') AND category = 'ski'";
-$params = [];
-
-if (!empty($_GET['stars'])) {
-    $sql .= " AND stars = :stars";
-    $params[':stars'] = $_GET['stars'];
-}
 if (!empty($_GET['type'])) {
     $sql .= " AND type = :type";
     $params[':type'] = $_GET['type'];
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 }
 
+// Query voorbereiden en uitvoeren
 $stmt = $conn->prepare($sql);
 $stmt->execute($params);
-<<<<<<< HEAD
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Ophalen unieke landen voor dropdown filter
+// Unieke landen ophalen voor dropdown filter
 $landenStmt = $conn->query("SELECT DISTINCT name FROM hotels WHERE (hotel_naam = '' OR hotel_naam IS NULL) AND category = 'ski'");
 $landenOptions = $landenStmt->fetchAll(PDO::FETCH_COLUMN);
-=======
-$landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 ?>
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -96,24 +79,18 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="hero-text">
         <h1>Vind jouw perfecte ski vakantie</h1>
         <p>Van Oostenrijk tot Italië, wij hebben de beste pistes voor jou geselecteerd.</p>
-<<<<<<< HEAD
         <form method="GET" action="" onsubmit="return redirectToLand();">
             <input type="text" id="landZoek" name="land" placeholder="Typ een land, bijv. Frankrijk" required>
             <button type="submit">Zoek</button>
         </form>
     </div>
 </section>
-=======
-    </div>
-</section>
 
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 <main class="pp-content">
     <div class="page-content">
         <aside class="pp-filters">
             <h3>Filter jouw Ski vakantie</h3>
             <form method="GET" action="ski.php">
-<<<<<<< HEAD
                 <label for="land">Land</label>
                 <select id="land" name="land">
                     <option value="">Alle landen</option>
@@ -124,8 +101,6 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php endforeach; ?>
                 </select>
 
-=======
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
                 <label for="stars">Sterren</label>
                 <select id="stars" name="stars">
                     <option value="">Alle</option>
@@ -134,10 +109,9 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <option value="5" <?= (isset($_GET['stars']) && $_GET['stars'] == '5') ? 'selected' : '' ?>>5 sterren</option>
                 </select>
 
-<<<<<<< HEAD
                 <label for="maxprijs">Max prijs (€)</label>
                 <input type="number" id="maxprijs" name="maxprijs" step="0.01" min="0" value="<?= isset($_GET['maxprijs']) ? htmlspecialchars($_GET['maxprijs']) : '' ?>" placeholder="Bijv. 150">
-=======
+
                 <label for="type">Soort vakantie</label>
                 <select id="type" name="type">
                     <option value="">Alle</option>
@@ -145,14 +119,12 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <option value="Familie" <?= (isset($_GET['type']) && $_GET['type'] == 'Familie') ? 'selected' : '' ?>>Familie</option>
                     <option value="Luxueus" <?= (isset($_GET['type']) && $_GET['type'] == 'Luxueus') ? 'selected' : '' ?>>Luxueus</option>
                 </select>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 
                 <button type="submit">Filter</button>
             </form>
         </aside>
 
         <section class="destination-blocks">
-<<<<<<< HEAD
             <?php if (count($results) > 0): ?>
                 <?php foreach ($results as $result): ?>
                     <div class="destination-box">
@@ -160,24 +132,12 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <img src="<?= htmlspecialchars($result['image']) ?>" alt="<?= htmlspecialchars($result['name']) ?>" style="width:100%;max-width:220px;height:auto;border-radius:6px;margin-bottom:10px;">
                         <?php endif; ?>
                         <h3><?= htmlspecialchars($result['name']) ?></h3>
+                        <p>Regio: <?= htmlspecialchars($result['region']) ?></p>
                         <p>Sterren: <?= htmlspecialchars($result['stars']) ?></p>
                         <p>Prijs vanaf: €<?= number_format($result['prijs'], 2) ?></p>
+                        <p>Type: <?= htmlspecialchars($result['type']) ?></p>
                         <?php if (!empty($result['link'])): ?>
                             <p><a href="<?= htmlspecialchars($result['link']) ?>" target="_blank" rel="noopener">Meer info</a></p>
-=======
-            <?php if (count($landen) > 0): ?>
-                <?php foreach ($landen as $land): ?>
-                    <div class="destination-box">
-                        <?php if (!empty($land['image'])): ?>
-                            <img src="<?= htmlspecialchars($land['image']) ?>" alt="<?= htmlspecialchars($land['name']) ?>" style="width:100%;max-width:220px;height:auto;border-radius:6px;margin-bottom:10px;">
-                        <?php endif; ?>
-                        <h3><?= htmlspecialchars($land['name']) ?></h3>
-                        <p>Regio: <?= htmlspecialchars($land['region']) ?></p>
-                        <p>Sterren: <?= htmlspecialchars($land['stars']) ?></p>
-                        <p>Type: <?= htmlspecialchars($land['type']) ?></p>
-                        <?php if (!empty($land['link'])): ?>
-                            <p><a href="<?= htmlspecialchars($land['link']) ?>" target="_blank">Meer info</a></p>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
@@ -193,8 +153,7 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
-</body>
-<<<<<<< HEAD
+
 <script>
     function redirectToLand() {
         const land = document.getElementById('landZoek').value.trim().toLowerCase();
@@ -212,7 +171,6 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return false; // Voorkom standaard form-submissie
     }
 </script>
+
+</body>
 </html>
-=======
-</html>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b

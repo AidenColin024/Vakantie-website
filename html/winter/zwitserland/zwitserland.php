@@ -10,7 +10,6 @@ try {
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
-<<<<<<< HEAD
 
 $sql = "SELECT hotel_naam, link FROM hotels WHERE name = 'Zwitserland' AND hotel_naam != ''";
 $stmt = $conn->prepare($sql);
@@ -20,21 +19,17 @@ $zwitserlandHotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (!empty($_GET['hotelSearch'])) {
     $zoekHotel = $_GET['hotelSearch'];
 
-    // Zoek het hotel in Zwitserland
     $stmt = $conn->prepare("SELECT link FROM hotels WHERE name = 'Zwitserland' AND hotel_naam = :hotelnaam LIMIT 1");
     $stmt->execute([':hotelnaam' => $zoekHotel]);
     $hotelData = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($hotelData && !empty($hotelData['link'])) {
-        // Redirect naar de hotelpagina met absoluut pad
         header("Location: /winter/zwitserland/" . $hotelData['link']);
         exit;
     } else {
         echo "<p style='color:red;'>Hotel niet gevonden. Probeer een andere naam.</p>";
     }
 }
-=======
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -64,9 +59,8 @@ if (!empty($_GET['hotelSearch'])) {
 <section class="vakantie ski-hero">
     <img src="../../images/switzerland-zermatt-nl.jpg" alt="Skiën in Zwitserland" class="hero-img" />
     <div class="hero-text">
-<<<<<<< HEAD
         <h1>Vind jouw perfecte ski vakantie</h1>
-        <p>Van Oostenrijk tot Zwitserland, wij hebben de beste pistes voor jou geselecteerd.</p>
+        <p>Van Zermatt tot St. Moritz, beleef jouw ultieme wintersportervaring.</p>
 
         <form method="GET" action="" id="hotelSearchForm">
             <label for="hotelSearch">Zoek hotel in Zwitserland:</label><br>
@@ -78,10 +72,6 @@ if (!empty($_GET['hotelSearch'])) {
             </datalist>
             <button type="submit">Zoek</button>
         </form>
-=======
-        <h1>Ontdek de Zwitserse Alpen</h1>
-        <p>Van Zermatt tot St. Moritz, beleef jouw ultieme wintersportervaring.</p>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
     </div>
 </section>
 
@@ -93,16 +83,10 @@ if (!empty($_GET['hotelSearch'])) {
             <select id="region" name="region">
                 <option value="">Alle regio's</option>
                 <option>Wallis</option>
-<<<<<<< HEAD
-                <option>Bernese Oberland</option>
-                <option>Graubünden</option>
-            </select>
-=======
                 <option>Graubünden</option>
                 <option>Berner Oberland</option>
             </select>
 
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <label for="stars">Sterren</label>
             <select id="stars" name="stars">
                 <option value="">Alle</option>
@@ -110,10 +94,7 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>4 sterren</option>
                 <option>5 sterren</option>
             </select>
-<<<<<<< HEAD
-=======
 
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <label for="type">Soort vakantie</label>
             <select id="type" name="type">
                 <option value="">Alle</option>
@@ -121,17 +102,12 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>Familie</option>
                 <option>Luxueus</option>
             </select>
-<<<<<<< HEAD
-=======
 
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <label><input type="checkbox"> Ski pas inbegrepen</label>
         </aside>
 
         <section class="destination-blocks">
-<<<<<<< HEAD
             <?php
-            // Haal alle hotels in Zwitserland op (waar hotel_naam niet leeg is)
             $stmt = $conn->prepare("SELECT * FROM hotels WHERE name = :land AND hotel_naam IS NOT NULL AND hotel_naam != '' ORDER BY stars DESC, hotel_naam ASC");
             $stmt->execute([':land' => 'Zwitserland']);
             $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -161,24 +137,6 @@ if (!empty($_GET['hotelSearch'])) {
                 endforeach;
             }
             ?>
-=======
-            <div class="destination-box" onclick="location.href='zermatt-resort.php'">
-                <img src="../../images/zermat%20resort.webp" alt="Zermatt Resort"/>
-                <h3>Zermatt Resort – 5 sterren</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='st-moritz-chalet.php'">
-                <img src="../../images/st%20moritz%20chalet.jpg" alt="St. Moritz Chalet"/>
-                <h3>St. Moritz Chalet – 4 sterren</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='jungfrau-lodge.php'">
-                <img src="../../images/jungfrau-lodge-swiss.jpg" alt="Jungfrau Lodge"/>
-                <h3>Jungfrau Lodge – 3 sterren</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='bern-hotel.php'">
-                <img src="../../images/berner%20hotel.jpg" alt="Berner Hotel Deluxe"/>
-                <h3>Berner Hotel Deluxe – 5 sterren</h3>
-            </div>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
         </section>
     </div>
 </main>
@@ -188,12 +146,7 @@ if (!empty($_GET['hotelSearch'])) {
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
-<<<<<<< HEAD
-</body>
-</html>
 
-
-=======
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const forms = document.querySelectorAll("form");
@@ -223,4 +176,3 @@ if (!empty($_GET['hotelSearch'])) {
 </body>
 </html>
 
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b

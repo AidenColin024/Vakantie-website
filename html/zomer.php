@@ -62,16 +62,15 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="hero-text">
         <h1>Vind jouw perfecte zomer vakantie</h1>
         <p>Van de zonnige stranden tot groene natuurgebieden, wij helpen je de beste plek te vinden.</p>
-<<<<<<< HEAD
         <form class="zoek-container" method="GET" action="" onsubmit="return redirectToLandZomer();">
             <input type="text" id="landZoekZomer" name="land" placeholder="Typ een land (bijv. Spanje)" required>
             <button type="submit">Zoek</button>
         </form>
     </div>
 
-=======
+
     </div>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
+
 </section>
 
 <main class="pp-content">
@@ -82,27 +81,49 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <label for="country">Land</label>
                 <select id="country" name="country">
                     <option value="">Alle landen</option>
-                    <option value="Spanje" <?= (isset($_GET['country']) && $_GET['country'] == 'Spanje') ? 'selected' : '' ?>>Spanje</option>
-                    <option value="Italië" <?= (isset($_GET['country']) && $_GET['country'] == 'Italië') ? 'selected' : '' ?>>Italië</option>
-                    <option value="Griekenland" <?= (isset($_GET['country']) && $_GET['country'] == 'Griekenland') ? 'selected' : '' ?>>Griekenland</option>
-                    <option value="Portugal" <?= (isset($_GET['country']) && $_GET['country'] == 'Portugal') ? 'selected' : '' ?>>Portugal</option>
-                    <option value="Frankrijk" <?= (isset($_GET['country']) && $_GET['country'] == 'Frankrijk') ? 'selected' : '' ?>>Frankrijk</option>
+                    <option value="Spanje" <?= (isset($_GET['country']) && $_GET['country'] == 'Spanje') ? 'selected' : '' ?>>
+                        Spanje
+                    </option>
+                    <option value="Italië" <?= (isset($_GET['country']) && $_GET['country'] == 'Italië') ? 'selected' : '' ?>>
+                        Italië
+                    </option>
+                    <option value="Griekenland" <?= (isset($_GET['country']) && $_GET['country'] == 'Griekenland') ? 'selected' : '' ?>>
+                        Griekenland
+                    </option>
+                    <option value="Portugal" <?= (isset($_GET['country']) && $_GET['country'] == 'Portugal') ? 'selected' : '' ?>>
+                        Portugal
+                    </option>
+                    <option value="Frankrijk" <?= (isset($_GET['country']) && $_GET['country'] == 'Frankrijk') ? 'selected' : '' ?>>
+                        Frankrijk
+                    </option>
                 </select>
 
                 <label for="stars">Sterren</label>
                 <select id="stars" name="stars">
                     <option value="">Alle</option>
-                    <option value="3" <?= (isset($_GET['stars']) && $_GET['stars'] == '3') ? 'selected' : '' ?>>3 sterren</option>
-                    <option value="4" <?= (isset($_GET['stars']) && $_GET['stars'] == '4') ? 'selected' : '' ?>>4 sterren</option>
-                    <option value="5" <?= (isset($_GET['stars']) && $_GET['stars'] == '5') ? 'selected' : '' ?>>5 sterren</option>
+                    <option value="3" <?= (isset($_GET['stars']) && $_GET['stars'] == '3') ? 'selected' : '' ?>>3
+                        sterren
+                    </option>
+                    <option value="4" <?= (isset($_GET['stars']) && $_GET['stars'] == '4') ? 'selected' : '' ?>>4
+                        sterren
+                    </option>
+                    <option value="5" <?= (isset($_GET['stars']) && $_GET['stars'] == '5') ? 'selected' : '' ?>>5
+                        sterren
+                    </option>
                 </select>
 
                 <label for="type">Soort vakantie</label>
                 <select id="type" name="type">
                     <option value="">Alle</option>
-                    <option value="Familie" <?= (isset($_GET['type']) && $_GET['type'] == 'Familie') ? 'selected' : '' ?>>Familie</option>
-                    <option value="Romantisch" <?= (isset($_GET['type']) && $_GET['type'] == 'Romantisch') ? 'selected' : '' ?>>Romantisch</option>
-                    <option value="Actief" <?= (isset($_GET['type']) && $_GET['type'] == 'Actief') ? 'selected' : '' ?>>Actief</option>
+                    <option value="Familie" <?= (isset($_GET['type']) && $_GET['type'] == 'Familie') ? 'selected' : '' ?>>
+                        Familie
+                    </option>
+                    <option value="Romantisch" <?= (isset($_GET['type']) && $_GET['type'] == 'Romantisch') ? 'selected' : '' ?>>
+                        Romantisch
+                    </option>
+                    <option value="Actief" <?= (isset($_GET['type']) && $_GET['type'] == 'Actief') ? 'selected' : '' ?>>
+                        Actief
+                    </option>
                 </select>
 
                 <button type="submit">Filter</button>
@@ -114,14 +135,17 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($landen as $land): ?>
                     <div class="destination-box">
                         <?php if (!empty($land['image'])): ?>
-                            <img src="<?= htmlspecialchars($land['image']) ?>" alt="<?= htmlspecialchars($land['name']) ?>" style="width:100%;max-width:220px;height:auto;border-radius:6px;margin-bottom:10px;">
+                            <img src="<?= htmlspecialchars($land['image']) ?>"
+                                 alt="<?= htmlspecialchars($land['name']) ?>"
+                                 style="width:100%;max-width:220px;height:auto;border-radius:6px;margin-bottom:10px;">
                         <?php endif; ?>
                         <h3><?= htmlspecialchars($land['name']) ?></h3>
                         <p>Regio: <?= htmlspecialchars($land['region']) ?></p>
                         <p>Sterren: <?= htmlspecialchars($land['stars']) ?></p>
                         <p>Type: <?= htmlspecialchars($land['type']) ?></p>
                         <?php if (!empty($land['link'])): ?>
-                            <p><a href="<?= htmlspecialchars($land['link']) ?>" target="_blank">Ga naar vakanties</a></p>
+                            <p><a href="<?= htmlspecialchars($land['link']) ?>" target="_blank">Ga naar vakanties</a>
+                            </p>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
@@ -138,7 +162,7 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
 </body>
-<<<<<<< HEAD
+
 <script>
     function redirectToLandZomer() {
         const land = document.getElementById('landZoekZomer').value.trim().toLowerCase();
@@ -154,6 +178,5 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return false;
     }
 </script>
-=======
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
+
 </html>

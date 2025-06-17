@@ -161,7 +161,6 @@ try {
 } catch (Exception $e) {
     // als de tabel niet bestaat of iets anders fout gaat, negeer het voor nu
 }
-<<<<<<< HEAD
 
 // VRAGEN OPHALEN UIT 'Vragen' TABEL (let op hoofdlettergevoeligheid)
 $vragen = [];
@@ -170,8 +169,6 @@ try {
 } catch (Exception $e) {
     // als de tabel niet bestaat of iets anders fout gaat, negeer het voor nu
 }
-=======
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -245,11 +242,13 @@ try {
                                     <input type="text" name="category" value="<?= htmlspecialchars($hotel['category']) ?>">
                                     <input type="text" name="image" value="<?= htmlspecialchars($hotel['image']) ?>">
                                     <input type="text" name="link" value="<?= htmlspecialchars($hotel['link']) ?>">
-                                    <input type="number" step="0.01" name="prijs" value="<?= htmlspecialchars($hotel['prijs']) ?>" placeholder="Prijs (€)">
-                                    <input type="date" name="beschikbaar" value="<?= htmlspecialchars($hotel['beschikbaar']) ?>" placeholder="Beschikbaar vanaf">
+                                    <input type="text" name="prijs" value="<?= htmlspecialchars($hotel['prijs']) ?>">
+                                    <input type="date" name="beschikbaar" value="<?= htmlspecialchars($hotel['beschikbaar']) ?>">
                                     <button type="submit">Wijzig hotel</button>
                                 </form>
-                                <form class="verwijder-hotel-form" method="POST" onsubmit="return confirm('Weet je zeker dat je dit hotel wilt verwijderen?');">
+
+                                <!-- Hotel verwijderen -->
+                                <form method="POST" onsubmit="return confirm('Weet je zeker dat je dit hotel wilt verwijderen?');">
                                     <input type="hidden" name="actie" value="verwijder_hotel">
                                     <input type="hidden" name="hotel_id" value="<?= $hotel['id'] ?>">
                                     <button type="submit">Verwijder hotel</button>
@@ -257,25 +256,28 @@ try {
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <div style="color:#888;">Geen hotels voor dit land.</div>
+                        <em>Geen hotels gevonden voor dit land.</em>
                     <?php endif; ?>
                 </div>
-                <form class="hotel-add-form" method="POST">
-                    <strong>Hotel toevoegen aan dit land:</strong><br>
+
+                <!-- Hotel toevoegen aan dit land -->
+                <form class="add-hotel-form" method="POST" style="margin-top: 1rem;">
                     <input type="hidden" name="actie" value="hotel_toevoegen_per_land">
                     <input type="hidden" name="land" value="<?= htmlspecialchars($land['name']) ?>">
-                    <input type="text" name="hotel_naam" required placeholder="Hotelnaam"><br>
-                    <input type="text" name="region" placeholder="Regio" value="<?= htmlspecialchars($land['region']) ?>"><br>
-                    <input type="number" name="stars" min="1" max="5" placeholder="Sterren"><br>
-                    <input type="text" name="type" placeholder="Type (bijv. Wintersport)"><br>
-                    <input type="text" name="category" placeholder="Categorie (bijv. ski)"><br>
-                    <input type="text" name="image" placeholder="Afbeelding (url of pad)"><br>
-                    <input type="text" name="link" placeholder="Link"><br>
-                    <input type="number" step="0.01" name="prijs" placeholder="Prijs (€)"><br>
-                    <input type="date" name="beschikbaar" placeholder="Beschikbaar vanaf"><br>
-                    <button type="submit">Voeg hotel toe</button>
+                    <input type="text" name="hotel_naam" placeholder="Hotelnaam" required>
+                    <input type="text" name="region" placeholder="Regio">
+                    <input type="number" name="stars" min="1" max="5" placeholder="Sterren">
+                    <input type="text" name="type" placeholder="Type">
+                    <input type="text" name="category" placeholder="Categorie">
+                    <input type="text" name="image" placeholder="Afbeelding (url of pad)">
+                    <input type="text" name="link" placeholder="Link">
+                    <input type="text" name="prijs" placeholder="Prijs">
+                    <input type="date" name="beschikbaar" placeholder="Beschikbaar vanaf">
+                    <button type="submit">Hotel toevoegen</button>
                 </form>
-                <form class="verwijder-land-form" method="POST" onsubmit="return confirm('Weet je zeker dat je het land en alle bijbehorende hotels wilt verwijderen?');">
+
+                <!-- Land verwijderen -->
+                <form method="POST" onsubmit="return confirm('Weet je zeker dat je dit land wilt verwijderen?');" style="margin-top: 1rem;">
                     <input type="hidden" name="actie" value="verwijder_land">
                     <input type="hidden" name="land" value="<?= htmlspecialchars($land['name']) ?>">
                     <button type="submit">Verwijder land</button>
@@ -284,70 +286,64 @@ try {
         <?php endforeach; ?>
     </div>
 
-    <!-- BOEKINGEN OVERZICHT -->
-    <section class="boekingen-section">
-        <h2>Geboekte vakanties</h2>
-        <?php if (!empty($boekingen)): ?>
-            <table class="boeking-table">
-                <thead>
+    <h2>Vragen van bezoekers</h2>
+    <?php if (!empty($vragen)): ?>
+        <table>
+            <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Email</th>
+                <th>Telefoon</th>
+                <th>Vraag</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($vragen as $vraag): ?>
                 <tr>
-                    <th>ID</th>
-                    <th>Naam</th>
-                    <th>Email</th>
-                    <th>Hotel</th>
-                    <th>Aantal personen</th>
-                    <th>Aankomst</th>
-                    <th>Vertrek</th>
-                    <th>Datum</th>
+                    <td><?= htmlspecialchars($vraag['Naam']) ?></td>
+                    <td><?= htmlspecialchars($vraag['Email']) ?></td>
+                    <td><?= htmlspecialchars($vraag['Telefoon']) ?></td>
+                    <td><?= nl2br(htmlspecialchars($vraag['Vraag'])) ?></td>
                 </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($boekingen as $b): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($b['id']) ?></td>
-                        <td><?= htmlspecialchars($b['naam']) ?></td>
-                        <td><?= htmlspecialchars($b['email']) ?></td>
-                        <td><?= htmlspecialchars($b['hotel']) ?></td>
-                        <td><?= htmlspecialchars($b['personen']) ?></td>
-                        <td><?= htmlspecialchars($b['aankomst']) ?></td>
-                        <td><?= htmlspecialchars($b['vertrek']) ?></td>
-                        <td><?= htmlspecialchars($b['datum']) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php else: ?>
-            <p>Er zijn nog geen vakanties geboekt.</p>
-        <?php endif; ?>
-    </section>
-<<<<<<< HEAD
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p>Geen vragen gevonden.</p>
+    <?php endif; ?>
 
-    <!-- VRAGEN OVERZICHT -->
-    <section class="boekingen-section">
-        <h2>Gestelde vragen via contactformulier</h2>
-        <?php if (!empty($vragen)): ?>
-            <table class="boeking-table">
-                <thead>
+    <h2>Boekingen</h2>
+    <?php if (!empty($boekingen)): ?>
+        <table>
+            <thead>
+            <tr>
+                <th>Boekingsnummer</th>
+                <th>Land</th>
+                <th>Hotel</th>
+                <th>Naam</th>
+                <th>Email</th>
+                <th>Telefoon</th>
+                <th>Datum</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($boekingen as $boeking): ?>
                 <tr>
-                    <th>Naam</th>
-                    <th>Vraag</th>
+                    <td><?= htmlspecialchars($boeking['boekingnummer'] ?? '') ?></td>
+                    <td><?= htmlspecialchars($boeking['land'] ?? '') ?></td>
+                    <td><?= htmlspecialchars($boeking['hotel'] ?? '') ?></td>
+                    <td><?= htmlspecialchars($boeking['naam'] ?? '') ?></td>
+                    <td><?= htmlspecialchars($boeking['email'] ?? '') ?></td>
+                    <td><?= htmlspecialchars($boeking['telefoon'] ?? '') ?></td>
+                    <td><?= isset($boeking['datum']) ? date('d-m-Y', strtotime($boeking['datum'])) : '' ?></td>
                 </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($vragen as $vraag): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($vraag['Naam']) ?></td>
-                        <td><?= nl2br(htmlspecialchars($vraag['Vraag'])) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php else: ?>
-            <p>Er zijn nog geen vragen gesteld.</p>
-        <?php endif; ?>
-    </section>
-=======
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p>Geen boekingen gevonden.</p>
+    <?php endif; ?>
+
 </main>
 </body>
 </html>

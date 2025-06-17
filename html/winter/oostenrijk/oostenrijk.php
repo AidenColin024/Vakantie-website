@@ -10,7 +10,6 @@ try {
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
-<<<<<<< HEAD
 
 $sql = "SELECT hotel_naam, link FROM hotels WHERE name = 'Oostenrijk' AND hotel_naam != ''";
 $stmt = $conn->prepare($sql);
@@ -33,8 +32,6 @@ if (!empty($_GET['hotelSearch'])) {
         echo "<p style='color:red;'>Hotel niet gevonden. Probeer een andere naam.</p>";
     }
 }
-=======
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -64,7 +61,6 @@ if (!empty($_GET['hotelSearch'])) {
 <section class="vakantie ski-hero">
     <img src="../../images/westendorf-drone.webp" alt="Skiën in Oostenrijk" class="hero-img" />
     <div class="hero-text">
-<<<<<<< HEAD
         <h1>Vind jouw perfecte ski vakantie</h1>
         <p>Van Oostenrijk tot Italië, wij hebben de beste pistes voor jou geselecteerd.</p>
 
@@ -78,10 +74,6 @@ if (!empty($_GET['hotelSearch'])) {
             </datalist>
             <button type="submit">Zoek</button>
         </form>
-=======
-        <h1>Ontdek de Alpen van Oostenrijk</h1>
-        <p>Van Tirol tot Vorarlberg, beleef jouw ultieme wintersportervaring.</p>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
     </div>
 </section>
 
@@ -155,8 +147,5 @@ if (!empty($_GET['hotelSearch'])) {
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
+

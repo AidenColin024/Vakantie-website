@@ -10,38 +10,35 @@ try {
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
-<<<<<<< HEAD
 
-$sql = "SELECT hotel_naam, link FROM hotels WHERE name = 'Frankrijk' AND hotel_naam != ''";
+$sql = "SELECT hotel_naam, link FROM hotels WHERE name = 'Italie' AND hotel_naam != ''";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-$frankrijkHotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$italieHotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if (!empty($_GET['hotelSearch'])) {
     $zoekHotel = $_GET['hotelSearch'];
 
-    // Zoek het hotel in Frankrijk
-    $stmt = $conn->prepare("SELECT link FROM hotels WHERE name = 'Frankrijk' AND hotel_naam = :hotelnaam LIMIT 1");
+    // Zoek het hotel in Italië
+    $stmt = $conn->prepare("SELECT link FROM hotels WHERE name = 'Italie' AND hotel_naam = :hotelnaam LIMIT 1");
     $stmt->execute([':hotelnaam' => $zoekHotel]);
     $hotelData = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($hotelData && !empty($hotelData['link'])) {
         // Redirect naar de hotelpagina met absoluut pad
-        header("Location: /winter/frankrijk/" . $hotelData['link']);
+        header("Location: /winter/italie/" . $hotelData['link']);
         exit;
     } else {
-        echo "<p style='color:red; margin-left: 1rem;'>Hotel niet gevonden. Probeer een andere naam.</p>";
+        echo "<p style='color:red;'>Hotel niet gevonden. Probeer een andere naam.</p>";
     }
 }
-=======
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 ?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Ski Vakanties Frankrijk - Polar & Paradise</title>
+    <title>Ski Vakanties Italië - Polar & Paradise</title>
     <link rel="stylesheet" href="../../vakantie.css?v=<?= time() ?>">
 </head>
 <body>
@@ -62,24 +59,21 @@ if (!empty($_GET['hotelSearch'])) {
 </header>
 
 <section class="vakantie ski-hero">
-    <img src="../../images/wintersport-frankrijk.webp" alt="Skiën in Frankrijk" class="hero-img" />
+    <img src="../../images/italie.jpg" alt="Skiën in Italië" class="hero-img" />
     <div class="hero-text">
-        <h1>Geniet van de Franse Alpen</h1>
-        <p>Van Les Arcs tot Chamonix, beleef jouw ultieme wintersportervaring.</p>
-<<<<<<< HEAD
+        <h1>Vind jouw perfecte ski vakantie</h1>
+        <p>Van Oostenrijk tot Italië, wij hebben de beste pistes voor jou geselecteerd.</p>
 
         <form method="GET" action="" id="hotelSearchForm">
-            <label for="hotelSearch">Zoek hotel in Frankrijk:</label><br>
+            <label for="hotelSearch">Zoek hotel in Italië:</label><br>
             <input list="hotelsList" id="hotelSearch" name="hotelSearch" placeholder="Typ hotelnaam...">
             <datalist id="hotelsList">
-                <?php foreach ($frankrijkHotels as $hotel): ?>
+                <?php foreach ($italieHotels as $hotel): ?>
                 <option value="<?= htmlspecialchars($hotel['hotel_naam']) ?>">
                     <?php endforeach; ?>
             </datalist>
             <button type="submit">Zoek</button>
         </form>
-=======
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
     </div>
 </section>
 
@@ -90,14 +84,10 @@ if (!empty($_GET['hotelSearch'])) {
             <label for="region">Regio</label>
             <select id="region" name="region">
                 <option value="">Alle regio's</option>
-                <option>Les Arcs</option>
-                <option>La Plagne</option>
-                <option>Serre Chevalier</option>
+                <option>Dolomieten</option>
+                <option>Val Gardena</option>
+                <option>Cervinia</option>
             </select>
-<<<<<<< HEAD
-=======
-
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <label for="stars">Sterren</label>
             <select id="stars" name="stars">
                 <option value="">Alle</option>
@@ -105,10 +95,6 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>4 sterren</option>
                 <option>5 sterren</option>
             </select>
-<<<<<<< HEAD
-=======
-
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <label for="type">Soort vakantie</label>
             <select id="type" name="type">
                 <option value="">Alle</option>
@@ -116,26 +102,18 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>Familie</option>
                 <option>Luxueus</option>
             </select>
-<<<<<<< HEAD
-=======
-
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <label><input type="checkbox"> Ski pas inbegrepen</label>
         </aside>
 
         <section class="destination-blocks">
             <?php
-<<<<<<< HEAD
-            // Haal alle hotels in Frankrijk op (waar hotel_naam niet leeg is)
-=======
-            // Haalt alle hotels in Frankrijk op (waar hotel_naam niet leeg is)
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
+            // Haal alle hotels in Italië op (waar hotel_naam niet leeg is)
             $stmt = $conn->prepare("SELECT * FROM hotels WHERE name = :land AND hotel_naam IS NOT NULL AND hotel_naam != '' ORDER BY stars DESC, hotel_naam ASC");
-            $stmt->execute([':land' => 'Frankrijk']);
+            $stmt->execute([':land' => 'Italie']);
             $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             if (empty($hotels)) {
-                echo "<p style='margin-left:1rem;'>Er zijn nog geen hotels toegevoegd voor Frankrijk.</p>";
+                echo "<p style='margin-left:1rem;'>Er zijn nog geen hotels toegevoegd voor Italië.</p>";
             } else {
                 foreach ($hotels as $hotel):
                     $hotelLink = htmlspecialchars($hotel['link'] ?: '#');
@@ -168,11 +146,9 @@ if (!empty($_GET['hotelSearch'])) {
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
-<<<<<<< HEAD
-</body>
-</html>
-=======
+
 <script>
+    // Simpele veld-validatie feedback
     document.addEventListener("DOMContentLoaded", () => {
         const forms = document.querySelectorAll("form");
 
@@ -200,4 +176,4 @@ if (!empty($_GET['hotelSearch'])) {
 </script>
 </body>
 </html>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
+

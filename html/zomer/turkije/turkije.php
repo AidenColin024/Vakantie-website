@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD
 $servername = "db";
-=======
-$servername = "db"; // Docker-service naam
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
@@ -11,7 +7,6 @@ $database = "mydatabase";
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-<<<<<<< HEAD
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
@@ -24,36 +19,24 @@ $turkijeHotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (!empty($_GET['hotelSearch'])) {
     $zoekHotel = $_GET['hotelSearch'];
 
-    // Zoek het hotel in Turkije
     $stmt = $conn->prepare("SELECT link FROM hotels WHERE name = 'Turkije' AND hotel_naam = :hotelnaam LIMIT 1");
     $stmt->execute([':hotelnaam' => $zoekHotel]);
     $hotelData = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($hotelData && !empty($hotelData['link'])) {
-        // Redirect naar de hotelpagina met absoluut pad
         header("Location: /zomer/turkije/" . $hotelData['link']);
         exit;
     } else {
         echo "<p style='color:red;'>Hotel niet gevonden. Probeer een andere naam.</p>";
     }
 }
-=======
-    // echo "✅ Verbinding met database is gelukt!";
-} catch (PDOException $e) {
-    echo "❌ Verbindingsfout: " . $e->getMessage();
-}
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 ?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<<<<<<< HEAD
     <title>Ski Vakanties Turkije - Polar & Paradise</title>
-=======
-    <title>Turkije Vakanties - Polar & Paradise</title>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
     <link rel="stylesheet" href="../../vakantie.css?v=<?= time() ?>">
 </head>
 <body>
@@ -64,13 +47,8 @@ if (!empty($_GET['hotelSearch'])) {
     <nav class="pp-nav">
         <ul>
             <li><a href="../../index.php">Home</a></li>
-<<<<<<< HEAD
             <li><a href="../../ski.php" class="active">Ski vakanties</a></li>
             <li><a href="../../zomer.php">Zomer vakanties</a></li>
-=======
-            <li><a href="../../ski.php">Ski vakanties</a></li>
-            <li><a href="../../zomer.php" class="active">Zomer vakanties</a></li>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <li><a href="../../overons.php">Over ons</a></li>
             <li><a href="../../contact.php">Contact</a></li>
             <li><a href="../../login.php">Login</a></li>
@@ -78,13 +56,11 @@ if (!empty($_GET['hotelSearch'])) {
     </nav>
 </header>
 
-<<<<<<< HEAD
 <section class="vakantie ski-hero">
-    <img src="../../images/downloads (1).jpg" alt="Skiën in Turkije" class="hero-img" />
+    <img src="../../images/downloads (1).jpg" alt="Turkije" class="hero-img" />
     <div class="hero-text">
-        <h1>Vind jouw perfecte ski vakantie</h1>
-        <p>Ontdek de prachtige pistes van Turkije – voor elk niveau een geweldige ervaring.</p>
-
+        <h1>ontdek Turkije</h1>
+        <p>Van istantbul tot uludag. vind jouw vakantie hier.</p>
         <form method="GET" action="" id="hotelSearchForm">
             <label for="hotelSearch">Zoek hotel in Turkije:</label><br>
             <input list="hotelsList" id="hotelSearch" name="hotelSearch" placeholder="Typ hotelnaam...">
@@ -95,21 +71,13 @@ if (!empty($_GET['hotelSearch'])) {
             </datalist>
             <button type="submit">Zoek</button>
         </form>
-=======
-<section class="vakantie zomer-hero">
-    <img src="../../images/downloads%20(1).jpg" alt="Vakantie in Turkije" class="hero-img" />
-    <div class="hero-text">
-        <h1>Beleef het prachtige Turkije</h1>
-        <p>Van Istanbul tot Antalya, jouw ideale zomerbestemming wacht.</p>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
     </div>
 </section>
 
 <main class="pp-content">
     <div class="page-content">
         <aside class="pp-filters">
-<<<<<<< HEAD
-            <h3>Filter jouw Ski vakantie</h3>
+            <h3>Filter jouw zomer vakantie</h3>
             <label for="region">Regio</label>
             <select id="region" name="region">
                 <option value="">Alle regio's</option>
@@ -117,18 +85,7 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>Palandöken</option>
                 <option>Erciyes</option>
             </select>
-=======
-            <h3>Filter jouw Zomer vakantie</h3>
-            <label for="region">Regio</label>
-            <select id="region" name="region">
-                <option value="">Alle regio's</option>
-                <option>Istanbul</option>
-                <option>Antalya</option>
-                <option>Cappadocië</option>
-                <option>Bodrum</option>
-            </select>
 
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <label for="stars">Sterren</label>
             <select id="stars" name="stars">
                 <option value="">Alle</option>
@@ -136,20 +93,19 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>4 sterren</option>
                 <option>5 sterren</option>
             </select>
-<<<<<<< HEAD
+
             <label for="type">Soort vakantie</label>
             <select id="type" name="type">
                 <option value="">Alle</option>
-                <option>Wintersport</option>
                 <option>Familie</option>
                 <option>Luxueus</option>
             </select>
+
             <label><input type="checkbox"> Ski pas inbegrepen</label>
         </aside>
 
         <section class="destination-blocks">
             <?php
-            // Haal alle hotels in Turkije op (waar hotel_naam niet leeg is)
             $stmt = $conn->prepare("SELECT * FROM hotels WHERE name = :land AND hotel_naam IS NOT NULL AND hotel_naam != '' ORDER BY stars DESC, hotel_naam ASC");
             $stmt->execute([':land' => 'Turkije']);
             $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -175,41 +131,9 @@ if (!empty($_GET['hotelSearch'])) {
                             <span>Beschikbaar vanaf: <?= $hotelBeschikbaar ?></span>
                         </div>
                     </div>
-                <?php
-                endforeach;
+                <?php endforeach;
             }
             ?>
-=======
-
-            <label for="type">Soort vakantie</label>
-            <select id="type" name="type">
-                <option value="">Alle</option>
-                <option>All-inclusive</option>
-                <option>Historisch</option>
-                <option>Strand</option>
-            </select>
-
-            <label><input type="checkbox"> Inclusief vlucht</label>
-        </aside>
-
-        <section class="destination-blocks">
-            <div class="destination-box" onclick="location.href='istanbul-hotel.php'">
-                <img src="../../images/istantbul.jpg" alt="Istanbul Grand Hotel"/>
-                <h3>Istanbul Grand Hotel – 4 sterren</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='antalya-luxe-hotel.php'">
-                <img src="../../images/antalya.jpg" alt="Antalya Luxe Hotel"/>
-                <h3>Antalya Luxe Hotel – 5 sterren</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='cappadocie-boutique-hotel.php'">
-                <img src="../../images/coppaducia.webp" alt="Cappadocië Boutique Hotel"/>
-                <h3>Cappadocië Boutique Hotel – 3 sterren</h3>
-            </div>
-            <div class="destination-box" onclick="location.href='bodrum-beach-hotel.php'">
-                <img src="../../images/bodrum.jpg" alt="Bodrum Beach Hotel"/>
-                <h3>Bodrum Beach Hotel – 4 sterren</h3>
-            </div>
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
         </section>
     </div>
 </main>
@@ -219,41 +143,5 @@ if (!empty($_GET['hotelSearch'])) {
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
-<<<<<<< HEAD
 </body>
 </html>
-
-
-=======
-
-<script>
-    // Simpele veld-validatie feedback
-    document.addEventListener("DOMContentLoaded", () => {
-        const forms = document.querySelectorAll("form");
-
-        forms.forEach(form => {
-            form.addEventListener("submit", e => {
-                const inputs = form.querySelectorAll("input[required], textarea[required]");
-                let allFilled = true;
-
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        input.style.borderColor = "red";
-                        allFilled = false;
-                    } else {
-                        input.style.borderColor = "#ccc";
-                    }
-                });
-
-                if (!allFilled) {
-                    e.preventDefault();
-                    alert("⚠️ Vul alle verplichte velden in.");
-                }
-            });
-        });
-    });
-</script>
-</body>
-</html>
-
->>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
