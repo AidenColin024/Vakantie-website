@@ -161,6 +161,7 @@ try {
 } catch (Exception $e) {
     // als de tabel niet bestaat of iets anders fout gaat, negeer het voor nu
 }
+<<<<<<< HEAD
 
 // VRAGEN OPHALEN UIT 'Vragen' TABEL (let op hoofdlettergevoeligheid)
 $vragen = [];
@@ -169,6 +170,8 @@ try {
 } catch (Exception $e) {
     // als de tabel niet bestaat of iets anders fout gaat, negeer het voor nu
 }
+=======
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -317,6 +320,7 @@ try {
             <p>Er zijn nog geen vakanties geboekt.</p>
         <?php endif; ?>
     </section>
+<<<<<<< HEAD
 
     <!-- VRAGEN OVERZICHT -->
     <section class="boekingen-section">
@@ -342,6 +346,8 @@ try {
             <p>Er zijn nog geen vragen gesteld.</p>
         <?php endif; ?>
     </section>
+=======
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 </main>
 </body>
 </html>

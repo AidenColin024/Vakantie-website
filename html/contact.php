@@ -1,17 +1,24 @@
 <?php
+<<<<<<< HEAD
 $servername = "db";
+=======
 $servername = "db"; // Docker-service naam
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
 
 try {
+<<<<<<< HEAD
     $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
+=======
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
+<<<<<<< HEAD
 
 $success = false;
 $error = "";
@@ -37,18 +44,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Vul alle verplichte velden in!";
     }
 }
+=======
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 ?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< HEAD
     <title>Polar & Paradise - Contact</title>
     <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
+=======
     <title>Polar & Paradise</title>
     <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
 
 
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 </head>
 <body>
 
@@ -65,10 +77,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <li><a href="ski.php">Ski vakanties</a></li>
             <li><a href="zomer.php">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
+<<<<<<< HEAD
             <li><a href="contact.php" class="active">Contact</a></li>
             <li><a href="login.php">Login</a></li>
+=======
             <li><a href="contact.html">Contact</a></li>
             <li><a href="login.php" >Login</a></li>
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
         </ul>
     </nav>
 </header>
@@ -86,6 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?= htmlspecialchars($error) ?>
             </div>
         <?php endif; ?>
+=======
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
         <form class="form" method="POST" action="contact.php">
             <label for="name">Naam</label>
             <input type="text" id="name" name="name" required>
@@ -134,4 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </script>
 </body>
 </html>
+<<<<<<< HEAD
+=======
 </html>
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b

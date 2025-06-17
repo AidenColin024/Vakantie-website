@@ -10,6 +10,7 @@ try {
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
+<<<<<<< HEAD
 
 $sql = "SELECT hotel_naam, link FROM hotels WHERE name = 'Frankrijk' AND hotel_naam != ''";
 $stmt = $conn->prepare($sql);
@@ -32,6 +33,8 @@ if (!empty($_GET['hotelSearch'])) {
         echo "<p style='color:red; margin-left: 1rem;'>Hotel niet gevonden. Probeer een andere naam.</p>";
     }
 }
+=======
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -63,6 +66,7 @@ if (!empty($_GET['hotelSearch'])) {
     <div class="hero-text">
         <h1>Geniet van de Franse Alpen</h1>
         <p>Van Les Arcs tot Chamonix, beleef jouw ultieme wintersportervaring.</p>
+<<<<<<< HEAD
 
         <form method="GET" action="" id="hotelSearchForm">
             <label for="hotelSearch">Zoek hotel in Frankrijk:</label><br>
@@ -74,6 +78,8 @@ if (!empty($_GET['hotelSearch'])) {
             </datalist>
             <button type="submit">Zoek</button>
         </form>
+=======
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
     </div>
 </section>
 
@@ -88,7 +94,10 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>La Plagne</option>
                 <option>Serre Chevalier</option>
             </select>
+<<<<<<< HEAD
+=======
 
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <label for="stars">Sterren</label>
             <select id="stars" name="stars">
                 <option value="">Alle</option>
@@ -96,7 +105,10 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>4 sterren</option>
                 <option>5 sterren</option>
             </select>
+<<<<<<< HEAD
+=======
 
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <label for="type">Soort vakantie</label>
             <select id="type" name="type">
                 <option value="">Alle</option>
@@ -104,14 +116,20 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>Familie</option>
                 <option>Luxueus</option>
             </select>
+<<<<<<< HEAD
+=======
 
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <label><input type="checkbox"> Ski pas inbegrepen</label>
         </aside>
 
         <section class="destination-blocks">
             <?php
+<<<<<<< HEAD
             // Haal alle hotels in Frankrijk op (waar hotel_naam niet leeg is)
+=======
             // Haalt alle hotels in Frankrijk op (waar hotel_naam niet leeg is)
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             $stmt = $conn->prepare("SELECT * FROM hotels WHERE name = :land AND hotel_naam IS NOT NULL AND hotel_naam != '' ORDER BY stars DESC, hotel_naam ASC");
             $stmt->execute([':land' => 'Frankrijk']);
             $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -150,8 +168,10 @@ if (!empty($_GET['hotelSearch'])) {
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
+<<<<<<< HEAD
 </body>
 </html>
+=======
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const forms = document.querySelectorAll("form");
@@ -180,3 +200,4 @@ if (!empty($_GET['hotelSearch'])) {
 </script>
 </body>
 </html>
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b

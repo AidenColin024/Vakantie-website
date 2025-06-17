@@ -10,6 +10,7 @@ try {
 } catch (PDOException $e) {
     echo "❌ Verbindingsfout: " . $e->getMessage();
 }
+<<<<<<< HEAD
 
 $sql = "SELECT hotel_naam, link FROM hotels WHERE name = 'Italie' AND hotel_naam != ''";
 $stmt = $conn->prepare($sql);
@@ -32,6 +33,8 @@ if (!empty($_GET['hotelSearch'])) {
         echo "<p style='color:red;'>Hotel niet gevonden. Probeer een andere naam.</p>";
     }
 }
+=======
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -61,6 +64,7 @@ if (!empty($_GET['hotelSearch'])) {
 <section class="vakantie ski-hero">
     <img src="../../images/italie.jpg" alt="Skiën in Italië" class="hero-img" />
     <div class="hero-text">
+<<<<<<< HEAD
         <h1>Vind jouw perfecte ski vakantie</h1>
         <p>Van Oostenrijk tot Italië, wij hebben de beste pistes voor jou geselecteerd.</p>
 
@@ -74,8 +78,10 @@ if (!empty($_GET['hotelSearch'])) {
             </datalist>
             <button type="submit">Zoek</button>
         </form>
+=======
         <h1>Skiën in de prachtige Dolomieten</h1>
         <p>Ontdek wintersport in Italië – authentiek, sfeervol en sneeuwzeker!</p>
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
     </div>
 </section>
 
@@ -90,6 +96,10 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>Val Gardena</option>
                 <option>Cervinia</option>
             </select>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <label for="stars">Sterren</label>
             <select id="stars" name="stars">
                 <option value="">Alle</option>
@@ -97,6 +107,10 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>4 sterren</option>
                 <option>5 sterren</option>
             </select>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <label for="type">Soort vakantie</label>
             <select id="type" name="type">
                 <option value="">Alle</option>
@@ -104,6 +118,10 @@ if (!empty($_GET['hotelSearch'])) {
                 <option>Familie</option>
                 <option>Luxueus</option>
             </select>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
             <label><input type="checkbox"> Ski pas inbegrepen</label>
         </aside>
 
@@ -148,6 +166,7 @@ if (!empty($_GET['hotelSearch'])) {
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
+<<<<<<< HEAD
 </body>
 </html>
 =======
@@ -180,3 +199,4 @@ if (!empty($_GET['hotelSearch'])) {
 </script>
 </body>
 </html>
+>>>>>>> 8fbf9be1f08dee7675cc31d7eb35334006f6bc2b
