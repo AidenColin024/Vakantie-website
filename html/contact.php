@@ -4,38 +4,32 @@ $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo "❌ Verbindingsfout: " . $e->getMessage();
-}
-
 $success = false;
 $error = "";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = trim($_POST['name'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $message = trim($_POST['message'] ?? '');
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    if ($name !== '' && $message !== '') {
-        try {
-            // Alleen naam en vraag opslaan, email wordt genegeerd!
-            $stmt = $conn->prepare("INSERT INTO Vragen (Naam, Vraag) VALUES (:naam, :vraag)");
-            $stmt->execute([
-                ':naam' => $name,
-                ':vraag' => $message
-            ]);
-            $success = true;
-        } catch (PDOException $e) {
-            $error = "Er ging iets mis bij het opslaan van je vraag. Probeer het later opnieuw.";
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST['name']) && isset($_POST['message'])) {
+            $naam = $_POST['name'];
+            $vraag = $_POST['message'];
+
+            if ($naam != '' && $vraag != '') {
+                $stmt = $conn->prepare("INSERT INTO Vragen (Naam, Vraag) VALUES (?, ?)");
+                $stmt->execute([$naam, $vraag]);
+                $success = true;
+            } else {
+                $error = "Vul alle verplichte velden in!";
+            }
         }
-    } else {
-        $error = "Vul alle verplichte velden in!";
     }
+} catch (PDOException $e) {
+    $error = "❌ Databasefout: " . $e->getMessage();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -46,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="pp-header">
     <div class="logo">
         <a href="index.php">
@@ -81,9 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="name">Naam</label>
             <input type="text" id="name" name="name" required>
 
-            <label for="email">E-mailadres</label>
-            <input type="email" id="email" name="email" required>
-
             <label for="message">Bericht</label>
             <textarea id="message" name="message" rows="5" required></textarea>
 
@@ -96,32 +86,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
-<script>
-    // Simpele veld-validatie feedback
-    document.addEventListener("DOMContentLoaded", () => {
-        const forms = document.querySelectorAll("form");
-
-        forms.forEach(form => {
-            form.addEventListener("submit", e => {
-                const inputs = form.querySelectorAll("input[required], textarea[required]");
-                let allFilled = true;
-
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        input.style.borderColor = "red";
-                        allFilled = false;
-                    } else {
-                        input.style.borderColor = "#ccc";
-                    }
-                });
-
-                if (!allFilled) {
-                    e.preventDefault();
-                    alert("⚠️ Vul alle verplichte velden in.");
-                }
-            });
-        });
-    });
-</script>
 </body>
 </html>

@@ -35,6 +35,7 @@ try {
     </div>
     <nav class="pp-nav">
         <ul>
+            <li><a href="admin.php">Home</a></li>
             <li><a href="admin-vragen.php">Inkomende vragen</a></li>
             <li><a href="admin-recensies.php">Inkomende reviews</a></li>
             <li><a href="admin-land.php">Landen</a></li>
