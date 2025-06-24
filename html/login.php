@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <button type="submit">Inloggen</button>
         </form>
         <p class="form-note">Nog geen account? <a href="registreer.php">Registreer hier</a></p>
-        <p class="form-note">Of bent u de eigenaar? <a href="admin-inlog.php">Log dan hier in</a></p>
+        <p class="form-note">Of bent u de eigenaar? <a href="Admin/admin-inlog.php">Log dan hier in</a></p>
     </div>
 </section>
 

@@ -64,21 +64,21 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Admin Registratie | Polar & Paradise</title>
-    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="../vakantie.css?v=<?= time() ?>">
 </head>
 <body>
 <header class="pp-header">
     <div class="logo">
-        <a href="index.php"><img src="images/image1 (1).png" alt="Polar & Paradise"></a>
+        <a href="../index.php"><img src="../images/image1%20(1).png" alt="Polar & Paradise"></a>
     </div>
     <nav class="pp-nav">
         <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="ski.php">Ski vakanties</a></li>
-            <li><a href="zomer.php">Zomer vakanties</a></li>
-            <li><a href="overons.php">Over ons</a></li>
-            <li><a href="contact.php">Contact</a></li>
-            <li><a href="login.php">Login</a></li>
+            <li><a href="../index.php">Home</a></li>
+            <li><a href="../ski.php">Ski vakanties</a></li>
+            <li><a href="../zomer.php">Zomer vakanties</a></li>
+            <li><a href="../overons.php">Over ons</a></li>
+            <li><a href="../contact.php">Contact</a></li>
+            <li><a href="../login.php">Login</a></li>
         </ul>
     </nav>
 </header>
