@@ -27,3 +27,48 @@
         </ul>
     </nav>
 </header>
+
+<section class="landen-container">
+    <h1>Landen beheren</h1>
+
+    <!-- Tabel met bestaande landen -->
+    <table>
+        <thead>
+        <tr>
+            <th>Land</th>
+            <th>Acties</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Voorbeeldrijen; vervang met PHP code die uit database laadt -->
+        <tr>
+            <td>Nederland</td>
+            <td class="actions">
+                <button type="button" onclick="alert('Bewerk Nederland')">Bewerken</button>
+                <button type="button" class="delete" onclick="confirm('Weet je zeker dat je Nederland wil verwijderen?')">Verwijderen</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Duitsland</td>
+            <td class="actions">
+                <button type="button" onclick="alert('Bewerk Duitsland')">Bewerken</button>
+                <button type="button" class="delete" onclick="confirm('Weet je zeker dat je Duitsland wil verwijderen?')">Verwijderen</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Formulier om nieuw land toe te voegen -->
+    <form method="POST" action="admin.landen.php">
+        <label for="nieuw-land">Nieuw land toevoegen</label>
+        <input type="text" id="nieuw-land" name="land" placeholder="Typ een landnaam..." required />
+        <button type="submit">Toevoegen</button>
+    </form>
+</section>
+<footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
+    © 2025 Polar Paradise. Alle rechten voorbehouden. <br>
+    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
+    Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
+</footer>
+</body>
+</html>
