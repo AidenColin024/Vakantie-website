@@ -14,19 +14,29 @@
 <!-- HEADER -->
 <header class="pp-header">
     <div class="logo">
+
         <a href="../index.php"><img src="/images/image1 (1).png" alt="Polar & Paradise"></a>
+
+        <a href="../index.php"><img src="/images/image1%20(1).png" alt="Polar & Paradise"></a>
+
     </div>
     <nav class="pp-nav">
         <ul>
             <li><a href="admin.php">Home</a></li>
             <li><a href="admin-vragen.php">Inkomende vragen</a></li>
+
             <li><a href="admin-recensies.php">Inkomende reviews</a></li>
+
+            <li><a href="../admin-recensies.php">Inkomende reviews</a></li>
+
             <li><a href="admin-land.php">Landen</a></li>
             <li><a href="admin-hotel.php">Hotels</a></li>
             <li><a href="../uitlog.php">Uitloggen</a></li>
         </ul>
     </nav>
 </header>
+
+
 
 <div class="container">
     <h1>Hotels beheren per land</h1>
@@ -67,6 +77,10 @@
         </table>
     </div>
 </div>
+
+
+</body>
+
 
 <script>
     // Simuleer hotels per land (normaal via PHP/database)
@@ -162,5 +176,7 @@
     }
 </script>
 
+
 </body>
+
 </html>

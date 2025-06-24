@@ -604,6 +604,7 @@ section {
 .boeking-table th {
     background: #e9f7fa;
 }
+
 .admin-hero {
     background-color: #f8f9fa;
     padding: 3rem 1rem;
@@ -641,6 +642,7 @@ section {
 .admin-card p {
     margin: 0.3rem 0;
 }
+
 .container {
     max-width: 900px;
     margin: 0 auto;
@@ -709,6 +711,7 @@ tr:hover {
 .actions button.delete {
     background-color: #cc3300;
 }
+
 .landen-container {
     background: white;
     padding: 1.5rem;
@@ -798,6 +801,7 @@ form button {
 form button:hover {
     background-color: #005fa3;
 }
+
 /* --- Responsiveness --- */
 @media (max-width: 1100px) {
     .services,
