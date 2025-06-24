@@ -1,8 +1,7 @@
 <?php
-ob_start();
 session_start();
 
-$servername = "db"; // of localhost als je niet docker gebruikt
+$servername = "db"; // of localhost
 $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
@@ -11,31 +10,38 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("❌ Verbindingsfout: " . $e->getMessage());
+    die("Verbindingsfout: " . $e->getMessage());
 }
 
 $foutmelding = "";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $email = $_POST["email"] ?? '';
-    $wachtwoord = $_POST["password"] ?? '';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["email"]) && isset($_POST["password"])) {
+        $email = $_POST["email"];
+        $wachtwoord = $_POST["password"];
 
-    $stmt = $conn->prepare("SELECT * FROM Gebruikers WHERE Email = :email");
-    $stmt->bindParam(":email", $email);
-    $stmt->execute();
+        $stmt = $conn->prepare("SELECT * FROM Gebruikers WHERE Email = ?");
+        $stmt->execute([$email]);
+        $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($gebruiker && password_verify($wachtwoord, $gebruiker["Wachtwoord"])) {
-        $_SESSION["naam"] = $gebruiker["Naam"];
-        $_SESSION["email"] = $gebruiker["Email"];
-        header("Location: account.php");
-        exit;
+        if ($gebruiker) {
+            if (password_verify($wachtwoord, $gebruiker["Wachtwoord"])) {
+                $_SESSION["naam"] = $gebruiker["Naam"];
+                $_SESSION["email"] = $gebruiker["Email"];
+                header("Location: account.php");
+                exit;
+            } else {
+                $foutmelding = "Ongeldige combinatie van e-mailadres en wachtwoord.";
+            }
+        } else {
+            $foutmelding = "Ongeldige combinatie van e-mailadres en wachtwoord.";
+        }
     } else {
-        $foutmelding = "❌ Ongeldige combinatie van e-mailadres en wachtwoord.";
+        $foutmelding = "Vul zowel e-mail als wachtwoord in.";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -89,33 +95,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
-<script>
-    // Simpele veld-validatie feedback
-    document.addEventListener("DOMContentLoaded", () => {
-        const forms = document.querySelectorAll("form");
-
-        forms.forEach(form => {
-            form.addEventListener("submit", e => {
-                const inputs = form.querySelectorAll("input[required], textarea[required]");
-                let allFilled = true;
-
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        input.style.borderColor = "red";
-                        allFilled = false;
-                    } else {
-                        input.style.borderColor = "#ccc";
-                    }
-                });
-
-                if (!allFilled) {
-                    e.preventDefault();
-                    alert("⚠️ Vul alle verplichte velden in.");
-                }
-            });
-        });
-    });
-</script>
 </body>
 </html>
 
