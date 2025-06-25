@@ -1,34 +1,138 @@
+<?php
+ob_start();
+session_start();
+
+/* ------------------- database verbinding ------------------- */
+$servername = "db";
+$username = "root";
+$password = "rootpassword";
+$database = "mydatabase";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("❌ Fout bij verbinden: " . $e->getMessage());
+}
+
+/* ------------------- geselecteerd land ophalen ------------------- */
+$selectedLand = $_GET['land'] ?? '';
+
+/* ------------------- landen ophalen voor dropdown ------------------- */
+$landenStmt = $conn->query("SELECT naam FROM landen ORDER BY naam");
+$landen = $landenStmt->fetchAll(PDO::FETCH_COLUMN);
+
+/* ------------------- nieuw hotel toevoegen ------------------- */
+$melding = '';
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["hotel_naam"], $_POST["land"])) {
+    $hotelNaam = trim($_POST["hotel_naam"]);
+    $land = trim($_POST["land"]);
+
+    if ($hotelNaam !== '' && $land !== '') {
+        // Insert in hotels, alleen kolommen die je echt in je tabel hebt
+        $stmt = $conn->prepare("INSERT INTO hotels (hotel_naam, name, region, prijs, beschikbaar, stars, type, category, beschrijving) VALUES (:hotel_naam, :name, '', 0, NULL, 0, '', '', '')");
+        $stmt->execute([
+            ':hotel_naam' => $hotelNaam,
+            ':name' => $land,
+        ]);
+        header("Location: admin-hotel.php?land=" . urlencode($land));
+        exit;
+    } else {
+        $melding = "⚠️ Vul zowel land als hotelnaam in.";
+    }
+}
+
+/* ------------------- hotels ophalen voor geselecteerd land ------------------- */
+$hotels = [];
+if ($selectedLand !== '') {
+    $hotelStmt = $conn->prepare("SELECT id, hotel_naam FROM hotels WHERE name = :land ORDER BY hotel_naam");
+    $hotelStmt->execute([':land' => $selectedLand]);
+    $hotels = $hotelStmt->fetchAll(PDO::FETCH_ASSOC);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Polar & Paradise</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hotels beheren – Polar & Paradise</title>
     <link rel="stylesheet" href="../vakantie.css?v=<?= time() ?>">
-
-
+    <style>
+        .container {
+            padding: 2rem;
+            max-width: 900px;
+            margin: auto;
+        }
+        h1, h2 {
+            margin-bottom: 1rem;
+        }
+        form, table {
+            margin-top: 1rem;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        input[type="text"], select, button {
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            margin-bottom: 1rem;
+        }
+        button {
+            background-color: #004aad;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: auto;
+            padding: 0.5rem 1.2rem;
+        }
+        button:hover {
+            background-color: #003080;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 0.6rem;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f5f5f5;
+        }
+        .actions a {
+            margin-right: 0.7rem;
+            color: #004aad;
+            text-decoration: none;
+        }
+        .actions a:hover {
+            text-decoration: underline;
+        }
+        .melding {
+            color: #900;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="pp-header">
     <div class="logo">
-
-        <a href="../index.php"><img src="/images/image1 (1).png" alt="Polar & Paradise"></a>
-
         <a href="../index.php"><img src="/images/image1%20(1).png" alt="Polar & Paradise"></a>
-
     </div>
     <nav class="pp-nav">
         <ul>
             <li><a href="admin.php">Home</a></li>
             <li><a href="admin-vragen.php">Inkomende vragen</a></li>
-
             <li><a href="admin-recensies.php">Inkomende reviews</a></li>
-
-            <li><a href="../admin-recensies.php">Inkomende reviews</a></li>
-
             <li><a href="admin-land.php">Landen</a></li>
             <li><a href="admin-hotel.php">Hotels</a></li>
             <li><a href="../uitlog.php">Uitloggen</a></li>
@@ -36,35 +140,36 @@
     </nav>
 </header>
 
-
-
 <div class="container">
-    <h1>Hotels beheren per land</h1>
+    <h1>Hotels beheren</h1>
 
-    <!-- Land selectie -->
-    <label for="land-select">Selecteer een land</label>
-    <select id="land-select" name="land-select" onchange="toonHotels()">
-        <option value="">-- Kies een land --</option>
-        <option value="nederland">Nederland</option>
-        <option value="duitsland">Duitsland</option>
-        <option value="frankrijk">Frankrijk</option>
-        <!-- Vervang dit met dynamische opties uit je database -->
-    </select>
+    <form method="get">
+        <label for="land-select">Selecteer een land</label>
+        <select id="land-select" name="land" onchange="this.form.submit()">
+            <option value="">-- Kies een land --</option>
+            <?php foreach ($landen as $land): ?>
+                <option value="<?= htmlspecialchars($land) ?>" <?= $land === $selectedLand ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($land) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </form>
 
-    <!-- Hotels sectie -->
-    <div id="hotels-section" style="display:none; margin-top:2rem;">
-        <h2>Hotels in <span id="geselecteerd-land"></span></h2>
+    <?php if ($selectedLand): ?>
+        <h2>Hotels in <?= htmlspecialchars($selectedLand) ?></h2>
 
-        <!-- Hotel toevoegen -->
-        <form id="hotel-form" onsubmit="return voegHotelToe()">
-            <label for="hotel-naam">Hotelnaam</label>
-            <input type="text" id="hotel-naam" name="hotel-naam" placeholder="Typ hotelnaam..." required />
+        <?php if ($melding): ?>
+            <div class="melding"><?= htmlspecialchars($melding) ?></div>
+        <?php endif; ?>
 
-            <button type="submit">Hotel toevoegen</button>
+        <form method="post">
+            <input type="hidden" name="land" value="<?= htmlspecialchars($selectedLand) ?>">
+            <label for="hotel-naam">Nieuwe hotelnaam</label>
+            <input type="text" id="hotel-naam" name="hotel_naam" required placeholder="Typ hotelnaam…">
+            <button type="submit">Toevoegen</button>
         </form>
 
-        <!-- Hotels tabel -->
-        <table id="hotels-table">
+        <table>
             <thead>
             <tr>
                 <th>Hotelnaam</th>
@@ -72,111 +177,23 @@
             </tr>
             </thead>
             <tbody>
-            <!-- Hotels komen hier via JS / PHP -->
+            <?php if (empty($hotels)): ?>
+                <tr><td colspan="2">Er zijn nog geen hotels in dit land.</td></tr>
+            <?php else: ?>
+                <?php foreach ($hotels as $hotel): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($hotel['hotel_naam']) ?></td>
+                        <td class="actions">
+                            <a href="admin-hotel-edit.php?id=<?= $hotel['id'] ?>">Bewerken</a>
+                            <a href="admin-hotel-delete.php?id=<?= $hotel['id'] ?>" onclick="return confirm('Weet je zeker dat je dit hotel wilt verwijderen?')">Verwijderen</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
             </tbody>
         </table>
-    </div>
+    <?php endif; ?>
 </div>
 
-
 </body>
-
-
-<script>
-    // Simuleer hotels per land (normaal via PHP/database)
-    const hotelsData = {
-        nederland: ['Hotel Amsterdam', 'Hotel Rotterdam'],
-        duitsland: ['Hotel Berlin', 'Hotel München'],
-        frankrijk: ['Hotel Parijs']
-    };
-
-    function toonHotels() {
-        const select = document.getElementById('land-select');
-        const land = select.value;
-        const sectie = document.getElementById('hotels-section');
-        const landNaamSpan = document.getElementById('geselecteerd-land');
-        const tbody = document.querySelector('#hotels-table tbody');
-
-        if (!land) {
-            sectie.style.display = 'none';
-            tbody.innerHTML = '';
-            return;
-        }
-
-        landNaamSpan.textContent = land.charAt(0).toUpperCase() + land.slice(1);
-        sectie.style.display = 'block';
-
-        // Toon hotels in tabel
-        tbody.innerHTML = '';
-        if (hotelsData[land]) {
-            hotelsData[land].forEach((hotel, index) => {
-                const tr = document.createElement('tr');
-
-                const tdNaam = document.createElement('td');
-                tdNaam.textContent = hotel;
-
-                const tdActies = document.createElement('td');
-                tdActies.classList.add('actions');
-
-                // Bewerken knop (voor nu alert)
-                const btnEdit = document.createElement('button');
-                btnEdit.textContent = 'Bewerken';
-                btnEdit.onclick = () => alert(`Bewerk hotel: ${hotel}`);
-
-                // Verwijderen knop
-                const btnDelete = document.createElement('button');
-                btnDelete.textContent = 'Verwijderen';
-                btnDelete.classList.add('delete');
-                btnDelete.onclick = () => {
-                    if (confirm(`Weet je zeker dat je ${hotel} wil verwijderen?`)) {
-                        // Verwijder hotel uit data en update tabel
-                        hotelsData[land].splice(index, 1);
-                        toonHotels();
-                    }
-                };
-
-                tdActies.appendChild(btnEdit);
-                tdActies.appendChild(btnDelete);
-
-                tr.appendChild(tdNaam);
-                tr.appendChild(tdActies);
-
-                tbody.appendChild(tr);
-            });
-        }
-    }
-
-    function voegHotelToe() {
-        const select = document.getElementById('land-select');
-        const land = select.value;
-        const hotelInput = document.getElementById('hotel-naam');
-        const hotelNaam = hotelInput.value.trim();
-
-        if (!land) {
-            alert('Selecteer eerst een land!');
-            return false;
-        }
-        if (!hotelNaam) {
-            alert('Typ een hotelnaam!');
-            return false;
-        }
-
-        // Voeg hotel toe aan data
-        if (!hotelsData[land]) {
-            hotelsData[land] = [];
-        }
-        hotelsData[land].push(hotelNaam);
-
-        // Update tabel en clear input
-        toonHotels();
-        hotelInput.value = '';
-        hotelInput.focus();
-
-        return false; // voorkom submit reload
-    }
-</script>
-
-
-</body>
-
 </html>
