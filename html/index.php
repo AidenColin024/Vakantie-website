@@ -31,7 +31,6 @@ try {
     <nav class="pp-nav">
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="ski.php">Ski vakanties</a></li>
             <li><a href="zomer.php">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
