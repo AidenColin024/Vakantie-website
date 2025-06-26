@@ -1,3 +1,4 @@
+
 <?php
 ob_start();
 session_start();
@@ -38,10 +39,12 @@ $landenStmt = $conn->query("SELECT id, naam, region FROM landen ORDER BY naam");
 $landen = $landenStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Landen beheren – Polar & Paradise</title>
     <link rel="stylesheet" href="../vakantie.css?v=<?= time() ?>">
@@ -51,6 +54,19 @@ $landen = $landenStmt->fetchAll(PDO::FETCH_ASSOC);
 <header class="pp-header">
     <div class="logo">
         <a href="../index.php"><img src="/images/image1%20(1).png" alt="Polar & Paradise"></a>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Polar & Paradise</title>
+    <link rel="stylesheet" href="../vakantie.css?v=<?= time() ?>">
+
+
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="pp-header">
+    <div class="logo">
+        <a href="../index.php"><img src="/images/image1 (1).png" alt="Polar & Paradise"></a>
     </div>
     <nav class="pp-nav">
         <ul>
@@ -64,6 +80,7 @@ $landen = $landenStmt->fetchAll(PDO::FETCH_ASSOC);
     </nav>
 </header>
 
+
 <div class="container">
     <h1>Landen beheren</h1>
 
@@ -71,15 +88,24 @@ $landen = $landenStmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="melding"><?= htmlspecialchars($melding) ?></div>
     <?php endif; ?>
 
+
+<section class="landen-container">
+    <h1>Landen beheren</h1>
+
+    <!-- Tabel met bestaande landen -->
+
     <table>
         <thead>
         <tr>
             <th>Land</th>
+
             <th>Regio</th>
+
             <th>Acties</th>
         </tr>
         </thead>
         <tbody>
+
         <?php foreach ($landen as $land): ?>
             <tr>
                 <td><?= htmlspecialchars($land['naam']) ?></td>
@@ -97,11 +123,40 @@ $landen = $landenStmt->fetchAll(PDO::FETCH_ASSOC);
     </table>
 
     <form method="POST" action="">
+
+        <!-- Voorbeeldrijen; vervang met PHP code die uit database laadt -->
+        <tr>
+            <td>Nederland</td>
+            <td class="actions">
+                <button type="button" onclick="alert('Bewerk Nederland')">Bewerken</button>
+                <button type="button" class="delete" onclick="confirm('Weet je zeker dat je Nederland wil verwijderen?')">Verwijderen</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Duitsland</td>
+            <td class="actions">
+                <button type="button" onclick="alert('Bewerk Duitsland')">Bewerken</button>
+                <button type="button" class="delete" onclick="confirm('Weet je zeker dat je Duitsland wil verwijderen?')">Verwijderen</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Formulier om nieuw land toe te voegen -->
+    <form method="POST" action="admin.landen.php">
+
         <label for="nieuw-land">Nieuw land toevoegen</label>
         <input type="text" id="nieuw-land" name="land" placeholder="Typ een landnaam..." required />
         <button type="submit">Toevoegen</button>
     </form>
+
 </div>
 
 </body>
 </html>
+
+</section>
+
+</body>
+</html>
+

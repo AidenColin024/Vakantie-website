@@ -8,8 +8,9 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $conn->query("SELECT naam, beoordeling, commentaar, datum FROM review ORDER BY datum DESC");
-    $recensies = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Vragen ophalen (geen ID, dus geen ORDER BY id)
+    $stmt = $conn->query("SELECT naam, vraag FROM Vragen");
+    $vragen = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
     die("Fout bij verbinden met database: " . $e->getMessage());
@@ -38,27 +39,27 @@ try {
             <li><a href="admin-vragen.php">Inkomende vragen</a></li>
             <li><a href="admin-recensies.php">Inkomende reviews</a></li>
             <li><a href="admin-land.php">Landen</a></li>
-            <li><a href="Admin/admin-hotel.php">Hotels</a></li>
+            <li><a href="admin-hotel.php">Hotels</a></li>
             <li><a href="../uitlog.php">Uitloggen</a></li>
         </ul>
     </nav>
 </header>
+
+
 <section class="admin-hero">
     <div class="admin-container">
-        <h1 class="admin-title">Recensies van Gebruikers</h1>
+        <h1 class="admin-title">Ingekomen Vragen van Gebruikers</h1>
 
         <div class="admin-section">
-            <?php if (!empty($recensies)): ?>
-                <?php foreach ($recensies as $recensie): ?>
+            <?php if (!empty($vragen)): ?>
+                <?php foreach ($vragen as $vraag): ?>
                     <div class="admin-card">
-                        <p><strong>Naam:</strong> <?= htmlspecialchars($recensie['naam']) ?></p>
-                        <p><strong>Beoordeling:</strong> <span class="rating"><?= htmlspecialchars($recensie['beoordeling']) ?>/5</span></p>
-                        <p><strong>Commentaar:</strong> <?= nl2br(htmlspecialchars($recensie['commentaar'])) ?></p>
-                        <p class="date"><em>Datum:</em> <?= htmlspecialchars($recensie['datum']) ?></p>
+                        <p><strong>Naam:</strong> <?= htmlspecialchars($vraag['naam']) ?></p>
+                        <p><strong>Vraag:</strong> <?= nl2br(htmlspecialchars($vraag['vraag'])) ?></p>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p>Er zijn nog geen recensies ontvangen.</p>
+                <p>Er zijn nog geen vragen binnengekomen.</p>
             <?php endif; ?>
         </div>
     </div>
