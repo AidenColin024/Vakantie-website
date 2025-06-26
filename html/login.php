@@ -1,7 +1,11 @@
 <?php
 session_start();
 
+
 $servername = "db"; // of localhost
+
+$servername = "db";
+
 $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
@@ -14,6 +18,7 @@ try {
 }
 
 $foutmelding = "";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["email"]) && isset($_POST["password"])) {
@@ -38,6 +43,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         $foutmelding = "Vul zowel e-mail als wachtwoord in.";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = $_POST["email"];
+    $wachtwoord = $_POST["password"];
+
+    if ($email && $wachtwoord) {
+        $stmt = $conn->prepare("SELECT * FROM Gebruikers WHERE Email = :email");
+        $stmt->bindParam(":email", $email);
+        $stmt->execute();
+        $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($gebruiker && password_verify($wachtwoord, $gebruiker["Wachtwoord"])) {
+            $_SESSION["naam"] = $gebruiker["Naam"];
+            $_SESSION["email"] = $gebruiker["Email"];
+            header("Location: account.php");
+            exit;
+        } else {
+            $foutmelding = "❌ Ongeldige combinatie van e-mailadres en wachtwoord.";
+        }
+    } else {
+        $foutmelding = "❌ Vul alle velden in.";
+
     }
 }
 ?>
@@ -46,13 +73,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inloggen | Polar & Paradise</title>
     <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
-
 </head>
 <body>
+
 <header class="pp-header">
     <div class="logo">
         <a href="index.php"><img src="images/image1 (1).png" alt="Polar & Paradise"></a>
@@ -63,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <li><a href="zomer.php">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
-            <li><a href="login.php">Login</a></li>
+            <li><a href="login.php" class="active">Login</a></li>
         </ul>
     </nav>
 </header>
@@ -72,28 +99,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="form-container">
         <h1 class="form-title">Inloggen</h1>
         <?php if ($foutmelding): ?>
-            <p style="color:red; font-weight:bold;"><?php echo htmlspecialchars($foutmelding); ?></p>
+            <p style="color:red; font-weight:bold;"><?= htmlspecialchars($foutmelding) ?></p>
         <?php endif; ?>
-        <form class="form" method="POST" action="login.php">
+        <form method="POST" action="login.php">
             <label for="email">E-mailadres</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" name="email" id="email" required>
 
             <label for="password">Wachtwoord</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" name="password" id="password" required>
 
             <button type="submit">Inloggen</button>
         </form>
-        <p class="form-note">Nog geen account? <a href="registreer.php">Registreer hier</a></p>
-        <p class="form-note">Of bent u de eigenaar? <a href="admin-inlog.php">Log dan hier in</a></p>
+        <p>Nog geen account? <a href="registreer.php">Registreer hier</a></p>
+        <p>Bent u eigenaar? <a href="Admin/admin-inlog.php">Log hier in</a></p>
     </div>
 </section>
 
-
 <footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
     © 2025 Polar Paradise. Alle rechten voorbehouden.<br>
-    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.<br>
-    Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
+    Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.
 </footer>
 </body>
 </html>
+
 
