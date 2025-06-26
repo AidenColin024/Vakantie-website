@@ -46,6 +46,7 @@ $hotels = $hotelStmt->fetchAll(PDO::FETCH_ASSOC);
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
             <li><a href="login.php">Login</a></li>
+
             <li><a href="hotels.php">Hotels</a></li>
         </ul>
     </nav>

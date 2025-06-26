@@ -1,7 +1,11 @@
 <?php
 session_start();
 
+
+$servername = "db"; // of localhost
+
 $servername = "db";
+
 $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
@@ -10,10 +14,35 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("❌ Verbindingsfout: " . $e->getMessage());
+    die("Verbindingsfout: " . $e->getMessage());
 }
 
 $foutmelding = "";
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["email"]) && isset($_POST["password"])) {
+        $email = $_POST["email"];
+        $wachtwoord = $_POST["password"];
+
+        $stmt = $conn->prepare("SELECT * FROM Gebruikers WHERE Email = ?");
+        $stmt->execute([$email]);
+        $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($gebruiker) {
+            if (password_verify($wachtwoord, $gebruiker["Wachtwoord"])) {
+                $_SESSION["naam"] = $gebruiker["Naam"];
+                $_SESSION["email"] = $gebruiker["Email"];
+                header("Location: account.php");
+                exit;
+            } else {
+                $foutmelding = "Ongeldige combinatie van e-mailadres en wachtwoord.";
+            }
+        } else {
+            $foutmelding = "Ongeldige combinatie van e-mailadres en wachtwoord.";
+        }
+    } else {
+        $foutmelding = "Vul zowel e-mail als wachtwoord in.";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];
@@ -35,9 +64,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     } else {
         $foutmelding = "❌ Vul alle velden in.";
+
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -56,7 +87,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <nav class="pp-nav">
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="ski.php">Ski vakanties</a></li>
             <li><a href="zomer.php">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
@@ -89,7 +119,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     © 2025 Polar Paradise. Alle rechten voorbehouden.<br>
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise.
 </footer>
-
 </body>
 </html>
 

@@ -12,7 +12,7 @@ try {
 }
 
 // Query met filters opbouwen: alleen landen tonen, geen hotels
-$sql = "SELECT name, region, stars, type, image, link FROM hotels WHERE (hotel_naam IS NULL OR hotel_naam = '') AND category = 'zomer'";
+$sql = "SELECT name, region, stars, type, image FROM hotels WHERE (hotel_naam IS NULL OR hotel_naam = '') AND category = 'zomer'";
 $params = [];
 
 if (!empty($_GET['stars'])) {
@@ -48,7 +48,6 @@ $landen = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <nav class="pp-nav">
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="ski.php">Ski vakanties</a></li>
             <li><a href="zomer.php" class="active">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
