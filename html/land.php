@@ -56,13 +56,13 @@ $hotels = $hotelStmt->fetchAll(PDO::FETCH_ASSOC);
     <p>Regio: <?= htmlspecialchars($land['region']) ?></p>
 
     <?php if ($hotels): ?>
-        <ul>
+        <ul class="hotel-list-in-land">
             <?php foreach ($hotels as $hotel): ?>
-                <li>
-                    <h3><?= htmlspecialchars($hotel['hotel_naam']) ?></h3>
-                    <p><?= $hotel['stars'] ?>★ – €<?= $hotel['prijs'] ?></p>
-                    <a href="hotel-details.php?id=<?= $hotel['id'] ?>">Bekijk hotel</a> |
-                    <a href="boeking.php?hotel=<?= $hotel['id'] ?>">Boek</a>
+                <li class="hotel-in-land">
+                    <div class="hotel-in-land-title"><?= htmlspecialchars($hotel['hotel_naam']) ?></div>
+                    <p><?= $hotel['stars'] ?>★ – €<?= number_format($hotel['prijs'], 2, ',', '.') ?></p>
+                    <a class="btn-primary" href="hotel-details.php?id=<?= $hotel['id'] ?>">Bekijk hotel</a>
+                    <a class="btn-primary" href="boeking.php?hotel=<?= $hotel['id'] ?>">Boek</a>
                 </li>
             <?php endforeach; ?>
         </ul>
