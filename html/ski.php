@@ -36,7 +36,29 @@ foreach ($landen as $land) {
     <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
 </head>
 <body>
-<h1>Ski vakanties</h1>
+<header class="pp-header">
+    <div class="logo">
+        <a href="index.php"><img src="images/image1 (1).png" alt="Polar & Paradise"></a>
+    </div>
+    <nav class="pp-nav">
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="ski.php">Ski vakanties</a></li>
+            <li><a href="zomer.php">Zomer vakanties</a></li>
+            <li><a href="overons.php">Over ons</a></li>
+            <li><a href="contact.php">Contact</a></li>
+            <li><a href="login.php">Login</a></li>
+            <li><a href="hotels.php">Hotels</a></li>
+        </ul>
+    </nav>
+</header>
+<section class="vakantie ski-hero">
+    <img src="images/R.jpg" alt="Ski vakanties" class="hero-img" />
+    <div class="hero-text">
+        <h1>Vind jouw perfecte ski vakantie</h1>
+        <p>Van Oostenrijk tot Italië, wij hebben de beste pistes voor jou geselecteerd.</p>
+    </div>
+</section>
 
 <form method="get" action="ski.php">
     <label>Sterren:

@@ -1,5 +1,5 @@
 <?php
-// Maak verbinding met database
+// Verbinding maken met de database
 $servername = "db";
 $username = "root";
 $password = "rootpassword";
@@ -12,13 +12,11 @@ try {
     die("Fout bij verbinden: " . $e->getMessage());
 }
 
-// Check of id is opgegeven
 if (!isset($_GET['id'])) {
     die("Geen hotel geselecteerd.");
 }
 $id = (int)$_GET['id'];
 
-// Haal hotel info op
 $stmt = $conn->prepare("SELECT * FROM hotels WHERE id = ?");
 $stmt->execute([$id]);
 $hotel = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -26,80 +24,118 @@ if (!$hotel) {
     die("Hotel niet gevonden.");
 }
 
-// Verwerk boeken
+// Boeking verwerken
 $bericht = "";
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actie'])) {
-    if ($_POST['actie'] === 'boek') {
-        $naam = trim($_POST['naam'] ?? '');
-        $datum = $_POST['datum'] ?? '';
-        if ($naam && $datum) {
-            // Sla boeking op in database (maak tabel bookings aan)
-            $sql = "INSERT INTO bookings (hotel_id, naam, datum) VALUES (?, ?, ?)";
-            $stmtBoek = $conn->prepare($sql);
-            $stmtBoek->execute([$id, $naam, $datum]);
-            $bericht = "Boeking succesvol!";
-        } else {
-            $bericht = "Vul naam en datum in.";
-        }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actie']) && $_POST['actie'] === 'boek') {
+    $naam = trim($_POST['naam'] ?? '');
+    $datum = $_POST['datum'] ?? '';
+    if ($naam && $datum) {
+        $sql = "INSERT INTO bookings (hotel_id, naam, datum) VALUES (?, ?, ?)";
+        $stmtBoek = $conn->prepare($sql);
+        $stmtBoek->execute([$id, $naam, $datum]);
+        $bericht = "Boeking succesvol!";
+    } else {
+        $bericht = "Vul naam en datum in.";
     }
 }
 
-// Haal reviews op
+// Reviews ophalen
 $stmtReviews = $conn->prepare("SELECT * FROM review WHERE hotel = ?");
 $stmtReviews->execute([$hotel['hotel_naam']]);
 $reviews = $stmtReviews->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
 
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8" />
-    <title><?= htmlspecialchars($hotel['hotel_naam']) ?></title>
+    <title><?= htmlspecialchars($hotel['hotel_naam']) ?> – Polar & Paradise</title>
+    <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
 </head>
 <body>
-<h1><?= htmlspecialchars($hotel['hotel_naam']) ?></h1>
-<p>Regio: <?= htmlspecialchars($hotel['region']) ?></p>
-<p>Prijs: €<?= htmlspecialchars($hotel['prijs']) ?> per nacht</p>
-<p>Beschrijving: <?= nl2br(htmlspecialchars($hotel['beschrijving'] ?? 'Geen beschrijving')) ?></p>
+<header class="pp-header">
+    <div class="logo">
+        <a href="index.php"><img src="images/image1 (1).png" alt="Polar & Paradise"></a>
+    </div>
+    <nav class="pp-nav">
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="ski.php">Ski vakanties</a></li>
+            <li><a href="zomer.php">Zomer vakanties</a></li>
+            <li><a href="hotels.php">Hotels</a></li>
+            <li><a href="overons.php">Over ons</a></li>
+            <li><a href="contact.php">Contact</a></li>
+        </ul>
+    </nav>
+</header>
 
-<h2>Boeken</h2>
-<?php if ($bericht): ?>
-    <p><strong><?= htmlspecialchars($bericht) ?></strong></p>
-<?php endif; ?>
-<form method="post">
-    <input type="hidden" name="actie" value="boek">
-    Naam: <input type="text" name="naam" required><br>
-    Datum: <input type="date" name="datum" required><br>
-    <button type="submit">Boek nu</button>
-</form>
+<main class="hotel-detail-container">
+    <h1><?= htmlspecialchars($hotel['hotel_naam']) ?></h1>
 
-<h2>Reviews</h2>
-<?php if (count($reviews) > 0): ?>
-    <?php foreach ($reviews as $rev): ?>
-        <p><strong><?= htmlspecialchars($rev['naam']) ?></strong>: <?= nl2br(htmlspecialchars($rev['commentaar'])) ?></p>
-    <?php endforeach; ?>
-<?php else: ?>
-    <p>Er zijn nog geen reviews.</p>
-<?php endif; ?>
+    <?php if (!empty($hotel['image'])): ?>
+        <img src="images/<?= htmlspecialchars($hotel['image']) ?>" alt="Afbeelding van <?= htmlspecialchars($hotel['hotel_naam']) ?>" class="hotel-image">
+    <?php endif; ?>
 
-<h3>Recensie plaatsen</h3>
-<form method="post" action="plaats_review.php">
-    <input type="hidden" name="hotel" value="<?= htmlspecialchars($hotel['hotel_naam']) ?>">
-    Naam: <input type="text" name="naam" required><br>
-    Beoordeling:
-    <select name="beoordeling" required>
-        <option value="5">5</option>
-        <option value="4">4</option>
-        <option value="3">3</option>
-        <option value="2">2</option>
-        <option value="1">1</option>
-    </select><br>
-    Commentaar:<br>
-    <textarea name="commentaar" rows="4" required></textarea><br>
-    <button type="submit">Verstuur recensie</button>
-</form>
 
-<p><a href="ski.php">Terug naar Ski vakanties</a></p>
+    <div class="hotel-info">
+        <p><strong>Regio:</strong> <?= htmlspecialchars($hotel['region']) ?></p>
+        <p><strong>Prijs:</strong> €<?= number_format($hotel['prijs'], 2, ',', '.') ?> per nacht</p>
+        <p><strong>Beschrijving:</strong><br><?= nl2br(htmlspecialchars($hotel['beschrijving'] ?? 'Geen beschrijving')) ?></p>
+    </div>
+
+    <section class="booking-form">
+        <h2>Boeken</h2>
+        <?php if ($bericht): ?>
+            <p class="melding"><?= htmlspecialchars($bericht) ?></p>
+        <?php endif; ?>
+        <form method="post">
+            <input type="hidden" name="actie" value="boek">
+            <label>Naam: <input type="text" name="naam" required></label>
+            <label>Datum: <input type="date" name="datum" required></label>
+            <button type="submit">Boek nu</button>
+        </form>
+    </section>
+
+    <section class="review-section">
+        <h2>Reviews</h2>
+        <?php if (count($reviews) > 0): ?>
+            <?php foreach ($reviews as $rev): ?>
+                <div class="review-block">
+                    <strong><?= htmlspecialchars($rev['naam']) ?></strong>
+                    <p><?= nl2br(htmlspecialchars($rev['commentaar'])) ?></p>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Er zijn nog geen reviews.</p>
+        <?php endif; ?>
+    </section>
+
+    <section class="review-form">
+        <h3>Recensie plaatsen</h3>
+        <form method="post" action="plaats_review.php">
+            <input type="hidden" name="hotel" value="<?= htmlspecialchars($hotel['hotel_naam']) ?>">
+            <label>Naam: <input type="text" name="naam" required></label>
+            <label>Beoordeling:
+                <select name="beoordeling" required>
+                    <option value="5">5 sterren</option>
+                    <option value="4">4 sterren</option>
+                    <option value="3">3 sterren</option>
+                    <option value="2">2 sterren</option>
+                    <option value="1">1 ster</option>
+                </select>
+            </label>
+            <label>Commentaar:
+                <textarea name="commentaar" rows="4" required></textarea>
+            </label>
+            <button type="submit">Verstuur recensie</button>
+        </form>
+    </section>
+
+    <p><a href="ski.php">← Terug naar Ski vakanties</a></p>
+</main>
+
+<footer class="site-footer">
+    © 2025 Polar & Paradise – alle rechten voorbehouden.
+</footer>
 </body>
 </html>
