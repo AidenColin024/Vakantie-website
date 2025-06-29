@@ -604,6 +604,21 @@ section {
 .boeking-table th {
     background: #e9f7fa;
 }
+/* Aanvullende styling voor nettere admin-vraagweergave */
+.admin-hero {
+    background-color: #f9f9f9;
+    padding: 3rem 1rem;
+}
+
+.admin-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+}
+
 
 .admin-hero {
     background-color: #f8f9fa;
@@ -619,6 +634,7 @@ section {
     padding: 2rem;
 }
 
+
 .admin-title {
     font-size: 2rem;
     margin-bottom: 2rem;
@@ -629,18 +645,52 @@ section {
 .admin-section {
     display: flex;
     flex-direction: column;
+
+    gap: 2rem;
+
     gap: 1.5rem;
+
 }
 
 .admin-card {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 1.5rem;
+
+    background-color: #fafafa;
+
     background-color: #fdfdfd;
+
 }
 
 .admin-card p {
     margin: 0.3rem 0;
+}
+
+
+.admin-card textarea {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.btn {
+    margin-top: 0.75rem;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #1e88e5;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #1565c0;
 }
 
 .container {
@@ -1067,6 +1117,7 @@ div > p {
     font-weight: bold;
     margin-bottom: 1rem;
 }
+
 
 
 
