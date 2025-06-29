@@ -31,7 +31,6 @@ try {
     <nav class="pp-nav">
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="ski.php">Zomervakanties</a></li>
             <li><a href="zomer.php">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
@@ -69,13 +68,6 @@ try {
             <a href="zomer.php" class="btn btn-primary">Bekijk</a>
         </div>
     </div>
-    <div class="winter">
-        <div class="content">
-            <h2>Jouw ideale wintersportvakantie</h2>
-            <a href="ski.php" class="btn btn-primary">Bekijk</a>
-        </div>
-    </div>
-</section>
 
 
 

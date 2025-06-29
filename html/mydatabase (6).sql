@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Jun 26, 2025 at 09:15 AM
+-- Generation Time: Jun 29, 2025 at 01:43 PM
 -- Server version: 5.7.44
 -- PHP Version: 8.2.27
 
@@ -62,7 +62,7 @@ CREATE TABLE `annuleren` (
 
 CREATE TABLE `boeking` (
   `id` int(11) NOT NULL,
-  `hotel` varchar(100) NOT NULL,
+  `hotel_id` int(11) NOT NULL,
   `naam` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `aankomst` date NOT NULL,
@@ -75,10 +75,8 @@ CREATE TABLE `boeking` (
 -- Dumping data for table `boeking`
 --
 
-INSERT INTO `boeking` (`id`, `hotel`, `naam`, `email`, `aankomst`, `vertrek`, `personen`, `datum`) VALUES
-(9, 'BarcelonaCityHotel', 'Aleks', '1208470@student.roc-nijmegen.nl', '2025-06-17', '2025-06-28', 1, '2025-06-17 02:46:47'),
-(10, 'ZermattResort', 'Aleks', '1208470@student.roc-nijmegen.nl', '2025-06-19', '2025-06-26', 1, '2025-06-19 09:11:29'),
-(11, 'ZermattResort', 'Aiden', 'aidencolindna@gmail.com', '2025-06-19', '2025-06-26', 1, '2025-06-19 09:12:47');
+INSERT INTO `boeking` (`id`, `hotel_id`, `naam`, `email`, `aankomst`, `vertrek`, `personen`, `datum`) VALUES
+(15, 5, 'Aleks', 'aleks2@gmail.com', '2025-06-29', '2025-06-30', 1, '2025-06-29 12:23:01');
 
 -- --------------------------------------------------------
 
@@ -100,7 +98,8 @@ CREATE TABLE `Gebruikers` (
 INSERT INTO `Gebruikers` (`id`, `Naam`, `Email`, `Wachtwoord`) VALUES
 (1, 'Aleks', '1208470@student.roc-nijmegen.nl', '$2y$10$Li9/kSOX4viB/LQ2bd2ZI.eAKTdkZKlHQc1hu6nnde..UvnuKVoY.'),
 (2, 'Aleks', 'Aleksmerdzhanov58@gmail.com', '$2y$10$.RrCU4CMeQmhU0NcIlcg3O7GMKP6syDq4lJ3ZkCb3NxareMDJa1uu'),
-(7, 'Jantje', 'jantje@gmail.com', '$2y$10$zBIrJaKEPgTh.Gxw6l7k2e9knRHWnyvRLQMtxc6bnthwAuEBRWH4.');
+(7, 'Jantje', 'jantje@gmail.com', '$2y$10$zBIrJaKEPgTh.Gxw6l7k2e9knRHWnyvRLQMtxc6bnthwAuEBRWH4.'),
+(8, 'Aleks', 'aleks2@gmail.com', '$2y$10$O6WQBWqYVUzbiT8TNm8peuoGAxW0C9UGQlJGdBCRugnVJ3dCtuExy');
 
 -- --------------------------------------------------------
 
@@ -118,7 +117,7 @@ CREATE TABLE `hotels` (
   `stars` int(11) NOT NULL,
   `type` varchar(255) NOT NULL,
   `category` varchar(50) NOT NULL,
-  `beschrijving` varchar(255) NOT NULL,
+  `beschrijving` varchar(500) NOT NULL,
   `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -127,7 +126,10 @@ CREATE TABLE `hotels` (
 --
 
 INSERT INTO `hotels` (`id`, `name`, `hotel_naam`, `region`, `prijs`, `beschikbaar`, `stars`, `type`, `category`, `beschrijving`, `image`) VALUES
-(4, 'Frankrijk', 'Les Arcs Chalet', 'Europa', 240.00, '2025-06-26', 3, 'Wintersport', 'ski', 'SKIIIII', 'images/hotels/1750923158_les arcs chalet.jpg');
+(4, 'Frankrijk', 'Les Arcs Chalet', 'Europa', 240.00, '2025-06-26', 3, 'Wintersport', 'ski', 'SKIIIII', 'images/hotels/1750923158_les arcs chalet.jpg'),
+(5, 'Spanje', 'Barcelona City Hotel', 'Europa', 140.00, '2025-06-29', 4, 'Zomervakantie', 'zomer', 'Barcelona City Hotel ligt in het hart van de stad, vlak bij de Ramblas. Het hotel biedt moderne kamers, gratis WiFi en een dakterras met uitzicht over Barcelona. Perfect voor een stedentrip.', 'images/hotels/1751192357_barcelona city hotel.jpg'),
+(6, 'Nederland', 'Amsterdam', 'Nederland', 20.00, '2025-06-29', 3, 'Zomervakantie', 'zomer', 'adsfgdhffd', ''),
+(7, 'Nederland', 'Amsterdam', 'Nederland', 20.00, '2025-06-29', 3, 'Zomervakantie', 'zomer', 'adsfgdhffd', 'images/hotels/1751203924_antalya.jpg');
 
 -- --------------------------------------------------------
 
@@ -138,16 +140,17 @@ INSERT INTO `hotels` (`id`, `name`, `hotel_naam`, `region`, `prijs`, `beschikbaa
 CREATE TABLE `landen` (
   `id` int(11) NOT NULL,
   `naam` varchar(100) NOT NULL,
-  `region` varchar(100) NOT NULL
+  `region` varchar(100) NOT NULL,
+  `category` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `landen`
 --
 
-INSERT INTO `landen` (`id`, `naam`, `region`) VALUES
-(1, 'Frankrijk', 'Europa'),
-(4, 'Spanje', 'Europa');
+INSERT INTO `landen` (`id`, `naam`, `region`, `category`) VALUES
+(4, 'Spanje', 'Europa', ''),
+(5, 'Nederland', 'Europa', NULL);
 
 -- --------------------------------------------------------
 
@@ -197,7 +200,12 @@ INSERT INTO `review` (`id`, `hotel`, `naam`, `beoordeling`, `commentaar`, `datum
 (1, 'SalzburgerlandChalet', 'Aleks', 5, 'top', '2025-06-12 08:26:17'),
 (2, 'ZermattResort', 'Aleks', 4, 'Top!', '2025-06-19 09:10:34'),
 (3, 'Les Arcs Chalet', 'ss', 5, 'ss', '2025-06-26 08:58:21'),
-(4, 'Les Arcs Chalet', 'ss', 5, 'ss', '2025-06-26 08:59:47');
+(4, 'Les Arcs Chalet', 'ss', 5, 'ss', '2025-06-26 08:59:47'),
+(5, 'Barcelona City Hotel', 'df', 5, 'dsfdg', '2025-06-29 12:42:38'),
+(6, 'Barcelona City Hotel', 'df', 5, 'dsfdg', '2025-06-29 12:43:30'),
+(7, 'Barcelona City Hotel', 'df', 5, 'dsfdg', '2025-06-29 12:43:39'),
+(8, 'Barcelona City Hotel', 'df', 5, 'dsfdg', '2025-06-29 12:43:43'),
+(9, 'Amsterdam', 'sdf', 5, 'Je meoder', '2025-06-29 13:32:41');
 
 -- --------------------------------------------------------
 
@@ -284,31 +292,31 @@ ALTER TABLE `annuleren`
 -- AUTO_INCREMENT for table `boeking`
 --
 ALTER TABLE `boeking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `Gebruikers`
 --
 ALTER TABLE `Gebruikers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `hotels`
 --
 ALTER TABLE `hotels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `landen`
 --
 ALTER TABLE `landen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
