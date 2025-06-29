@@ -1,5 +1,4 @@
 <?php
-ob_start(); // Zorgt ervoor dat headers nog gestuurd kunnen worden
 session_start();
 
 $servername = "db";
