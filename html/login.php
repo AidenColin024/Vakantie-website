@@ -1,11 +1,7 @@
 <?php
 session_start();
 
-
 $servername = "db"; // of localhost
-
-$servername = "db";
-
 $username = "root";
 $password = "rootpassword";
 $database = "mydatabase";
@@ -19,30 +15,6 @@ try {
 
 $foutmelding = "";
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["email"]) && isset($_POST["password"])) {
-        $email = $_POST["email"];
-        $wachtwoord = $_POST["password"];
-
-        $stmt = $conn->prepare("SELECT * FROM Gebruikers WHERE Email = ?");
-        $stmt->execute([$email]);
-        $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($gebruiker) {
-            if (password_verify($wachtwoord, $gebruiker["Wachtwoord"])) {
-                $_SESSION["naam"] = $gebruiker["Naam"];
-                $_SESSION["email"] = $gebruiker["Email"];
-                header("Location: account.php");
-                exit;
-            } else {
-                $foutmelding = "Ongeldige combinatie van e-mailadres en wachtwoord.";
-            }
-        } else {
-            $foutmelding = "Ongeldige combinatie van e-mailadres en wachtwoord.";
-        }
-    } else {
-        $foutmelding = "Vul zowel e-mail als wachtwoord in.";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];
@@ -121,5 +93,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </footer>
 </body>
 </html>
-
-
