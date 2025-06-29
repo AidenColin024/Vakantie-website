@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             if ($admin && password_verify($wachtwoord, $admin["Wachtwoord"])) {
                 $_SESSION["admin_naam"] = $admin["Naam"];
                 $_SESSION["admin_email"] = $admin["Email"];
-                header("Location: ../admin.php");
+                header("Location: admin.php");
                 exit;
             } else {
                 $foutmelding = "Verkeerde combinatie van e-mail en wachtwoord.";

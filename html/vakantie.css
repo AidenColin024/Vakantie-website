@@ -1083,6 +1083,160 @@ div > p {
     font-weight: bold;
     margin-bottom: 1rem;
 }
+
+/* Zoek- en filtersectie bovenaan */
+.filter-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 15px 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-container label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-right: 8px;
+}
+
+.filter-container input[type="text"],
+.filter-container input[type="date"],
+.filter-container select {
+    padding: 7px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    min-width: 180px;
+    transition: border-color 0.3s;
+}
+
+.filter-container input[type="text"]:focus,
+.filter-container input[type="date"]:focus,
+.filter-container select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+.filter-container button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    min-width: 120px;
+}
+
+.filter-container button:hover {
+    background-color: #217dbb;
+}
+
+/* Lijst met hotels */
+.hotels-list {
+    max-width: 1000px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+}
+
+.hotel-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.hotel-info {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.hotel-meta {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.hotel-link a {
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.hotel-link a:hover {
+    background-color: #217dbb;
+}
+
+.booking-main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.booking-main h1 {
+    margin-bottom: 1.2rem;
+    color: #222;
+    font-weight: 700;
+}
+
+.booking-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.booking-table th,
+.booking-table td {
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    text-align: left;
+}
+
+.booking-table thead {
+    background-color: #007acc;
+    color: white;
+}
+
+.booking-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.booking-table tbody tr:hover {
+    background-color: #d0e7ff;
+}
+
+.booking-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 8px 14px;
+    background-color: #007acc;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.booking-link:hover {
+    background-color: #005fa3;
+}
+=======
 .account-hero {
     padding: 3rem 1rem;
     background-color: #f4f4f4;
