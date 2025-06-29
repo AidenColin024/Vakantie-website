@@ -39,7 +39,7 @@ $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endforeach; ?>
     </ul>
 <?php else: ?>
-    <p>Geen ski hotels gevonden.</p>
+    <p>Geen hotels gevonden.</p>
 <?php endif; ?>
 
 </body>

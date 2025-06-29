@@ -22,6 +22,7 @@ if (isset($_GET['id'])) {
 $bericht = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
     if (isset($_POST['hotel'])) {
         $hotel = $_POST['hotel'];
     } else {
@@ -60,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $bericht = "Vul alle velden correct in.";
     }
+
 } else {
     $bericht = "Ongeldige aanvraag.";
 }
@@ -74,12 +76,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 <div class="container">
     <h1>Recensie plaatsen</h1>
+
     <?php if ($bericht != ""): ?>
         <p style="color:<?php if ($bericht == "Recensie succesvol geplaatst, maar geen hotel ID gevonden voor redirect.") { echo 'green'; } else { echo 'red'; } ?>; font-weight:bold;">
             <?php echo htmlspecialchars($bericht); ?>
         </p>
     <?php endif; ?>
+
     <p><a href="hotel-details.php?id=<?php echo htmlspecialchars($hotelId); ?>">Terug naar hotel</a></p>
 </div>
 </body>
 </html>
+
