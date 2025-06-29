@@ -69,16 +69,6 @@ try {
             <a href="zomer.php" class="btn btn-primary">Bekijk</a>
         </div>
     </div>
-    <div class="winter">
-        <div class="content">
-            <h2>Jouw ideale wintersportvakantie</h2>
-            <a href="ski.php" class="btn btn-primary">Bekijk</a>
-        </div>
-    </div>
-</section>
-
-
-
 <!-- SERVICE BLOCKS -->
 <section class="services">
     <div class="service">

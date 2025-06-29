@@ -87,17 +87,6 @@ try {
     Polar Paradise is een geregistreerd handelsmerk van Polar Paradise. <br>
     Ongeautoriseerd gebruik van inhoud of merktekens is verboden.
 </footer>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const contactService = document.querySelector('.service-contact');
-        if (contactService) {
-            contactService.addEventListener('click', () => {
-                alert('Heb je vragen? Neem gerust contact met ons op via de contactpagina!');
-            });
-        }
-    });
-</script>
 
 </body>
-</html>
 </html>
