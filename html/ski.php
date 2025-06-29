@@ -5,20 +5,48 @@ $pdo = new PDO("mysql:host=db;dbname=mydatabase;charset=utf8mb4", "root", "rootp
 
 $filterStars = isset($_GET['stars']) ? $_GET['stars'] : '';
 $filterType = isset($_GET['type']) ? $_GET['type'] : '';
+$filterCountry = isset($_GET['country']) ? $_GET['country'] : '';
 
+// Alle landen ophalen
 $landenStmt = $pdo->query("SELECT id, naam, region FROM landen ORDER BY naam");
 $landen = $landenStmt->fetchAll(PDO::FETCH_ASSOC);
 
 $landHotelData = [];
-$sql = "SELECT id, hotel_naam, stars, prijs, type FROM hotels WHERE name = :land AND category = 'ski'";
-if ($filterStars !== '') $sql .= " AND stars = :stars";
-if ($filterType !== '') $sql .= " AND type = :type";
 
+// Query voorbereiden
+$sql = "SELECT id, hotel_naam, stars, prijs, type 
+        FROM hotels 
+        WHERE category = 'zomer'";
+
+if ($filterCountry !== '') {
+    $sql .= " AND name = :land";
+}
+if ($filterStars !== '') {
+    $sql .= " AND stars = :stars";
+}
+if ($filterType !== '') {
+    $sql .= " AND type = :type";
+}
+
+// Loop over landen en haal hotels op
 foreach ($landen as $land) {
+    // Als er een landfilter is, haal dan alleen dat land op
+    if ($filterCountry !== '' && $filterCountry !== $land['naam']) {
+        continue; // sla landen over die niet het filterland zijn
+    }
+
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':land', $land['naam']);
-    if ($filterStars !== '') $stmt->bindValue(':stars', $filterStars);
-    if ($filterType !== '') $stmt->bindValue(':type', $filterType);
+
+    if ($filterCountry !== '') {
+        $stmt->bindValue(':land', $land['naam']);
+    }
+    if ($filterStars !== '') {
+        $stmt->bindValue(':stars', $filterStars);
+    }
+    if ($filterType !== '') {
+        $stmt->bindValue(':type', $filterType);
+    }
+
     $stmt->execute();
     $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -32,7 +60,7 @@ foreach ($landen as $land) {
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Ski vakanties</title>
+    <title>Zomer vakanties</title>
     <link rel="stylesheet" href="vakantie.css?v=<?= time() ?>">
 </head>
 <body>
@@ -43,48 +71,35 @@ foreach ($landen as $land) {
     <nav class="pp-nav">
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="ski.php">Ski vakanties</a></li>
-            <li><a href="zomer.php">Zomer vakanties</a></li>
+            <li><a href="ski.php">Vakantie</a></li>
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
             <li><a href="login.php">Login</a></li>
-            <li><a href="hotels.php">Hotels</a></li>
         </ul>
     </nav>
 </header>
-<section class="vakantie ski-hero">
-    <img src="images/R.jpg" alt="Ski vakanties" class="hero-img" />
+
+<section class="vakantie zomer-hero">
+    <img src="images/ChatGPT Image 21 mei 2025, 11_02_07.png" alt="Zomer vakanties" class="hero-img" />
     <div class="hero-text">
-        <h1>Vind jouw perfecte ski vakantie</h1>
-        <p>Van Oostenrijk tot Italië, wij hebben de beste pistes voor jou geselecteerd.</p>
+        <h1>Vind jouw perfecte zomervakantie</h1>
+        <p>Van de zonnige stranden tot groene natuurgebieden, wij helpen je de beste plek te vinden.</p>
     </div>
 </section>
 
-<form method="get" action="ski.php">
-    <label>Sterren:
-        <select name="stars">
-            <option value="">Alle</option>
-            <option value="3" <?= $filterStars === '3' ? 'selected' : '' ?>>3 sterren</option>
-            <option value="4" <?= $filterStars === '4' ? 'selected' : '' ?>>4 sterren</option>
-            <option value="5" <?= $filterStars === '5' ? 'selected' : '' ?>>5 sterren</option>
-        </select>
-    </label>
-    <label>Type:
-        <select name="type">
-            <option value="">Alle</option>
-            <option value="Wintersport" <?= $filterType === 'Wintersport' ? 'selected' : '' ?>>Wintersport</option>
-            <option value="Familie" <?= $filterType === 'Familie' ? 'selected' : '' ?>>Familie</option>
-            <option value="Luxueus" <?= $filterType === 'Luxueus' ? 'selected' : '' ?>>Luxueus</option>
-        </select>
-    </label>
-    <button type="submit">Filter</button>
+<form method="GET" action="zoekresultaat.php" style="text-align:center; margin-top: 30px;">
+    <input type="text" name="zoekterm" placeholder="Zoek land of hotel..." style="padding: 8px; width: 250px;">
+    <input type="date" name="beschikbaar_op" style="padding: 8px;">
+    <button type="submit" style="padding: 8px;">Zoeken</button>
 </form>
 
 <?php foreach ($landHotelData as $entry): ?>
     <div>
-        <h2><a href="land.php?naam=<?= urlencode($entry['land']['naam']) ?>">
+        <h2>
+            <a href="land.php?naam=<?= urlencode($entry['land']['naam']) ?>">
                 <?= htmlspecialchars($entry['land']['naam']) ?>
-            </a></h2>
+            </a>
+        </h2>
         <p>Regio: <?= htmlspecialchars($entry['land']['region']) ?></p>
 
         <?php if ($entry['hotels']): ?>
@@ -92,14 +107,14 @@ foreach ($landen as $land) {
                 <?php foreach ($entry['hotels'] as $hotel): ?>
                     <li>
                         <?= htmlspecialchars($hotel['hotel_naam']) ?> -
-                        <?= $hotel['stars'] ?>★ -
-                        €<?= $hotel['prijs'] ?> -
+                        <?= htmlspecialchars($hotel['stars']) ?>★ -
+                        €<?= htmlspecialchars($hotel['prijs']) ?> -
                         <a href="hotels.php?id=<?= $hotel['id'] ?>">Bekijk</a>
                     </li>
                 <?php endforeach; ?>
             </ul>
         <?php else: ?>
-            <p>Geen ski-hotels gevonden.</p>
+            <p>Geen zomerhotels gevonden.</p>
         <?php endif; ?>
     </div>
 <?php endforeach; ?>

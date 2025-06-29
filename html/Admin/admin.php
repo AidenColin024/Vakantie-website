@@ -36,6 +36,7 @@ try {
             <li><a href="admin-recensies.php">Inkomende reviews</a></li>
             <li><a href="admin-land.php">Landen</a></li>
             <li><a href="admin-hotel.php">Hotels</a></li>
+            <li><a href="admin-boeking.php">Boekingen</a></li>
             <li><a href="../uitlog.php">Uitloggen</a></li>
         </ul>
     </nav>

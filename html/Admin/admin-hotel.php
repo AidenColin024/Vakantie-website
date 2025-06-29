@@ -1,101 +1,110 @@
 <?php
-ob_start();
 session_start();
 
-/* --- Database connectie --- */
-$servername = "db";
-$username = "root";
-$password = "rootpassword";
-$database = "mydatabase";
-
+/* --- Database verbinden --- */
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
+    $conn = new PDO(
+        "mysql:host=db;dbname=mydatabase;charset=utf8mb4",
+        "root",
+        "rootpassword"
+    );
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("❌ Fout bij verbinden: " . $e->getMessage());
+    echo "Fout bij verbinden met de database.";
+    exit;
 }
 
-/* --- Geselecteerd land ophalen --- */
-$selectedLand = $_GET['land'] ?? '';
+/* --- Geselecteerd land (via GET) --- */
+$selectedLand = isset($_GET['land']) ? $_GET['land'] : '';
 
-/* --- Lijst landen voor dropdown --- */
+/* --- Alle landen ophalen --- */
+$landen = [];
 $landenStmt = $conn->query("SELECT naam FROM landen ORDER BY naam");
-$landen = $landenStmt->fetchAll(PDO::FETCH_COLUMN);
+if ($landenStmt) {
+    $landen = $landenStmt->fetchAll(PDO::FETCH_COLUMN);
+}
 
-/* --- Melding voor formulier --- */
+/* --- Melding voor het formulier --- */
 $melding = '';
 
-/* --- Nieuwe hotel toevoegen --- */
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $hotelNaam   = trim($_POST["hotel_naam"] ?? '');
-    $land        = trim($_POST["land"] ?? '');
-    $region      = trim($_POST["region"] ?? '');
-    $prijs       = $_POST["prijs"] ?? 0;
-    $beschikbaar = $_POST["beschikbaar"] ?? null;
-    $stars       = $_POST["stars"] ?? 0;
-    $type        = trim($_POST["type"] ?? '');
-    $category    = trim($_POST["category"] ?? '');
-    $beschrijving= trim($_POST["beschrijving"] ?? '');
+/* --- Nieuw hotel toevoegen --- */
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $hotelNaam = isset($_POST['hotel_naam']) ? $_POST['hotel_naam'] : '';
+    $land      = isset($_POST['land'])       ? $_POST['land']       : '';
+    $region    = isset($_POST['region'])     ? $_POST['region']     : '';
+    $prijs     = isset($_POST['prijs'])      ? $_POST['prijs']      : 0;
+    $beschikbaar = isset($_POST['beschikbaar']) ? $_POST['beschikbaar'] : null;
+    $stars     = isset($_POST['stars'])      ? $_POST['stars']      : 0;
+    $type      = isset($_POST['type'])       ? $_POST['type']       : '';
+    $category  = isset($_POST['category'])   ? $_POST['category']   : '';
+    $beschrijving = isset($_POST['beschrijving']) ? $_POST['beschrijving'] : '';
 
+    /* Minimale validatie */
     if ($hotelNaam === '' || $land === '') {
-        $melding = "⚠️ Vul minimaal hotelnaam en land in.";
+        $melding = '⚠️ Vul minimaal hotelnaam en land in.';
     } else {
-        // Afbeelding uploaden
+        /* Afbeelding uploaden (optioneel) */
         $imagePath = '';
         if (!empty($_FILES['image']['name'])) {
             $uploadDir = __DIR__ . '/../images/hotels/';
-            if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
 
-            $filename = time() . '_' . basename($_FILES['image']['name']);
-            $targetFile = $uploadDir . $filename;
+            $bestandsnaam = time() . '_' . basename($_FILES['image']['name']);
+            $bestemmingsPad = $uploadDir . $bestandsnaam;
 
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
-                $imagePath = 'images/hotels/' . $filename;
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $bestemmingsPad)) {
+                $imagePath = 'images/hotels/' . $bestandsnaam;
             }
         }
 
-        $sql = "INSERT INTO hotels 
-            (hotel_naam, name, region, prijs, beschikbaar, stars, type, category, beschrijving, image)
-            VALUES (:hotel_naam, :name, :region, :prijs, :beschikbaar, :stars, :type, :category, :beschrijving, :image)";
+        /* Hotel opslaan */
+        $sql = "INSERT INTO hotels
+                (hotel_naam, name, region, prijs, beschikbaar, stars, type, category, beschrijving, image)
+                VALUES
+                (:hotel_naam, :name, :region, :prijs, :beschikbaar, :stars, :type, :category, :beschrijving, :image)";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute([
-            ':hotel_naam'  => $hotelNaam,
-            ':name'        => $land,
-            ':region'      => $region,
-            ':prijs'       => $prijs,
-            ':beschikbaar' => $beschikbaar ?: null,
-            ':stars'       => $stars,
-            ':type'        => $type,
-            ':category'    => $category,
-            ':beschrijving'=> $beschrijving,
-            ':image'       => $imagePath
+            ':hotel_naam'   => $hotelNaam,
+            ':name'         => $land,
+            ':region'       => $region,
+            ':prijs'        => $prijs,
+            ':beschikbaar'  => $beschikbaar,
+            ':stars'        => $stars,
+            ':type'         => $type,
+            ':category'     => $category,
+            ':beschrijving' => $beschrijving,
+            ':image'        => $imagePath
         ]);
 
-        header("Location: admin-hotel.php?land=" . urlencode($land));
+        header('Location: admin-hotel.php?land=' . urlencode($land));
         exit;
     }
 }
 
-/* --- Hotels ophalen van geselecteerd land --- */
+/* --- Hotels van het gekozen land ophalen --- */
 $hotels = [];
 if ($selectedLand !== '') {
-    $hotelStmt = $conn->prepare("SELECT id, hotel_naam FROM hotels WHERE name = :land ORDER BY hotel_naam");
-    $hotelStmt->execute([':land' => $selectedLand]);
-    $hotels = $hotelStmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $conn->prepare(
+        "SELECT id, hotel_naam FROM hotels
+         WHERE name = :land
+         ORDER BY hotel_naam"
+    );
+    $stmt->execute([':land' => $selectedLand]);
+    $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hotels beheren – Polar & Paradise</title>
-    <link rel="stylesheet" href="../vakantie.css?v=<?= time() ?>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels beheren – Polar & Paradise</title>
+    <link rel="stylesheet" href="../vakantie.css?v=<?= time(); ?>">
 </head>
 <body>
-
 <header class="pp-header">
     <div class="logo">
         <a href="../index.php"><img src="/images/image1%20(1).png" alt="Polar & Paradise"></a>
@@ -106,7 +115,7 @@ if ($selectedLand !== '') {
             <li><a href="admin-vragen.php">Inkomende vragen</a></li>
             <li><a href="admin-recensies.php">Inkomende reviews</a></li>
             <li><a href="admin-land.php">Landen</a></li>
-            <li><a href="admin-hotel.php" class="active">Hotels</a></li>
+            <li><a class="active" href="admin-hotel.php">Hotels</a></li>
             <li><a href="../uitlog.php">Uitloggen</a></li>
         </ul>
     </nav>
@@ -115,67 +124,70 @@ if ($selectedLand !== '') {
 <div class="container">
     <h1>Hotels beheren</h1>
 
+    <!-- Land kiezen -->
     <form method="get">
         <label for="land-select">Selecteer een land</label>
         <select id="land-select" name="land" onchange="this.form.submit()">
             <option value="">-- Kies een land --</option>
             <?php foreach ($landen as $land): ?>
-                <option value="<?= htmlspecialchars($land) ?>" <?= $land === $selectedLand ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($land) ?>
+                <option
+                        value="<?= htmlspecialchars($land); ?>"
+                    <?= $land === $selectedLand ? 'selected' : ''; ?>
+                >
+                    <?= htmlspecialchars($land); ?>
                 </option>
             <?php endforeach; ?>
         </select>
     </form>
 
     <?php if ($selectedLand): ?>
-        <h2>Hotels in <?= htmlspecialchars($selectedLand) ?></h2>
+        <h2>Hotels in <?= htmlspecialchars($selectedLand); ?></h2>
 
         <?php if ($melding): ?>
-            <div class="melding"><?= htmlspecialchars($melding) ?></div>
+            <div class="melding"><?= htmlspecialchars($melding); ?></div>
         <?php endif; ?>
 
+        <!-- Hotel toevoegen -->
         <form method="post" enctype="multipart/form-data">
-            <input type="hidden" name="land" value="<?= htmlspecialchars($selectedLand) ?>">
+            <input type="hidden" name="land" value="<?= htmlspecialchars($selectedLand); ?>">
 
-            <label for="hotel-naam">Hotelnaam</label>
-            <input type="text" id="hotel-naam" name="hotel_naam" required placeholder="Typ hotelnaam…">
+            <label>Hotelnaam</label>
+            <input type="text" name="hotel_naam" required>
 
-            <label for="region">Regio</label>
-            <input type="text" id="region" name="region" placeholder="Typ regio…">
+            <label>Regio</label>
+            <input type="text" name="region">
 
-            <label for="prijs">Prijs (€)</label>
-            <input type="number" step="0.01" id="prijs" name="prijs" placeholder="Prijs per nacht">
+            <label>Prijs (€)</label>
+            <input type="number" name="prijs" step="0.01">
 
-            <label for="beschikbaar">Beschikbaar vanaf</label>
-            <input type="date" id="beschikbaar" name="beschikbaar">
+            <label>Beschikbaar vanaf</label>
+            <input type="date" name="beschikbaar">
 
-            <label for="stars">Sterren</label>
-            <input type="number" min="1" max="5" id="stars" name="stars" placeholder="Aantal sterren">
+            <label>Sterrenscore</label>
+            <input type="number" name="stars" min="1" max="5">
 
-            <label for="type">Type</label>
-            <input type="text" id="type" name="type" placeholder="Bijv. Wintersport, Familie…">
+            <label>Type</label>
+            <input type="text" name="type">
 
-            <label for="category">Categorie</label>
-            <select id="category" name="category">
+            <label>Categorie</label>
+            <select name="category">
                 <option value="ski">Ski</option>
                 <option value="zomer">Zomer</option>
             </select>
 
-            <label for="beschrijving">Beschrijving</label>
-            <textarea id="beschrijving" name="beschrijving" placeholder="Beschrijving…"></textarea>
+            <label>Beschrijving</label>
+            <textarea name="beschrijving"></textarea>
 
-            <label for="image">Afbeelding</label>
-            <input type="file" id="image" name="image" accept="image/*">
+            <label>Afbeelding</label>
+            <input type="file" name="image" accept="image/*">
 
             <button type="submit">Toevoegen</button>
         </form>
 
+        <!-- Overzicht hotels -->
         <table>
             <thead>
-            <tr>
-                <th>Hotelnaam</th>
-                <th>Acties</th>
-            </tr>
+            <tr><th>Hotelnaam</th><th>Acties</th></tr>
             </thead>
             <tbody>
             <?php if (empty($hotels)): ?>
@@ -183,10 +195,16 @@ if ($selectedLand !== '') {
             <?php else: ?>
                 <?php foreach ($hotels as $hotel): ?>
                     <tr>
-                        <td><?= htmlspecialchars($hotel['hotel_naam']) ?></td>
-                        <td class="actions">
-                            <a href="admin-hotel-edit.php?id=<?= $hotel['id'] ?>">Bewerken</a>
-                            <a href="admin-hotel-delete.php?id=<?= $hotel['id'] ?>" onclick="return confirm('Weet je zeker dat je dit hotel wilt verwijderen?')">Verwijderen</a>
+                        <td><?= htmlspecialchars($hotel['hotel_naam']); ?></td>
+                        <td>
+                            <a href="admin-hotel-edit.php?id=<?= $hotel['id']; ?>">Bewerken</a>
+                            |
+                            <a
+                                    href="admin-hotel-delete.php?id=<?= $hotel['id']; ?>"
+                                    onclick="return confirm('Weet je zeker dat je dit hotel wilt verwijderen?');"
+                            >
+                                Verwijderen
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -195,6 +213,5 @@ if ($selectedLand !== '') {
         </table>
     <?php endif; ?>
 </div>
-
 </body>
 </html>

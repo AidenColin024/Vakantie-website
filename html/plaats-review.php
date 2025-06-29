@@ -1,4 +1,5 @@
 <?php
+// Verbinding maken
 $servername = "db";
 $username = "root";
 $password = "rootpassword";
@@ -10,22 +11,48 @@ try {
 } catch (PDOException $e) {
     die("Fout bij verbinden: " . $e->getMessage());
 }
-// Haal hotel id uit GET, of zet op null als niet aanwezig
-$hotelId = $_GET['id'] ?? null;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $hotel = $_POST['hotel'] ?? '';
-    $naam = trim($_POST['naam'] ?? '');
-    $beoordeling = (int)($_POST['beoordeling'] ?? 0);
-    $commentaar = trim($_POST['commentaar'] ?? '');
+// Haal hotel id uit GET
+if (isset($_GET['id'])) {
+    $hotelId = $_GET['id'];
+} else {
+    $hotelId = '';
+}
 
-    if ($hotel && $naam && $beoordeling >= 1 && $beoordeling <= 5 && $commentaar) {
+$bericht = "";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['hotel'])) {
+        $hotel = $_POST['hotel'];
+    } else {
+        $hotel = '';
+    }
+
+    if (isset($_POST['naam'])) {
+        $naam = $_POST['naam'];
+    } else {
+        $naam = '';
+    }
+
+    if (isset($_POST['beoordeling'])) {
+        $beoordeling = (int) $_POST['beoordeling'];
+    } else {
+        $beoordeling = 0;
+    }
+
+    if (isset($_POST['commentaar'])) {
+        $commentaar = $_POST['commentaar'];
+    } else {
+        $commentaar = '';
+    }
+
+    // Simpele controle of alles is ingevuld
+    if ($hotel != "" && $naam != "" && $beoordeling >= 1 && $beoordeling <= 5 && $commentaar != "") {
         $stmt = $conn->prepare("INSERT INTO review (hotel, naam, beoordeling, commentaar) VALUES (?, ?, ?, ?)");
         $stmt->execute([$hotel, $naam, $beoordeling, $commentaar]);
 
-        // Alleen redirect als hotelId bestaat
-        if ($hotelId) {
-            header("Location: hotel-details.php?id=" . urlencode($hotelId) . "&bericht=review_success");
+        if ($hotelId != "") {
+            header("Location: hotel-details.php?id=" . $hotelId . "&bericht=review_success");
             exit;
         } else {
             $bericht = "Recensie succesvol geplaatst, maar geen hotel ID gevonden voor redirect.";
@@ -37,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bericht = "Ongeldige aanvraag.";
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -48,12 +74,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <div class="container">
     <h1>Recensie plaatsen</h1>
-    <?php if (!empty($bericht)): ?>
-        <p style="color:<?= ($bericht === 'Recensie succesvol geplaatst, maar geen hotel ID gevonden voor redirect.') ? 'green' : 'red' ?>; font-weight:bold;">
-            <?= htmlspecialchars($bericht) ?>
+    <?php if ($bericht != ""): ?>
+        <p style="color:<?php if ($bericht == "Recensie succesvol geplaatst, maar geen hotel ID gevonden voor redirect.") { echo 'green'; } else { echo 'red'; } ?>; font-weight:bold;">
+            <?php echo htmlspecialchars($bericht); ?>
         </p>
     <?php endif; ?>
-    <p><a href="hotel-details.php?id=<?= htmlspecialchars($hotelId ?? '') ?>">Terug naar hotel</a></p>
+    <p><a href="hotel-details.php?id=<?php echo htmlspecialchars($hotelId); ?>">Terug naar hotel</a></p>
 </div>
 </body>
 </html>

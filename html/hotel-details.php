@@ -73,7 +73,7 @@ $reviews = $stmtReviews->fetchAll(PDO::FETCH_ASSOC);
     <h1><?= htmlspecialchars($hotel['hotel_naam']) ?></h1>
 
     <?php if (!empty($hotel['image'])): ?>
-        <img src="images/<?= htmlspecialchars($hotel['image']) ?>" alt="Afbeelding van <?= htmlspecialchars($hotel['hotel_naam']) ?>" class="hotel-image">
+        <img src="<?= htmlspecialchars($hotel['image']) ?>" alt="Afbeelding van <?= htmlspecialchars($hotel['hotel_naam']) ?>" class="hotel-image">
     <?php endif; ?>
 
 
@@ -83,18 +83,11 @@ $reviews = $stmtReviews->fetchAll(PDO::FETCH_ASSOC);
         <p><strong>Beschrijving:</strong><br><?= nl2br(htmlspecialchars($hotel['beschrijving'] ?? 'Geen beschrijving')) ?></p>
     </div>
 
-    <section class="booking-form">
-        <h2>Boeken</h2>
-        <?php if ($bericht): ?>
-            <p class="melding"><?= htmlspecialchars($bericht) ?></p>
-        <?php endif; ?>
-        <form method="post">
-            <input type="hidden" name="actie" value="boek">
-            <label>Naam: <input type="text" name="naam" required></label>
-            <label>Datum: <input type="date" name="datum" required></label>
-            <button type="submit">Boek nu</button>
-        </form>
+    <section class="booking-link">
+        <a href="boeking.php?id=<?= $hotel['id'] ?>"
+           class="btn-book">Boek dit hotel</a>
     </section>
+
 
     <section class="review-section">
         <h2>Reviews</h2>
