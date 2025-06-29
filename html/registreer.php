@@ -1,5 +1,4 @@
 <?php
-ob_start();
 session_start();
 
 $servername = "db";
@@ -11,46 +10,42 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8mb4", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("❌ Verbindingsfout: " . $e->getMessage());
+    die("Verbindingsfout: " . $e->getMessage());
 }
 
 $foutmelding = "";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $naam = trim($_POST["naam"] ?? '');
-    $email = trim($_POST["email"] ?? '');
-    $wachtwoord = $_POST["password"] ?? '';
-    $wachtwoordBevestiging = $_POST["password_confirm"] ?? '';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["naam"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["password_confirm"])) {
+        $naam = $_POST["naam"];
+        $email = $_POST["email"];
+        $wachtwoord = $_POST["password"];
+        $wachtwoordBevestiging = $_POST["password_confirm"];
 
-    if (!$naam || !$email || !$wachtwoord || !$wachtwoordBevestiging) {
-        $foutmelding = "Vul alle velden in.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $foutmelding = "Ongeldig e-mailadres.";
-    } elseif ($wachtwoord !== $wachtwoordBevestiging) {
-        $foutmelding = "Wachtwoorden komen niet overeen.";
-    } else {
-        // Check of email al bestaat
-        $stmt = $conn->prepare("SELECT * FROM Gebruikers WHERE Email = :email");
-        $stmt->bindParam(":email", $email);
-        $stmt->execute();
-        if ($stmt->fetch()) {
-            $foutmelding = "Dit e-mailadres is al geregistreerd.";
+        if ($naam == "" || $email == "" || $wachtwoord == "" || $wachtwoordBevestiging == "") {
+            $foutmelding = "Vul alle velden in.";
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $foutmelding = "Ongeldig e-mailadres.";
+        } elseif ($wachtwoord !== $wachtwoordBevestiging) {
+            $foutmelding = "Wachtwoorden komen niet overeen.";
         } else {
-            // Wachtwoord hashen en opslaan
-            $hash = password_hash($wachtwoord, PASSWORD_DEFAULT);
+            $stmt = $conn->prepare("SELECT * FROM Gebruikers WHERE Email = ?");
+            $stmt->execute([$email]);
+            if ($stmt->fetch()) {
+                $foutmelding = "Dit e-mailadres is al geregistreerd.";
+            } else {
+                $hash = password_hash($wachtwoord, PASSWORD_DEFAULT);
+                $stmt = $conn->prepare("INSERT INTO Gebruikers (Naam, Email, Wachtwoord) VALUES (?, ?, ?)");
+                $stmt->execute([$naam, $email, $hash]);
 
-            $stmt = $conn->prepare("INSERT INTO Gebruikers (Naam, Email, Wachtwoord) VALUES (:naam, :email, :wachtwoord)");
-            $stmt->bindParam(":naam", $naam);
-            $stmt->bindParam(":email", $email);
-            $stmt->bindParam(":wachtwoord", $hash);
-            $stmt->execute();
-
-            // Sessie starten en doorsturen
-            $_SESSION["naam"] = $naam;
-            $_SESSION["email"] = $email;
-            header("Location: account.php");
-            exit;
+                $_SESSION["naam"] = $naam;
+                $_SESSION["email"] = $email;
+                header("Location: account.php");
+                exit;
+            }
         }
+    } else {
+        $foutmelding = "Vul alle velden in.";
     }
 }
 ?>
@@ -72,7 +67,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <nav class="pp-nav">
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="ski.php">Ski vakanties</a></li>
             <li><a href="zomer.php">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
@@ -109,32 +103,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #666;">
     © 2025 Polar Paradise. Alle rechten voorbehouden
 </footer>
-<script>
-    // Simpele veld-validatie feedback
-    document.addEventListener("DOMContentLoaded", () => {
-        const forms = document.querySelectorAll("form");
-
-        forms.forEach(form => {
-            form.addEventListener("submit", e => {
-                const inputs = form.querySelectorAll("input[required], textarea[required]");
-                let allFilled = true;
-
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        input.style.borderColor = "red";
-                        allFilled = false;
-                    } else {
-                        input.style.borderColor = "#ccc";
-                    }
-                });
-
-                if (!allFilled) {
-                    e.preventDefault();
-                    alert("⚠️ Vul alle verplichte velden in.");
-                }
-            });
-        });
-    });
-</script>
 </body>
 </html>

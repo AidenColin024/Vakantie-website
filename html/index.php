@@ -32,6 +32,7 @@ try {
         <ul>
             <li><a href="index.php">Home</a></li>
             <li><a href="ski.php">Zomervakanties</a></li>
+            <li><a href="zomer.php">Zomer vakanties</a></li>
             <li><a href="overons.php">Over ons</a></li>
             <li><a href="contact.php">Contact</a></li>
             <li><a href="login.php">Login</a></li>
@@ -104,32 +105,5 @@ try {
 </footer>
 </body>
 </html>
-<script>
-    // Simpele veld-validatie feedback
-    document.addEventListener("DOMContentLoaded", () => {
-        const forms = document.querySelectorAll("form");
-
-        forms.forEach(form => {
-            form.addEventListener("submit", e => {
-                const inputs = form.querySelectorAll("input[required], textarea[required]");
-                let allFilled = true;
-
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        input.style.borderColor = "red";
-                        allFilled = false;
-                    } else {
-                        input.style.borderColor = "#ccc";
-                    }
-                });
-
-                if (!allFilled) {
-                    e.preventDefault();
-                    alert("⚠️ Vul alle verplichte velden in.");
-                }
-            });
-        });
-    });
-</script>
 </body>
 </html>
