@@ -93,4 +93,3 @@ $landen = $conn->query("SELECT id, naam, region FROM landen ORDER BY naam")->fet
 </body>
 </html>
 
-
